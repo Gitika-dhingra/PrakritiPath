@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Light Greek-style animated gradient background */
+        @keyframes greekGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        body {
+            background: linear-gradient(270deg, #a1c4fd, #c2e9fb, #f0f4f8, #ffffff);
+            background-size: 800% 800%;
+            animation: greekGradient 25s ease infinite;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Greek-style login card with soft grid */
+        .greek-card {
+            background: linear-gradient(135deg, #ffffff 25%, #f7f7f7 25%, #f7f7f7 50%, #ffffff 50%, #ffffff 75%, #f7f7f7 75%);
+            background-size: 20px 20px;
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            backdrop-filter: blur(6px);
+        }
+
+        /* Buttons color adjustment */
+        .primary-btn {
+            background-color: #1e3c72;
+        }
+        .primary-btn:hover {
+            background-color: #3a5ba0;
+        }
+
+        .social-google {
+            background-color: #4285F4;
+        }
+        .social-google:hover {
+            background-color: #357ae8;
+        }
+
+        .social-facebook {
+            background-color: #4267B2;
+        }
+        .social-facebook:hover {
+            background-color: #365899;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-white/30 backdrop-blur-md p-4 flex justify-between items-center shadow-md">
+    <a href="index.html" class="text-2xl font-bold text-[#1e3c72]">Prakriti</a>
+    <div>
+        <a href="signup.html" class="px-3 py-1 border border-[#1e3c72] rounded hover:bg-[#1e3c72] hover:text-white transition-colors">Sign Up</a>
+    </div>
+</nav>
+
+    <!-- Login Form -->
+    <div class="flex justify-center items-center flex-1">
+        <div class="greek-card w-full max-w-md">
+            <h2 class="text-3xl font-bold mb-6 text-[#1e3c72] text-center">Login</h2>
+
+            <!-- Error Message -->
+            <div id="errorMsg" class="hidden text-red-500 mb-4 text-center">
+                Invalid email or password.
+            </div>
+
+            <form action="#" method="POST" class="space-y-4">
+
+                <!-- Email -->
+                <div>
+                    <label for="email" class="block text-gray-700 mb-1">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
+                </div>
+
+                <!-- Password -->
+                <div class="relative">
+                    <label for="password" class="block text-gray-700 mb-1">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
+                    <button type="button" onclick="togglePassword()" class="absolute right-3 top-9 text-gray-500">
+                        Show
+                    </button>
+                </div>
+
+                <!-- Forgot Password -->
+                <div class="text-right">
+                    <a href="forgot-password.html" class="text-sm text-[#1e3c72] hover:underline">Forgot Password?</a>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit"
+                    class="w-full primary-btn text-white py-2 rounded-lg hover:primary-btn transition-colors font-semibold">
+                    Login
+                </button>
+
+                <!-- Or Divider -->
+                <div class="flex items-center justify-center my-4">
+                    <span class="border-b w-1/5 border-gray-300"></span>
+                    <span class="mx-2 text-gray-500">OR</span>
+                    <span class="border-b w-1/5 border-gray-300"></span>
+                </div>
+
+                <!-- Social Login Buttons -->
+                <div class="space-y-2">
+                    <button type="button" class="w-full social-google text-white py-2 rounded-lg hover:social-google transition-colors flex items-center justify-center gap-2">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" class="w-5 h-5"> Login with Google
+                    </button>
+                    <button type="button" class="w-full social-facebook text-white py-2 rounded-lg hover:social-facebook transition-colors flex items-center justify-center gap-2">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="Facebook" class="w-5 h-5"> Login with Facebook
+                    </button>
+                </div>
+
+            </form>
+
+            <p class="mt-4 text-center text-gray-500 text-sm">
+                Don't have an account? <a href="signup.html" class="text-[#1e3c72] hover:underline">Sign Up</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const btn = event.currentTarget;
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                btn.textContent = 'Hide';
+            } else {
+                passwordInput.type = 'password';
+                btn.textContent = 'Show';
+            }
+        }
+    </script>
+
+</body>
+</html>
