@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - PrakritiPath</title> 
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Forum&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --greek-blue:#0d3b66;
+  --greek-gold:#d4af37;
+  --greek-light:#f4f4f4;
+  --accent:#0f766e;
+  --bg:#f8faf9;
+  --card:#ffffff;
+}
+body{
+  margin:0;
+  font-family:Inter, sans-serif;
+  background:linear-gradient(270deg,#fde2e4,#e2f0cb,#cfe0e8,#fff1e6);
+  background-size:800% 800%;
+  animation: pastelShift 25s ease infinite;
+}
+@keyframes pastelShift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* Header */
+header{
+  background:var(--greek-blue);
+  color:#fff;
+  padding:15px 30px;
+  font-family:'Cinzel Decorative', serif;
+  display:flex; justify-content:space-between; align-items:center;
+}
+header h1{margin:0;font-size:24px;}
+
+/* Layout */
+.container{
+  display:flex;
+  gap:20px;
+  padding:20px;
+}
+.left-panel{
+  flex:1.2;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.right-panel{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+/* Boxes */
+.box, .feature-box{
+  background:var(--card);
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(2,6,23,0.1);
+  border:3px solid var(--greek-gold);
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Full-width box */
+.full-width{
+  width:calc(100% - 0px);
+  margin:0 auto;
+}
+
+/* Calendar */
+.calendar-container{
+  text-align:center;
+  padding:15px;
+  border:3px solid var(--greek-gold);
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(2,6,23,0.1);
+}
+.calendar-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+.calendar-header button{
+  background:var(--greek-blue);
+  color:#fff;
+  border:none;
+  padding:6px 12px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.calendar-header h3{
+  margin:0;
+  color:var(--greek-gold);
+  font-family:'Cinzel Decorative', serif;
+}
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(7, 1fr);
+  gap:8px;
+}
+.calendar div{
+  padding:15px 0;
+  font-size:18px;
+  border-radius:8px;
+  background-color:var(--greek-light);
+  color:var(--greek-blue);
+}
+.calendar .day-header{
+  font-weight:bold;
+  color:var(--greek-blue);
+}
+.calendar .today{
+  background-color:var(--greek-blue);
+  color:#fff;
+  font-weight:bold;
+  border:2px solid var(--greek-gold);
+}
+
+/* Feature boxes */
+.feature-box{
+  padding:25px;
+  border-radius:16px;
+  border:3px solid var(--greek-blue);
+  box-shadow:0 8px 20px rgba(2,6,23,0.08);
+  font-size:16px;
+  font-weight:500;
+  cursor:pointer;
+}
+.feature-box h2{
+  margin-bottom:12px;
+  color:var(--greek-blue);
+  font-family:'Cinzel Decorative', serif;
+}
+.feature-content{
+  display:none;
+  margin-top:10px;
+  text-align:left;
+  width:100%;
+  font-size:15px;
+  color:#333;
+}
+
+/* Chatbot Icon */
+#chatbotIcon{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:var(--greek-gold);
+  color:var(--greek-blue);
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:28px;
+  cursor:pointer;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  text-decoration:none;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>PrakritiPath Dashboard</h1>
+</header>
+
+<div class="container">
+  <!-- Left Panel -->
+  <div class="left-panel">
+    <div class="feature-box">
+      <h2>Upcoming Appointments</h2>
+      <p>Dr. Deepu John - 22 Sep 2025, 10:00 AM</p>
+      <p>Dr. Ashikha Raj - 23 Sep 2025, 2:00 PM</p>
+    </div>
+
+    <div class="feature-box">
+      <h2>Health Updates</h2>
+      <p>Blood Pressure: 120/80</p>
+      <p>Weight: 65 kg</p>
+      <p>Next Checkup: 30 Sep 2025</p>
+    </div>
+
+    <div class="feature-box full-width">
+      <h2>Reminders</h2>
+      <p>🌅 Take morning medicine</p>
+      <p>🧘 Yoga session at 7:00 AM</p>
+      <p>💧 Drink at least 2 liters of water</p>
+      <p>📞 Call nutritionist for weekly plan</p>
+      <p>🍎 Eat seasonal fruits</p>
+      <p>🛌 Sleep by 10 PM</p>
+    </div>
+
+    <!-- Features with toggle content -->
+    <div class="feature-box" onclick="toggleFeature(this)">
+      <h2>View Lab Reports</h2>
+      <div class="feature-content">
+        <p>Check your recent blood tests, urine tests, and other lab results here.</p>
+      </div>
+    </div>
+
+    <div class="feature-box" onclick="toggleFeature(this)">
+      <h2>Order Medicines</h2>
+      <div class="feature-content">
+        <p>Order prescribed medicines online and track delivery status.</p>
+      </div>
+    </div>
+
+    <div class="feature-box" onclick="toggleFeature(this)">
+      <h2>Book Consultation</h2>
+      <div class="feature-content">
+        <p>Schedule online or offline consultations with available doctors.</p>
+      </div>
+    </div>
+
+    <div class="feature-box" onclick="toggleFeature(this)">
+      <h2>Health Tips</h2>
+      <div class="feature-content">
+        <p>Daily wellness tips including diet, exercise, and mental health guidance.</p>
+      </div>
+    </div>
+
+    <div class="feature-box" onclick="toggleFeature(this)">
+      <h2>Emergency Contacts</h2>
+      <div class="feature-content">
+        <p>Quick access to emergency numbers and nearby hospitals.</p>
+      </div>
+    </div>
+
+    <div class="feature-box" onclick="toggleFeature(this)">
+      <h2>Insurance Details</h2>
+      <div class="feature-content">
+        <p>View your insurance policies, claim status, and related documents.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Panel (Calendar) -->
+  <div class="right-panel">
+    <div class="calendar-container">
+      <div class="calendar-header">
+        <button id="prevMonth">&lt;</button>
+        <h3 id="monthYear">September 2025</h3>
+        <button id="nextMonth">&gt;</button>
+      </div>
+      <div class="calendar" id="calendar">
+        <!-- Days will be injected here -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Chatbot Icon -->
+<a href="chatbot.html" id="chatbotIcon">💬</a>
+
+<script>
+// Calendar JS
+const calendarEl = document.getElementById('calendar');
+const monthYearEl = document.getElementById('monthYear');
+let today = new Date();
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
+
+function renderCalendar(month, year){
+  calendarEl.innerHTML = '';
+  const daysOfWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  daysOfWeek.forEach(d=>{
+    const div = document.createElement('div');
+    div.classList.add('day-header');
+    div.textContent = d;
+    calendarEl.appendChild(div);
+  });
+
+  const firstDay = new Date(year, month,1).getDay();
+  const daysInMonth = new Date(year, month+1,0).getDate();
+
+  for(let i=0;i<firstDay;i++){
+    const div = document.createElement('div');
+    calendarEl.appendChild(div);
+  }
+
+  for(let day=1;day<=daysInMonth;day++){
+    const div = document.createElement('div');
+    div.textContent = day;
+    if(day===today.getDate() && month===today.getMonth() && year===today.getFullYear()){
+      div.classList.add('today');
+    }
+    calendarEl.appendChild(div);
+  }
+
+  const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  monthYearEl.textContent = `${monthNames[month]} ${year}`;
+}
+
+document.getElementById('prevMonth').addEventListener('click',()=>{
+  currentMonth--;
+  if(currentMonth<0){currentMonth=11; currentYear--;}
+  renderCalendar(currentMonth,currentYear);
+});
+document.getElementById('nextMonth').addEventListener('click',()=>{
+  currentMonth++;
+  if(currentMonth>11){currentMonth=0; currentYear++;}
+  renderCalendar(currentMonth,currentYear);
+});
+
+renderCalendar(currentMonth,currentYear);
+
+// Toggle feature content
+function toggleFeature(element){
+  const content = element.querySelector('.feature-content');
+  if(content.style.display === 'block'){
+    content.style.display = 'none';
+  } else {
+    content.style.display = 'block';
+  }
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
