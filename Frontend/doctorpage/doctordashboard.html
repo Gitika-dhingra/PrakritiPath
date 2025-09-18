@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Dashboard</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #fdfcfb, #f8ede3, #e0f7f4);
+      background-size: 400% 400%;
+      animation: pastelShift 25s ease infinite;
+      margin: 0;
+      padding: 0;
+    }
+
+    @keyframes pastelShift {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    header {
+      background: linear-gradient(90deg, #0d3b66, #2a4d69, #d4af37);
+      color: #fff;
+      padding: 18px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0px 5px 18px rgba(0,0,0,0.25);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+      font-family: 'Cinzel Decorative', serif;
+      letter-spacing: 1px;
+    }
+
+    header button {
+      background: transparent;
+      border: 2px solid #d4af37;
+      padding: 10px 20px;
+      border-radius: 25px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    header button:hover {
+      background: #d4af37;
+      color: #0d3b66;
+    }
+
+    .dashboard {
+      padding: 40px;
+    }.reschedule-btn {
+  display: inline-block;
+  background: #0d3b66;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.reschedule-btn:hover {
+  background: #d4af37;
+  color: #0d3b66;
+}
+
+
+    .patient-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .box {
+      background: linear-gradient(135deg, #ffffff, #f9f5ef, #f4f9f9);
+      padding: 22px;
+      border-radius: 18px;
+      border: 2px solid #d4af37;
+      box-shadow: 0px 10px 25px rgba(0,0,0,0.12);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 14px 32px rgba(0,0,0,0.18);
+    }
+
+    .box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 7px;
+      height: 100%;
+      background: linear-gradient(180deg, #0d3b66, #3a506b);
+      border-radius: 12px 0 0 12px;
+    }
+
+    .box h2 {
+      font-size: 20px;
+      margin-bottom: 14px;
+      color: #0d3b66;
+      font-family: 'Cinzel Decorative', serif;
+      border-bottom: 2px solid #d4af37;
+      padding-bottom: 6px;
+    }
+
+    .box p {
+      font-size: 15px;
+      margin: 8px 0;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .reschedule-btn {
+      margin-top: 12px;
+      background: #0d3b66;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .reschedule-btn:hover {
+      background: #d4af37;
+      color: #0d3b66;
+    }
+
+    textarea {
+      width: 100%;
+      height: 95px;
+      margin-top: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      padding: 12px;
+      font-size: 14px;
+      resize: none;
+      font-family: 'Inter', sans-serif;
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Doctor Dashboard</h1>
+    <button onclick="logout()">Logout</button>
+  </header>
+
+  <div class="dashboard">
+
+    <!-- Patient 1 -->
+    <div class="patient-card">
+      <div class="box">
+        <h2>Patient 1</h2>
+        <p><strong>Name:</strong> Rohan Sharma</p>
+        <p><strong>Age:</strong> 32</p>
+        <p><strong>Gender:</strong> Male</p>
+      </div>
+
+      <div class="box">
+        <h2>Appointment</h2>
+        <p><strong>Date:</strong> 20 Sept 2025</p>
+        <p><strong>Time:</strong> 4:30 PM</p>
+        <p><strong>Status:</strong> Confirmed</p>
+        <a href="http://127.0.0.1:5500/Frontend/doctorpage/reschuling.html" class="reschedule-btn">Reschedule</a>
+
+      </div>
+
+      <div class="box">
+        <h2>Clinical Notes & Observations</h2>
+        <p><strong>Symptoms:</strong> Patient reports frequent headaches, mild fever, and fatigue for the past 4 days. Discomfort worsens at night and is slightly relieved with rest.</p>
+        <textarea placeholder="Doctor's Remarks..."></textarea>
+      </div>
+    </div>
+
+    <!-- Patient 2 -->
+    <div class="patient-card">
+      <div class="box">
+        <h2>Patient 2</h2>
+        <p><strong>Name:</strong> Meera Gupta</p>
+        <p><strong>Age:</strong> 27</p>
+        <p><strong>Gender:</strong> Female</p>
+      </div>
+
+      <div class="box">
+        <h2>Appointment</h2>
+        <p><strong>Date:</strong> 22 Sept 2025</p>
+        <p><strong>Time:</strong> 11:00 AM</p>
+        <p><strong>Status:</strong> Pending</p>
+        <button class="reschedule-btn">Reschedule</button>
+      </div>
+
+      <div class="box">
+        <h2>Clinical Notes & Observations</h2>
+        <p><strong>Symptoms:</strong> Patient experiences anxiety, irregular digestion, and occasional bloating. Work-related stress seems to be a contributing factor.</p>
+        <textarea placeholder="Doctor's Remarks..."></textarea>
+      </div>
+    </div>
+
+    <!-- Patient 3 -->
+    <div class="patient-card">
+      <div class="box">
+        <h2>Patient 3</h2>
+        <p><strong>Name:</strong> Ankit Verma</p>
+        <p><strong>Age:</strong> 40</p>
+        <p><strong>Gender:</strong> Male</p>
+      </div>
+
+      <div class="box">
+        <h2>Appointment</h2>
+        <p><strong>Date:</strong> 25 Sept 2025</p>
+        <p><strong>Time:</strong> 2:00 PM</p>
+        <p><strong>Status:</strong> Confirmed</p>
+        <button class="reschedule-btn">Reschedule</button>
+      </div>
+
+      <div class="box">
+        <h2>Clinical Notes & Observations</h2>
+        <p><strong>Symptoms:</strong> Persistent lower back pain and morning stiffness. Reports difficulty sleeping due to discomfort and stress.</p>
+        <textarea placeholder="Doctor's Remarks..."></textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function logout() {
+      alert("Logging out...");
+      window.location.href = "index.html"; // replace with login page
+    }
+  </script>
+</body>
+</html>
