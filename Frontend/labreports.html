@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Reports</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #f7f9fc, #eef2f3);
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(to right, #0d3b66, #145374);
+      color: white;
+      padding: 15px 40px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      border-bottom: 6px solid #d4af37;
+    }
+
+    .logout {
+      position: absolute;
+      right: 40px;
+      top: 18px;
+      background: #d4af37;
+      color: #0d3b66;
+      padding: 8px 16px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .logout:hover {
+      background: #0d3b66;
+      color: #fff;
+    }
+
+    .container {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+    }
+
+    .report-box {
+      background: #fff;
+      border: 3px solid #d4af37;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0px 6px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .report-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .report-box h2 {
+      font-size: 20px;
+      color: #0d3b66;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #d4af37;
+      padding-bottom: 5px;
+    }
+
+    .report-details {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .download-btn {
+      display: inline-block;
+      margin-top: 15px;
+      background: #0d3b66;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+    .download-btn:hover {
+      background: #d4af37;
+      color: #0d3b66;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    Patient Lab Reports
+    <a href="index.html" class="logout">Logout</a>
+  </header>
+
+  <div class="container">
+    <!-- Report 1 -->
+    <div class="report-box">
+      <h2>Blood Test Report</h2>
+      <div class="report-details">
+        <p><strong>Date:</strong> 12 Sept 2025</p>
+        <p><strong>Doctor:</strong> Dr. Mehta</p>
+        <p><strong>Summary:</strong> Hemoglobin and RBC count normal. Vitamin D slightly low.</p>
+      </div>
+      <a href="#" class="download-btn">Download PDF</a>
+    </div>
+
+    <!-- Report 2 -->
+    <div class="report-box">
+      <h2>X-Ray Report</h2>
+      <div class="report-details">
+        <p><strong>Date:</strong> 8 Sept 2025</p>
+        <p><strong>Doctor:</strong> Dr. Sharma</p>
+        <p><strong>Summary:</strong> Chest X-Ray normal. No major abnormalities detected.</p>
+      </div>
+      <a href="#" class="download-btn">Download PDF</a>
+    </div>
+
+    <!-- Report 3 -->
+    <div class="report-box">
+      <h2>Ayurvedic Diagnosis Report</h2>
+      <div class="report-details">
+        <p><strong>Date:</strong> 5 Sept 2025</p>
+        <p><strong>Doctor:</strong> Dr. Raghavan</p>
+        <p><strong>Summary:</strong> Patient shows mild Vata imbalance. Recommended Panchakarma therapy and herbal medicines.</p>
+      </div>
+      <a href="#" class="download-btn">Download PDF</a>
+    </div>
+
+    <!-- Report 4 -->
+    <div class="report-box">
+      <h2>Pathology Report</h2>
+      <div class="report-details">
+        <p><strong>Date:</strong> 1 Sept 2025</p>
+        <p><strong>Doctor:</strong> Dr. Kapoor</p>
+        <p><strong>Summary:</strong> Liver function and kidney function tests within normal range.</p>
+      </div>
+      <a href="#" class="download-btn">Download PDF</a>
+    </div>
+  </div>
+
+</body>
+</html>

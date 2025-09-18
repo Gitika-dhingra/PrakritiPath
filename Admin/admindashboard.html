@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - PrakritiPath</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --greek-blue:#0d3b66;
+  --greek-gold:#d4af37;
+  --greek-light:#f4f4f4;
+  --bg:#f9fafb;
+}
+
+body{
+  margin:0;
+  font-family:Inter, sans-serif;
+  background:linear-gradient(270deg,#fde2e4,#e2f0cb,#cfe0e8,#fff1e6);
+  background-size:800% 800%;
+  animation: pastelShift 25s ease infinite;
+}
+@keyframes pastelShift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* Header */
+header{
+  background:var(--greek-blue);
+  color:white;
+  padding:15px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-family:'Cinzel Decorative', serif;
+  border-bottom:5px solid var(--greek-gold);
+}
+header h1{margin:0;font-size:22px;}
+header a{
+  background:var(--greek-gold);
+  color:var(--greek-blue);
+  padding:8px 16px;
+  border-radius:25px;
+  text-decoration:none;
+  font-weight:bold;
+  transition:0.3s;
+}
+header a:hover{background:white;color:var(--greek-blue);}
+
+/* Layout */
+.container{
+  display:flex;
+  min-height:calc(100vh - 60px);
+}
+
+/* Sidebar */
+.sidebar{
+  width:220px;
+  background:var(--greek-light);
+  border-right:3px solid var(--greek-gold);
+  padding:20px;
+}
+.sidebar h2{
+  font-family:'Cinzel Decorative', serif;
+  font-size:18px;
+  color:var(--greek-blue);
+  margin-bottom:20px;
+}
+.sidebar a{
+  display:block;
+  padding:10px 12px;
+  margin-bottom:10px;
+  color:var(--greek-blue);
+  text-decoration:none;
+  border-radius:8px;
+  transition:0.3s;
+  font-weight:500;
+}
+.sidebar a:hover{
+  background:var(--greek-gold);
+  color:white;
+}
+
+/* Main Content */
+.main{
+  flex:1;
+  padding:25px;
+}
+.main h2{
+  font-family:'Cinzel Decorative', serif;
+  color:var(--greek-blue);
+  margin-bottom:15px;
+}
+.table-container{
+  background:white;
+  padding:20px;
+  border-radius:16px;
+  margin-bottom:30px;
+  border:3px solid var(--greek-blue);
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+table th, table td{
+  padding:12px;
+  text-align:left;
+  border-bottom:1px solid #ddd;
+}
+table th{
+  background:#f8f1dc;
+  color:var(--greek-blue);
+}
+.actions button{
+  padding:6px 12px;
+  border:none;
+  border-radius:6px;
+  margin-right:5px;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:600;
+}
+.edit-btn{background:var(--greek-gold);color:var(--greek-blue);}
+.delete-btn{background:#e63946;color:white;}
+.edit-btn:hover{opacity:0.85;}
+.delete-btn:hover{opacity:0.85;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Admin Dashboard</h1>
+  <a href="index.html">Logout</a>
+</header>
+
+<div class="container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Navigation</h2>
+    <a href="#">Patients</a>
+    <a href="#">Doctors</a>
+    <a href="#">Users</a>
+    <a href="#">Reports</a>
+    <a href="#">Settings</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <div class="table-container">
+      <h2>Patients</h2>
+      <table>
+        <tr>
+          <th>Name</th><th>Age</th><th>Contact</th><th>Actions</th>
+        </tr>
+        <tr>
+          <td>Rohan Mehta</td><td>34</td><td>+91-9876543210</td>
+          <td class="actions">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Ananya Sharma</td><td>28</td><td>+91-9123456789</td>
+          <td class="actions">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="table-container">
+      <h2>Doctors</h2>
+      <table>
+        <tr>
+          <th>Name</th><th>Specialization</th><th>Contact</th><th>Actions</th>
+        </tr>
+        <tr>
+          <td>Dr. Deepu John</td><td>Ayurvedic Therapy</td><td>+91-9812345678</td>
+          <td class="actions">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Dr. Ashikha Raj</td><td>Panchakarma</td><td>+91-9988776655</td>
+          <td class="actions">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="table-container">
+      <h2>Users</h2>
+      <table>
+        <tr>
+          <th>Username</th><th>Email</th><th>Status</th><th>Actions</th>
+        </tr>
+        <tr>
+          <td>sudiksha_v</td><td>sudiksha@example.com</td><td>Active</td>
+          <td class="actions">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>rahul_k</td><td>rahul@example.com</td><td>Inactive</td>
+          <td class="actions">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
