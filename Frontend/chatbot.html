@@ -4,134 +4,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PrakritiPath Chatbot</title>
-
-  <!-- Elegant font -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      /* Animated pastel background */
-      background: linear-gradient(-45deg, #f3f9ff, #fdf2f8, #f0fff4, #fffbea);
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(-45deg, #dce4f2, #f7f5eb, #e4eaf1, #f9f8ed);
       background-size: 400% 400%;
       animation: gradientShift 18s ease infinite;
     }
-
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
-    .chat-container {
-      width: 100%;
-      max-width: 720px;
-      height: 80vh;
-      background: #ffffff;
-      border: 4px solid #00bcd4; /* professional bright cyan border */
-      border-radius: 18px;
-      box-shadow: 0 8px 28px rgba(0,0,0,0.25);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .chat-header {
-      background: linear-gradient(90deg, #0288d1, #26c6da); /* professional blue-cyan gradient */
-      color: #fff;
-      padding: 16px;
-      font-size: 22px;
-      font-family: 'Playfair Display', serif;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      text-align: center;
-      border-bottom: 3px solid #00e5ff; /* accent cyan */
-    }
-
-    .chat-box {
-      flex: 1;
-      padding: 20px;
-      overflow-y: auto;
-      background: #fafafa;
-    }
-
-    .message {
-      margin-bottom: 16px;
-      padding: 14px 18px;
-      border-radius: 14px;
-      max-width: 70%;
-      line-height: 1.5;
-      font-family: 'Georgia', serif;
-      font-size: 15px;
-      display: inline-block;
-      clear: both;
-    }
-
-    .bot-message {
-      background: #6a1b9a; /* Deep purple for bot */
-      color: #fff;
-      float: left;
-      border-radius: 14px 14px 14px 0;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    }
-
-    .user-message {
-      background: #fb8c00; /* Bright orange for user */
-      color: #fff;
-      float: right;
-      text-align: right;
-      border-radius: 14px 14px 0 14px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    }
-
-    .chat-input {
-      display: flex;
-      border-top: 3px solid #00bcd4;
-      background: #fff;
-    }
-
-    .chat-input input {
-      flex: 1;
-      padding: 14px;
-      border: none;
-      outline: none;
-      font-size: 15px;
-      background: transparent;
-      font-family: 'Georgia', serif;
-    }
-
-    .chat-input button {
-      background: #0288d1;
-      color: #fff;
-      font-weight: bold;
-      border: none;
-      border-left: 3px solid #00bcd4;
-      padding: 0 20px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background 0.3s;
-    }
-
-    .chat-input button:hover {
-      background: #0277bd;
-    }
   </style>
 </head>
-<body>
-  <div class="chat-container">
-    <div class="chat-header">🌿 PrakritiPath Chatbot</div>
-    <div class="chat-box" id="chatBox">
-      <div class="message bot-message">Hello 👋 How can I assist you today?</div>
-    </div>
-    <div class="chat-input">
-      <input type="text" id="userInput" placeholder="Type your message..." />
-      <button onclick="sendMessage()">Send</button>
+<body class="h-screen flex flex-col">
+
+  <!-- Navigation Bar -->
+  <nav class="bg-blue-500 text-white shadow-md flex justify-between items-center px-6 py-3">
+    <a href="userdashboard.html" class="text-white hover:text-blue-200 font-semibold flex items-center space-x-2">
+      <span class="text-xl">←</span>
+      <span>Back</span>
+    </a>
+    <h1 class="text-2xl font-bold font-[Cinzel] tracking-wide">PrakritiPath</h1>
+  </nav>
+
+  <!-- Chat Container -->
+  <div class="flex-1 flex justify-center items-center p-4">
+    <div class="w-full max-w-3xl h-[80vh] bg-[#f0f4f8] rounded-2xl shadow-2xl flex flex-col overflow-hidden border-2 border-blue-300">
+      
+      <!-- Chat Header -->
+      <div class="bg-blue-400 text-white text-center py-4 font-[Cinzel] text-xl font-bold border-b-2 border-blue-300">
+        🌿 PrakritiPath Chatbot
+      </div>
+      
+      <!-- Chat Box -->
+      <div id="chatBox" class="flex-1 p-4 overflow-y-auto bg-[#f9f8ed] space-y-4">
+        <div class="bg-purple-300 text-white px-4 py-3 rounded-xl max-w-xs shadow-md font-[Cinzel]">
+          Hello 🌿 How can I assist you today?
+        </div>
+      </div>
+      
+      <!-- Chat Input -->
+      <div class="flex border-t-2 border-blue-300">
+        <input id="userInput" type="text" placeholder="Type your message..." 
+          class="flex-1 px-4 py-3 focus:outline-none text-gray-800 font-medium bg-[#f0f4f8]" />
+        <button onclick="sendMessage()" 
+          class="bg-blue-400 hover:bg-blue-500 text-white font-bold px-6 py-3 border-l-2 border-blue-300 transition">
+          Send
+        </button>
+      </div>
     </div>
   </div>
 
@@ -141,29 +65,33 @@
       const message = input.value.trim();
       if (!message) return;
 
-      // Add user message
-      addMessage(message, "user-message");
+      addMessage(message, "user");
 
-      // Bot reply logic (sample)
       setTimeout(() => {
-        let reply = "🌿 I'm here to guide you through Panchakarma & Ayurveda.";
+        let reply = "🌸 I'm here to guide you with Ayurveda & Panchakarma care.";
         if (message.toLowerCase().includes("price")) {
           reply = "💰 Our Panchakarma packages begin at ₹22,780 for 14 nights.";
         } else if (message.toLowerCase().includes("book")) {
           reply = "📅 Please proceed to the 'Book Now' section for reservations.";
         } else if (message.toLowerCase().includes("hello")) {
-          reply = "👋 Welcome to PrakritiPath! How are you feeling today?";
+          reply = "🌺 Welcome to PrakritiPath! How are you feeling today?";
         }
-        addMessage(reply, "bot-message");
+        addMessage(reply, "bot");
       }, 700);
 
       input.value = "";
     }
 
-    function addMessage(text, className) {
+    function addMessage(text, sender) {
       const chatBox = document.getElementById("chatBox");
       const msg = document.createElement("div");
-      msg.className = "message " + className;
+
+      if (sender === "user") {
+        msg.className = "bg-pink-300 text-white px-4 py-3 rounded-xl max-w-xs shadow-md ml-auto font-semibold";
+      } else {
+        msg.className = "bg-purple-300 text-white px-4 py-3 rounded-xl max-w-xs shadow-md font-[Cinzel]";
+      }
+
       msg.innerText = text;
       chatBox.appendChild(msg);
       chatBox.scrollTop = chatBox.scrollHeight;

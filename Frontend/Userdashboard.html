@@ -3,266 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard - PrakritiPath</title> 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Forum&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<title>PrakritiPath Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
-:root{
-  --greek-blue:#0d3b66;
-  --greek-gold:#d4af37;
-  --greek-light:#f4f4f4;
-  --accent:#0f766e;
-  --bg:#f8faf9;
-  --card:#ffffff;
+body {
+  background: linear-gradient(135deg, #f0faff 0%, #eaf4ff 50%, #fffdf7 100%);
 }
-body{
-  margin:0;
-  font-family:Inter, sans-serif;
-  background:linear-gradient(270deg,#fde2e4,#e2f0cb,#cfe0e8,#fff1e6);
-  background-size:800% 800%;
-  animation: pastelShift 25s ease infinite;
-}
-@keyframes pastelShift{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-
-/* Header */
-header{
-  background:var(--greek-blue);
-  color:#fff;
-  padding:15px 30px;
-  font-family:'Cinzel Decorative', serif;
-  display:flex; justify-content:space-between; align-items:center;
-}
-header h1{margin:0;font-size:24px;}
-
-/* Layout */
-.container{
-  display:flex;
-  gap:20px;
-  padding:20px;
-}
-.left-panel{
-  flex:1.2;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
-.right-panel{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
-
-/* Boxes */
-.box, .feature-box{
-  background:var(--card);
-  padding:20px;
-  border-radius:16px;
-  box-shadow:0 10px 25px rgba(2,6,23,0.1);
-  border:3px solid var(--greek-gold);
-  text-align:center;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-}
-
-/* Full-width box */
-.full-width{
-  width:calc(100% - 0px);
-  margin:0 auto;
-}
-
-/* Calendar */
-.calendar-container{
-  text-align:center;
-  padding:15px;
-  border:3px solid var(--greek-gold);
-  border-radius:16px;
-  box-shadow:0 10px 25px rgba(2,6,23,0.1);
-}
-.calendar-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
-}
-.calendar-header button{
-  background:var(--greek-blue);
-  color:#fff;
-  border:none;
-  padding:6px 12px;
-  border-radius:8px;
-  cursor:pointer;
-}
-.calendar-header h3{
-  margin:0;
-  color:var(--greek-gold);
-  font-family:'Cinzel Decorative', serif;
-}
-.calendar{
-  display:grid;
-  grid-template-columns:repeat(7, 1fr);
-  gap:8px;
-}
-.calendar div{
-  padding:15px 0;
-  font-size:18px;
-  border-radius:8px;
-  background-color:var(--greek-light);
-  color:var(--greek-blue);
-}
-.calendar .day-header{
-  font-weight:bold;
-  color:var(--greek-blue);
-}
-.calendar .today{
-  background-color:var(--greek-blue);
-  color:#fff;
-  font-weight:bold;
-  border:2px solid var(--greek-gold);
-}
-
-/* Feature boxes */
-.feature-box{
-  padding:25px;
-  border-radius:16px;
-  border:3px solid var(--greek-blue);
-  box-shadow:0 8px 20px rgba(2,6,23,0.08);
-  font-size:16px;
-  font-weight:500;
-  cursor:pointer;
-}
-.feature-box h2{
-  margin-bottom:12px;
-  color:var(--greek-blue);
-  font-family:'Cinzel Decorative', serif;
-}
-.feature-content{
-  display:none;
-  margin-top:10px;
-  text-align:left;
-  width:100%;
-  font-size:15px;
-  color:#333;
-}
-
-/* Chatbot Icon */
-#chatbotIcon{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:var(--greek-gold);
-  color:var(--greek-blue);
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:28px;
-  cursor:pointer;
-  box-shadow:0 5px 15px rgba(0,0,0,0.2);
-  text-decoration:none;
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: all 0.3s ease-in-out;
 }
 </style>
 </head>
-<body>
+<body class="min-h-screen font-sans">
 
-<header>
-  <h1>PrakritiPath Dashboard</h1>
+<!-- Navbar -->
+<header class="flex justify-between items-center bg-white shadow-md px-8 py-4 rounded-b-xl">
+  <h1 class="text-2xl font-bold text-[#3A75C4]">PrakritiPath</h1> <!-- Greek blue heading -->
+  <a href="registration/logout.html" class="bg-blue-100 hover:bg-blue-200 text-blue-900 px-5 py-2 rounded-lg font-medium transition">Logout</a>
 </header>
 
-<div class="container">
-  <!-- Left Panel -->
-  <div class="left-panel">
-    <div class="feature-box">
-      <h2>Upcoming Appointments</h2>
-      <p>Dr. Deepu John - 22 Sep 2025, 10:00 AM</p>
-      <p>Dr. Ashikha Raj - 23 Sep 2025, 2:00 PM</p>
-    </div>
+<!-- Top Container -->
+<div class="flex flex-col md:flex-row gap-6 p-6">
 
-    <div class="feature-box">
-      <h2>Health Updates</h2>
-      <p>Blood Pressure: 120/80</p>
-      <p>Weight: 65 kg</p>
-      <p>Next Checkup: 30 Sep 2025</p>
+  <!-- Calendar Panel -->
+  <div class="md:flex-1 bg-white rounded-2xl shadow-lg p-6">
+    <div class="flex justify-between items-center mb-4">
+      <button id="prevMonth" class="bg-blue-100 text-blue-900 px-3 py-1 rounded hover:bg-blue-200 transition">&lt;</button>
+      <h3 id="monthYear" class="text-[#3A75C4] font-semibold text-lg">September 2025</h3>
+      <button id="nextMonth" class="bg-blue-100 text-blue-900 px-3 py-1 rounded hover:bg-blue-200 transition">&gt;</button>
     </div>
-
-    <div class="feature-box full-width">
-      <h2>Reminders</h2>
-      <p>🌅 Take morning medicine</p>
-      <p>🧘 Yoga session at 7:00 AM</p>
-      <p>💧 Drink at least 2 liters of water</p>
-      <p>📞 Call nutritionist for weekly plan</p>
-      <p>🍎 Eat seasonal fruits</p>
-      <p>🛌 Sleep by 10 PM</p>
-    </div>
-
-    <!-- Features with toggle content -->
-    <div class="feature-box" onclick="toggleFeature(this)">
-      <h2>View Lab Reports</h2>
-      <div class="feature-content">
-        <p>Check your recent blood tests, urine tests, and other lab results here.</p>
-      </div>
-    </div>
-
-    <div class="feature-box" onclick="toggleFeature(this)">
-      <h2>Order Medicines</h2>
-      <div class="feature-content">
-        <p>Order prescribed medicines online and track delivery status.</p>
-      </div>
-    </div>
-
-    <div class="feature-box" onclick="toggleFeature(this)">
-      <h2>Book Consultation</h2>
-      <div class="feature-content">
-        <p>Schedule online or offline consultations with available doctors.</p>
-      </div>
-    </div>
-
-    <div class="feature-box" onclick="toggleFeature(this)">
-      <h2>Health Tips</h2>
-      <div class="feature-content">
-        <p>Daily wellness tips including diet, exercise, and mental health guidance.</p>
-      </div>
-    </div>
-
-    <div class="feature-box" onclick="toggleFeature(this)">
-      <h2>Emergency Contacts</h2>
-      <div class="feature-content">
-        <p>Quick access to emergency numbers and nearby hospitals.</p>
-      </div>
-    </div>
-
-    <div class="feature-box" onclick="toggleFeature(this)">
-      <h2>Insurance Details</h2>
-      <div class="feature-content">
-        <p>View your insurance policies, claim status, and related documents.</p>
-      </div>
-    </div>
+    <div class="grid grid-cols-7 gap-2 text-center font-medium text-gray-600" id="calendar"></div>
   </div>
 
-  <!-- Right Panel (Calendar) -->
-  <div class="right-panel">
-    <div class="calendar-container">
-      <div class="calendar-header">
-        <button id="prevMonth">&lt;</button>
-        <h3 id="monthYear">September 2025</h3>
-        <button id="nextMonth">&gt;</button>
-      </div>
-      <div class="calendar" id="calendar">
-        <!-- Days will be injected here -->
-      </div>
+  <!-- Next Appointment -->
+  <div class="md:flex-1">
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover h-full">
+      <div class="bg-gradient-to-r from-blue-100 to-blue-200 text-blue-900 px-4 py-2 font-semibold text-sm">Next Appointment</div>
+      <p class="p-4 text-gray-700">Dr. Deepu John - 22 Sep 2025, 10:00 AM</p>
     </div>
   </div>
 </div>
 
+<!-- Bottom Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 pb-6 items-stretch" id="backendGrid"></div>
+
 <!-- Chatbot Icon -->
-<a href="chatbot.html" id="chatbotIcon">💬</a>
+<a href="chatbot.html" class="fixed bottom-6 right-6 bg-gradient-to-br from-blue-100 to-blue-200 text-blue-900 w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:scale-110 transition transform">💬</a>
 
 <script>
 // Calendar JS
@@ -272,12 +60,18 @@ let today = new Date();
 let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
 
+const appointments = [
+  {date: new Date(2025,8,20), status:'missed'},
+  {date: new Date(2025,8,22), status:'visited'},
+  {date: new Date(2025,8,23), status:'upcoming'}
+];
+
 function renderCalendar(month, year){
   calendarEl.innerHTML = '';
   const daysOfWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  daysOfWeek.forEach(d=>{
+  daysOfWeek.forEach(d => {
     const div = document.createElement('div');
-    div.classList.add('day-header');
+    div.className = 'font-semibold text-blue-600';
     div.textContent = d;
     calendarEl.appendChild(div);
   });
@@ -285,55 +79,58 @@ function renderCalendar(month, year){
   const firstDay = new Date(year, month,1).getDay();
   const daysInMonth = new Date(year, month+1,0).getDate();
 
-  for(let i=0;i<firstDay;i++){
-    const div = document.createElement('div');
-    calendarEl.appendChild(div);
-  }
+  for(let i=0;i<firstDay;i++) calendarEl.appendChild(document.createElement('div'));
 
   for(let day=1;day<=daysInMonth;day++){
-    const div = document.createElement('div');
-    div.textContent = day;
-    if(day===today.getDate() && month===today.getMonth() && year===today.getFullYear()){
-      div.classList.add('today');
-    }
+    const div=document.createElement('div');
+    div.textContent=day;
+    div.className='py-2 rounded-lg transition text-gray-800';
+    if(day===today.getDate() && month===today.getMonth() && year===today.getFullYear()) div.classList.add('bg-blue-300','text-white','font-bold');
+    appointments.forEach(app=>{
+      if(app.date.getDate()===day && app.date.getMonth()===month && app.date.getFullYear()===year){
+        if(app.status==='visited') div.classList.add('bg-green-200','text-green-900');
+        if(app.status==='missed') div.classList.add('bg-red-200','text-red-700');
+        if(app.status==='upcoming') div.classList.add('bg-yellow-200','text-yellow-900');
+      }
+    });
     calendarEl.appendChild(div);
   }
 
-  const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  monthYearEl.textContent = `${monthNames[month]} ${year}`;
+  const monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"];
+  monthYearEl.textContent=`${monthNames[month]} ${year}`;
 }
 
 document.getElementById('prevMonth').addEventListener('click',()=>{
-  currentMonth--;
-  if(currentMonth<0){currentMonth=11; currentYear--;}
+  currentMonth--; if(currentMonth<0){currentMonth=11; currentYear--;}
   renderCalendar(currentMonth,currentYear);
 });
 document.getElementById('nextMonth').addEventListener('click',()=>{
-  currentMonth++;
-  if(currentMonth>11){currentMonth=0; currentYear++;}
+  currentMonth++; if(currentMonth>11){currentMonth=0; currentYear++;}
   renderCalendar(currentMonth,currentYear);
 });
-
 renderCalendar(currentMonth,currentYear);
 
-// Toggle feature content
-function toggleFeature(element){
-  const content = element.querySelector('.feature-content');
-  if(content.style.display === 'block'){
-    content.style.display = 'none';
-  } else {
-    content.style.display = 'block';
-  }
-}
-</script>
+// Backend items
+const backendItems=[
+  {title:'Health Updates',type:'bg-blue-100 text-blue-900',content:['Blood Pressure: 120/80','Weight: 65 kg','Next Checkup: 30 Sep 2025']},
+  {title:'Reminders',type:'bg-blue-50 text-blue-900',content:['Take morning medicine','Yoga session at 7 AM','Drink 2L water']},
+  {title:'Lab Reports',type:'bg-blue-200 text-blue-900',content:['Recent blood tests, urine tests, etc.']},
+  {title:'Order Medicines',type:'bg-blue-100 text-blue-900',content:[
+    'Order prescribed medicines online',
+    '<a href="paymentgateway.html" class="inline-block mt-2 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-900 px-4 py-2 rounded-lg font-semibold shadow hover:scale-105 transition">Proceed to Payment</a>'
+  ]},
+  {title:'Nutrition Plan',type:'bg-blue-50 text-blue-900',content:['Breakfast: Oats','Lunch: Salad','Dinner: Soup']},
+  {title:'Messages',type:'bg-blue-200 text-blue-900',content:['Message from Dr. Deepu','Message from receptionist']}
+];
 
+const grid=document.getElementById('backendGrid');
+backendItems.forEach(item=>{
+  const div=document.createElement('div');
+  div.className=`bg-white shadow-lg rounded-2xl overflow-hidden card-hover flex flex-col h-full`;
+  div.innerHTML=`<div class="${item.type} px-4 py-2 font-semibold">${item.title}</div>
+  <div class="flex-1">${item.content.map(c=>`<p class="px-4 py-2 text-gray-700">${c}</p>`).join('')}</div>`;
+  grid.appendChild(div);
+});
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
