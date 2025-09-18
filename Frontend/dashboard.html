@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Dashboard</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Forum&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --greek-blue: #0d3b66;
+    --greek-gold: #d4af37;
+    --greek-light: #f4f4f4;
+    --accent: #0f766e;
+    --muted: #666;
+    --box-bg: #ffffff;
+    --box-shadow: rgba(16,24,24,0.1);
+  }
+  body {
+    font-family: 'Forum', serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(270deg,#fde2e4,#e2f0cb,#cfe0e8,#fff1e6);
+    background-size: 800% 800%;
+    animation: pastelShift 25s ease infinite;
+    color: #111;
+  }
+
+  @keyframes pastelShift {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+
+  h2, h3 { font-family: 'Cinzel Decorative', serif; margin:0; }
+
+  /* Dashboard layout */
+  .dashboard-row {
+    display: flex;
+    gap: 20px;
+    padding: 30px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Boxes */
+  .box {
+    background: var(--box-bg);
+    border: 3px solid var(--greek-gold);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 20px var(--box-shadow);
+  }
+
+  .info-box {
+    text-align: center;
+    flex: 1;
+  }
+
+  .calendar-container {
+    flex: 1;
+    max-width: 450px;
+    text-align: center;
+  }
+
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .calendar div {
+    padding: 10px 0;
+    border-radius: 8px;
+    background-color: #0d3b66;
+    color: #fff;
+  }
+
+  /* Chatbot icon */
+  .chatbot-icon {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--greek-gold);
+    color: var(--greek-blue);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+  }
+  .chatbot-icon:hover {
+    transform: scale(1.1);
+  }
+
+</style>
+</head>
+<body>
+
+<h1 style="text-align:center; margin-top:20px; font-size:36px; color:var(--greek-blue)">Patient Dashboard</h1>
+
+<div class="dashboard-row">
+  <!-- Left: Features -->
+  <div class="info-container" style="flex:1; display:flex; flex-direction:column; gap:20px;">
+    <div class="box info-box">
+      <h3>🩺 Upcoming Appointments</h3>
+      <p>Dr. Deepu John - 20 Sept 2025, 10:00 AM</p>
+      <p>Dr. Ashikha Raj - 21 Sept 2025, 02:00 PM</p>
+    </div>
+
+    <div class="box info-box">
+      <h3>💊 Health Updates</h3>
+      <p>Blood Pressure: 120/80 mmHg</p>
+      <p>Heart Rate: 72 bpm</p>
+      <p>Next Lab Test: 25 Sept 2025</p>
+    </div>
+
+    <div class="box info-box">
+      <h3>📄 Reports</h3>
+      <p>Latest Report: Panchakarma Progress - 15 Sept 2025</p>
+      <p>Previous Report: Blood Test - 10 Sept 2025</p>
+    </div>
+  </div>
+
+  <!-- Right: Calendar -->
+  <div class="box calendar-container">
+    <h2>📅 Calendar</h2>
+    <div class="calendar" id="calendar">
+      <div>Sun</div>
+      <div>Mon</div>
+      <div>Tue</div>
+      <div>Wed</div>
+      <div>Thu</div>
+      <div>Fri</div>
+      <div>Sat</div>
+      <!-- Example dates -->
+      <div>15</div><div>16</div><div>17</div><div>18</div><div>19</div><div>20</div><div>21</div>
+      <div>22</div><div>23</div><div>24</div><div>25</div><div>26</div><div>27</div><div>28</div>
+    </div>
+  </div>
+</div>
+
+<!-- Chatbot Icon -->
+<div class="chatbot-icon" onclick="window.location.href='chatbot.html'">💬</div>
+
+</body>
+</html>
