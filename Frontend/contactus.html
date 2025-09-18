@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - PrakritiPath</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Pastel Greek-style gradient background */
+    @keyframes greekPastel {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    body {
+      background: linear-gradient(270deg, #fdfdfd, #d6e6f2, #fcefe8, #e6f7f1);
+      background-size: 600% 600%;
+      animation: greekPastel 25s ease infinite;
+    }
+  </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col">
+
+  <!-- Navigation -->
+  <nav class="bg-white/60 backdrop-blur-lg p-4 flex justify-between items-center shadow-md border-b border-gray-200">
+    <a href="index.html" class="text-2xl font-bold text-[#2d4373] tracking-wide">PrakritiPath</a>
+    <div class="hidden md:flex space-x-6 text-[#2d4373] font-medium">
+      <a href="dashboard.html" class="hover:text-[#3a5a99] transition-colors">Dashboard</a>
+      <a href="about.html" class="hover:text-[#3a5a99] transition-colors">About</a>
+      <a href="contact.html" class="text-[#3a5a99] font-semibold">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Contact Section -->
+  <div class="flex justify-center items-center flex-1 px-4 py-10">
+    <div class="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-2xl backdrop-blur-md border border-[#f1f1f1]">
+      <h2 class="text-3xl font-bold mb-2 text-center text-[#2d4373]">Contact Us</h2>
+      <p class="text-center text-gray-600 mb-8">Have questions or need assistance? Please fill out the form below and our team will respond promptly.</p>
+
+      <!-- Form -->
+      <form action="#" method="POST" class="space-y-5">
+        <!-- Name -->
+        <div>
+          <label for="name" class="block text-gray-700 mb-1">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2d4373]" required>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-gray-700 mb-1">Your Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2d4373]" required>
+        </div>
+
+        <!-- Message -->
+        <div>
+          <label for="message" class="block text-gray-700 mb-1">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Write your message here..."
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2d4373]" required></textarea>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit"
+          class="w-full bg-[#2d4373] text-white py-3 rounded-lg hover:bg-[#3a5a99] transition-colors font-semibold">
+          Send Message
+        </button>
+      </form>
+
+      <!-- Contact Details -->
+      <div class="mt-10 text-center space-y-2">
+        <p class="text-gray-600">You can also reach us at:</p>
+        <p class="text-[#2d4373] font-semibold">support@prakritipath.com</p>
+        <p class="text-[#2d4373] font-semibold">+91 98765 43210</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white/60 backdrop-blur-md py-4 text-center text-gray-600 border-t border-gray-200 text-sm">
+    © 2025 PrakritiPath. All rights reserved.
+  </footer>
+
+</body>
+</html>
