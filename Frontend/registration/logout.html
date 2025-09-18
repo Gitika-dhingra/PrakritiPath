@@ -4,18 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Logging Out...</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #f9fafb;
+      color: #333;
+    }
+    .message {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+  </style>
   <script>
-    // Clear any stored session/user data
+    // Clear session/local storage
     sessionStorage.clear();
     localStorage.clear();
 
-    // Redirect to Frontend/index.html with a logout message
+    // Show message for 2.5s then redirect
     window.onload = function () {
-      window.location.href = "Frontend/index.html?message=loggedout";
+      setTimeout(function () {
+        window.location.href = "../index.html";
+      }, 1000); // 1.0 seconds
     };
   </script>
 </head>
-<body class="flex items-center justify-center min-h-screen bg-gray-100">
-  <p class="text-gray-600 text-lg">Logging you out, please wait...</p>
+<body>
+  <div class="message">✅ You have been logged out successfully.</div>
 </body>
 </html>
