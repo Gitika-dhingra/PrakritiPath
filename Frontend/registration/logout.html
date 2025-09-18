@@ -2,17 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Logging Out...</title>
   <script>
-    // Clear session/local storage if you use it for login
+    // Clear any stored session/user data
     sessionStorage.clear();
     localStorage.clear();
 
-    // Redirect to index.html in the Frontend folder
-    window.location.href = "Frontend/index.html";
+    // Redirect to Frontend/index.html with a logout message
+    window.onload = function () {
+      window.location.href = "Frontend/index.html?message=loggedout";
+    };
   </script>
 </head>
-<body>
-  <p>You are being logged out. Redirecting...</p>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+  <p class="text-gray-600 text-lg">Logging you out, please wait...</p>
 </body>
 </html>
