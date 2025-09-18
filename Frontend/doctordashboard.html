@@ -56,23 +56,7 @@
 
     .dashboard {
       padding: 40px;
-    }.reschedule-btn {
-  display: inline-block;
-  background: #0d3b66;
-  color: #fff;
-  padding: 10px 18px;
-  border-radius: 25px;
-  font-size: 14px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.reschedule-btn:hover {
-  background: #d4af37;
-  color: #0d3b66;
-}
-
+    }
 
     .patient-card {
       display: grid;
@@ -134,6 +118,8 @@
       cursor: pointer;
       font-size: 14px;
       transition: 0.3s;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .reschedule-btn:hover {
@@ -152,6 +138,34 @@
       resize: none;
       font-family: 'Inter', sans-serif;
       background: #fafafa;
+    }
+
+    .send-btn {
+      margin-top: 10px;
+      background: #d4af37;
+      color: #0d3b66;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .send-btn:hover {
+      background: #0d3b66;
+      color: #fff;
+    }
+
+    select, input[type="date"], input[type="time"] {
+      margin-top: 10px;
+      width: 100%;
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
     }
   </style>
 </head>
@@ -177,14 +191,25 @@
         <p><strong>Date:</strong> 20 Sept 2025</p>
         <p><strong>Time:</strong> 4:30 PM</p>
         <p><strong>Status:</strong> Confirmed</p>
-        <a href="http://127.0.0.1:5500/Frontend/doctorpage/reschuling.html" class="reschedule-btn">Reschedule</a>
-
+        <p><strong>Previous Appointment:</strong> 10 Sept 2025</p>
+        <label>Status Update:</label>
+        <select id="status1">
+          <option value="">--Select--</option>
+          <option value="Visited">Visited</option>
+          <option value="Missed">Missed</option>
+        </select>
+        <label>Next Appointment:</label>
+        <input type="date" id="nextDate1">
+        <input type="time" id="nextTime1">
+        <button class="send-btn" onclick="updateAppointment(1)">Update</button>
+        <a href="reschuling.html" class="reschedule-btn">Reschedule</a>
       </div>
 
       <div class="box">
         <h2>Clinical Notes & Observations</h2>
-        <p><strong>Symptoms:</strong> Patient reports frequent headaches, mild fever, and fatigue for the past 4 days. Discomfort worsens at night and is slightly relieved with rest.</p>
-        <textarea placeholder="Doctor's Remarks..."></textarea>
+        <p><strong>Symptoms:</strong> Patient reports frequent headaches, mild fever, and fatigue for the past 4 days.</p>
+        <textarea id="remarks1" placeholder="Doctor's Remarks..."></textarea>
+        <button class="send-btn" onclick="sendRemarks(1)">Send</button>
       </div>
     </div>
 
@@ -192,23 +217,35 @@
     <div class="patient-card">
       <div class="box">
         <h2>Patient 2</h2>
-        <p><strong>Name:</strong> Meera Gupta</p>
-        <p><strong>Age:</strong> 27</p>
-        <p><strong>Gender:</strong> Female</p>
+        <p><strong>Name:</strong> Vijay Singh</p>
+        <p><strong>Age:</strong> 20</p>
+        <p><strong>Gender:</strong> Male</p>
       </div>
 
       <div class="box">
         <h2>Appointment</h2>
-        <p><strong>Date:</strong> 22 Sept 2025</p>
-        <p><strong>Time:</strong> 11:00 AM</p>
+        <p><strong>Date:</strong> 1 Oct 2025</p>
+        <p><strong>Time:</strong> 1:00 PM</p>
         <p><strong>Status:</strong> Pending</p>
-        <button class="reschedule-btn">Reschedule</button>
+        <p><strong>Previous Appointment:</strong> 15 Sept 2025</p>
+        <label>Status Update:</label>
+        <select id="status2">
+          <option value="">--Select--</option>
+          <option value="Visited">Visited</option>
+          <option value="Missed">Missed</option>
+        </select>
+        <label>Next Appointment:</label>
+        <input type="date" id="nextDate2">
+        <input type="time" id="nextTime2">
+        <button class="send-btn" onclick="updateAppointment(2)">Update</button>
+        <a href="reschuling.html" class="reschedule-btn">Reschedule</a>
       </div>
 
       <div class="box">
         <h2>Clinical Notes & Observations</h2>
-        <p><strong>Symptoms:</strong> Patient experiences anxiety, irregular digestion, and occasional bloating. Work-related stress seems to be a contributing factor.</p>
-        <textarea placeholder="Doctor's Remarks..."></textarea>
+        <p><strong>Symptoms:</strong> Reports stomach pain and nausea after meals, ongoing for 1 week.</p>
+        <textarea id="remarks2" placeholder="Doctor's Remarks..."></textarea>
+        <button class="send-btn" onclick="sendRemarks(2)">Send</button>
       </div>
     </div>
 
@@ -216,23 +253,35 @@
     <div class="patient-card">
       <div class="box">
         <h2>Patient 3</h2>
-        <p><strong>Name:</strong> Ankit Verma</p>
+        <p><strong>Name:</strong> Ruchika Verma</p>
         <p><strong>Age:</strong> 40</p>
-        <p><strong>Gender:</strong> Male</p>
+        <p><strong>Gender:</strong> Female</p>
       </div>
 
       <div class="box">
         <h2>Appointment</h2>
-        <p><strong>Date:</strong> 25 Sept 2025</p>
+        <p><strong>Date:</strong> 20 Sept 2025</p>
         <p><strong>Time:</strong> 2:00 PM</p>
         <p><strong>Status:</strong> Confirmed</p>
-        <button class="reschedule-btn">Reschedule</button>
+        <p><strong>Previous Appointment:</strong> 2 Sept 2025</p>
+        <label>Status Update:</label>
+        <select id="status3">
+          <option value="">--Select--</option>
+          <option value="Visited">Visited</option>
+          <option value="Missed">Missed</option>
+        </select>
+        <label>Next Appointment:</label>
+        <input type="date" id="nextDate3">
+        <input type="time" id="nextTime3">
+        <button class="send-btn" onclick="updateAppointment(3)">Update</button>
+        <a href="reschuling.html" class="reschedule-btn">Reschedule</a>
       </div>
 
       <div class="box">
         <h2>Clinical Notes & Observations</h2>
-        <p><strong>Symptoms:</strong> Persistent lower back pain and morning stiffness. Reports difficulty sleeping due to discomfort and stress.</p>
-        <textarea placeholder="Doctor's Remarks..."></textarea>
+        <p><strong>Symptoms:</strong> Persistent cough, chest congestion, and mild shortness of breath for 2 weeks.</p>
+        <textarea id="remarks3" placeholder="Doctor's Remarks..."></textarea>
+        <button class="send-btn" onclick="sendRemarks(3)">Send</button>
       </div>
     </div>
 
@@ -241,7 +290,35 @@
   <script>
     function logout() {
       alert("Logging out...");
-      window.location.href = "index.html"; // replace with login page
+      window.location.href = "index.html"; 
+    }
+
+    function sendRemarks(patientId) {
+      const remarks = document.getElementById(`remarks${patientId}`).value;
+      if (!remarks.trim()) {
+        alert("Please enter remarks before sending.");
+        return;
+      }
+      localStorage.setItem(`patient${patientId}_remarks`, remarks);
+      alert(`Remarks for Patient ${patientId} sent to User Dashboard!`);
+    }
+
+    function updateAppointment(patientId) {
+      const status = document.getElementById(`status${patientId}`).value;
+      const nextDate = document.getElementById(`nextDate${patientId}`).value;
+      const nextTime = document.getElementById(`nextTime${patientId}`).value;
+
+      if (!status) {
+        alert("Please select status update.");
+        return;
+      }
+
+      localStorage.setItem(`patient${patientId}_status`, status);
+      if (nextDate && nextTime) {
+        localStorage.setItem(`patient${patientId}_nextAppointment`, `${nextDate} at ${nextTime}`);
+      }
+
+      alert(`Appointment update for Patient ${patientId} saved!`);
     }
   </script>
 </body>

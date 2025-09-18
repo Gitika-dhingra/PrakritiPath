@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Consultation - PrakritiPath</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --greek-blue:#0d3b66;
+  --greek-gold:#d4af37;
+  --greek-light:#f4f4f4;
+}
+
+/* Background */
+body{
+  margin:0;
+  font-family:Inter, sans-serif;
+  background:linear-gradient(270deg,#fde2e4,#e2f0cb,#cfe0e8,#fff1e6);
+  background-size:800% 800%;
+  animation: pastelShift 25s ease infinite;
+}
+@keyframes pastelShift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* Header */
+header{
+  background:var(--greek-blue);
+  color:white;
+  padding:15px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:5px solid var(--greek-gold);
+  font-family:'Cinzel Decorative', serif;
+}
+header h1{margin:0;font-size:22px;}
+header a{
+  background:var(--greek-gold);
+  color:var(--greek-blue);
+  padding:8px 16px;
+  border-radius:25px;
+  text-decoration:none;
+  font-weight:bold;
+  transition:0.3s;
+}
+header a:hover{background:white;color:var(--greek-blue);}
+
+/* Form Section */
+.container{
+  max-width:700px;
+  margin:50px auto;
+  background:white;
+  padding:30px;
+  border-radius:18px;
+  border:3px solid var(--greek-blue);
+  box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+.container h2{
+  text-align:center;
+  font-family:'Cinzel Decorative', serif;
+  color:var(--greek-blue);
+  margin-bottom:20px;
+}
+form label{
+  display:block;
+  margin-bottom:6px;
+  font-weight:600;
+  color:var(--greek-blue);
+}
+form input, form select, form textarea{
+  width:100%;
+  padding:12px;
+  margin-bottom:20px;
+  border:2px solid #ccc;
+  border-radius:10px;
+  font-size:15px;
+  transition:0.3s;
+}
+form input:focus, form select:focus, form textarea:focus{
+  border-color:var(--greek-gold);
+  outline:none;
+}
+form button{
+  background:var(--greek-gold);
+  color:var(--greek-blue);
+  font-weight:bold;
+  padding:12px 20px;
+  border:none;
+  border-radius:25px;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+  display:block;
+  margin:auto;
+}
+form button:hover{
+  background:var(--greek-blue);
+  color:white;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Book Consultation</h1>
+  <a href="patient-dashboard.html">Back</a>
+</header>
+
+<div class="container">
+  <h2>Consultation Request</h2>
+  <form>
+    <label for="doctor">Select Doctor</label>
+    <select id="doctor" name="doctor" required>
+      <option value="">-- Choose Doctor --</option>
+      <option value="dr_deepu">Dr. Deepu John – Ayurvedic Therapy</option>
+      <option value="dr_ashikha">Dr. Ashikha Raj – Panchakarma</option>
+      <option value="dr_meera">Dr. Meera Iyer – Holistic Healing</option>
+    </select>
+
+    <label for="date">Select Date</label>
+    <input type="date" id="date" name="date" required>
+
+    <label for="time">Select Time</label>
+    <input type="time" id="time" name="time" required>
+
+    <label for="reason">Reason for Consultation</label>
+    <textarea id="reason" name="reason" rows="4" placeholder="Describe your health concern..." required></textarea>
+
+    <button type="submit">Book Appointment</button>
+  </form>
+</div>
+
+</body>
+</html>
