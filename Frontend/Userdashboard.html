@@ -6,42 +6,108 @@
 <title>PrakritiPath Dashboard</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
+/* Smooth Gradient Background */
 body {
-  background: linear-gradient(135deg, #f0faff 0%, #eaf4ff 50%, #fffdf7 100%);
+  background: linear-gradient(135deg, #e6edf6, #f1ecf9, #f4f8fb); 
+  background-size: 600% 600%;
+  animation: softFlow 22s ease infinite;
 }
+@keyframes softFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Greek-style Border Enhancement */
+.greek-border {
+  border: 3px solid transparent;
+  border-radius: 18px;
+  background: white; /* ✅ Same clean white for all boxes */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  position: relative;
+}
+.greek-border::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* ✅ Prevent border overflow */
+  border: 2px dashed rgba(0,0,0,0.08);
+  border-radius: 18px;
+  pointer-events: none;
+}
+
+/* Card Hover Effect */
 .card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  transition: all 0.3s ease-in-out;
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+  transition: all 0.3s ease;
+}
+
+/* Circle Dates */
+.date-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-weight: bold;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.date-circle:hover {
+  transform: scale(1.1);
+  background: rgba(69,123,157,0.1);
+}
+
+/* Enhanced Buttons */
+.btn {
+  background: linear-gradient(135deg, #457b9d, #6d597a);
+  color: white;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  background: linear-gradient(135deg, #6d597a, #e76f51);
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
 }
 </style>
 </head>
 <body class="min-h-screen font-sans">
 
 <!-- Navbar -->
-<header class="flex justify-between items-center bg-white shadow-md px-8 py-4 rounded-b-xl">
-  <h1 class="text-2xl font-bold text-[#3A75C4]">PrakritiPath</h1> <!-- Greek blue heading -->
-  <a href="registration/logout.html" class="bg-blue-100 hover:bg-blue-200 text-blue-900 px-5 py-2 rounded-lg font-medium transition">Logout</a>
+<header class="flex justify-between items-center bg-white shadow-md px-8 py-4 rounded-b-xl greek-border">
+  <h1 class="text-2xl font-bold text-[#457b9d]">PrakritiPath</h1>
+  <a href="registration/logout.html" class="btn">Logout</a>
 </header>
 
 <!-- Top Container -->
 <div class="flex flex-col md:flex-row gap-6 p-6">
 
   <!-- Calendar Panel -->
-  <div class="md:flex-1 bg-white rounded-2xl shadow-lg p-6">
+  <div class="md:flex-1 greek-border p-6 card-hover">
     <div class="flex justify-between items-center mb-4">
-      <button id="prevMonth" class="bg-blue-100 text-blue-900 px-3 py-1 rounded hover:bg-blue-200 transition">&lt;</button>
-      <h3 id="monthYear" class="text-[#3A75C4] font-semibold text-lg">September 2025</h3>
-      <button id="nextMonth" class="bg-blue-100 text-blue-900 px-3 py-1 rounded hover:bg-blue-200 transition">&gt;</button>
+      <button id="prevMonth" class="btn px-3 py-1">&lt;</button>
+      <h3 id="monthYear" class="text-[#6d597a] font-semibold text-lg">September 2025</h3>
+      <button id="nextMonth" class="btn px-3 py-1">&gt;</button>
     </div>
-    <div class="grid grid-cols-7 gap-2 text-center font-medium text-gray-600" id="calendar"></div>
+    <div class="grid grid-cols-7 gap-2 text-center font-medium text-gray-700" id="calendar"></div>
   </div>
 
   <!-- Next Appointment -->
   <div class="md:flex-1">
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover h-full">
-      <div class="bg-gradient-to-r from-blue-100 to-blue-200 text-blue-900 px-4 py-2 font-semibold text-sm">Next Appointment</div>
-      <p class="p-4 text-gray-700">Dr. Deepu John - 22 Sep 2025, 10:00 AM</p>
+    <div class="greek-border overflow-hidden card-hover h-full">
+      <div class="bg-gradient-to-r from-[#457b9d] to-[#6d597a] text-white px-4 py-2 font-semibold text-sm">Next Appointment</div>
+      <div class="p-4 text-gray-700 space-y-2">
+        <p><strong>Doctor:</strong> Dr. Deepu John</p>
+        <p><strong>Date & Time:</strong> 22 Sep 2025, 10:00 AM</p>
+        <p><strong>Department:</strong> General Medicine</p>
+        <p><strong>Location:</strong> Room 204, City Hospital</p>
+        <p><strong>Purpose:</strong> Routine Check-up & Lab Report Review</p>
+        <p class="text-sm text-gray-500">Please arrive 15 minutes early and carry previous reports.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -50,7 +116,7 @@ body {
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 pb-6 items-stretch" id="backendGrid"></div>
 
 <!-- Chatbot Icon -->
-<a href="chatbot.html" class="fixed bottom-6 right-6 bg-gradient-to-br from-blue-100 to-blue-200 text-blue-900 w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:scale-110 transition transform">💬</a>
+<a href="chatbot.html" class="fixed bottom-6 right-6 bg-gradient-to-br from-[#457b9d] to-[#e76f51] text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:scale-110 transition transform">💬</a>
 
 <script>
 // Calendar JS
@@ -60,6 +126,7 @@ let today = new Date();
 let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
 
+// Example data
 const appointments = [
   {date: new Date(2025,8,20), status:'missed'},
   {date: new Date(2025,8,22), status:'visited'},
@@ -71,7 +138,7 @@ function renderCalendar(month, year){
   const daysOfWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   daysOfWeek.forEach(d => {
     const div = document.createElement('div');
-    div.className = 'font-semibold text-blue-600';
+    div.className = 'font-semibold text-[#457b9d]';
     div.textContent = d;
     calendarEl.appendChild(div);
   });
@@ -83,16 +150,25 @@ function renderCalendar(month, year){
 
   for(let day=1;day<=daysInMonth;day++){
     const div=document.createElement('div');
-    div.textContent=day;
-    div.className='py-2 rounded-lg transition text-gray-800';
-    if(day===today.getDate() && month===today.getMonth() && year===today.getFullYear()) div.classList.add('bg-blue-300','text-white','font-bold');
+    div.className='relative py-6 rounded-lg transition text-gray-800 flex flex-col items-center justify-center';
+    div.innerHTML=`<span>${day}</span>`;
+
+    if(day===today.getDate() && month===today.getMonth() && year===today.getFullYear()){
+      div.classList.add('bg-[#457b9d]','text-white','font-bold','rounded-lg');
+    }
+
     appointments.forEach(app=>{
       if(app.date.getDate()===day && app.date.getMonth()===month && app.date.getFullYear()===year){
-        if(app.status==='visited') div.classList.add('bg-green-200','text-green-900');
-        if(app.status==='missed') div.classList.add('bg-red-200','text-red-700');
-        if(app.status==='upcoming') div.classList.add('bg-yellow-200','text-yellow-900');
+        let borderColor='', label='';
+        if(app.status==='visited'){ borderColor='border-[#2a9d8f]'; label='Visited'; }
+        if(app.status==='missed'){ borderColor='border-[#e76f51]'; label='Missed'; }
+        if(app.status==='upcoming'){ borderColor='border-[#ffb703]'; label='Appointment'; }
+
+        div.innerHTML=`<span class="date-circle border-2 ${borderColor}">${day}</span>
+        <span class="text-xs mt-1 text-gray-600">${label}</span>`;
       }
     });
+
     calendarEl.appendChild(div);
   }
 
@@ -112,22 +188,22 @@ renderCalendar(currentMonth,currentYear);
 
 // Backend items
 const backendItems=[
-  {title:'Health Updates',type:'bg-blue-100 text-blue-900',content:['Blood Pressure: 120/80','Weight: 65 kg','Next Checkup: 30 Sep 2025']},
-  {title:'Reminders',type:'bg-blue-50 text-blue-900',content:['Take morning medicine','Yoga session at 7 AM','Drink 2L water']},
-  {title:'Lab Reports',type:'bg-blue-200 text-blue-900',content:['Recent blood tests, urine tests, etc.']},
-  {title:'Order Medicines',type:'bg-blue-100 text-blue-900',content:[
+  {title:'Health Updates',content:['Blood Pressure: 120/80','Weight: 65 kg','Next Checkup: 30 Sep 2025']},
+  {title:'Reminders',content:['Take morning medicine','Yoga session at 7 AM','Drink 2L water']},
+  {title:'Lab Reports',content:['Recent blood tests, urine tests, etc.']},
+  {title:'Order Medicines',content:[
     'Order prescribed medicines online',
-    '<a href="paymentgateway.html" class="inline-block mt-2 bg-gradient-to-r from-blue-100 to-blue-200 text-blue-900 px-4 py-2 rounded-lg font-semibold shadow hover:scale-105 transition">Proceed to Payment</a>'
+    '<a href="paymentgateway.html" class="btn mt-2 inline-block">Proceed to Payment</a>'
   ]},
-  {title:'Nutrition Plan',type:'bg-blue-50 text-blue-900',content:['Breakfast: Oats','Lunch: Salad','Dinner: Soup']},
-  {title:'Messages',type:'bg-blue-200 text-blue-900',content:['Message from Dr. Deepu','Message from receptionist']}
+  {title:'Nutrition Plan',content:['Breakfast: Oats','Lunch: Salad','Dinner: Soup']},
+  {title:'Messages',content:['Message from Dr. Deepu','Message from receptionist']}
 ];
 
 const grid=document.getElementById('backendGrid');
 backendItems.forEach(item=>{
   const div=document.createElement('div');
-  div.className=`bg-white shadow-lg rounded-2xl overflow-hidden card-hover flex flex-col h-full`;
-  div.innerHTML=`<div class="${item.type} px-4 py-2 font-semibold">${item.title}</div>
+  div.className=`greek-border card-hover flex flex-col h-full`;
+  div.innerHTML=`<div class="bg-gradient-to-r from-[#457b9d] to-[#6d597a] text-white px-4 py-2 font-semibold">${item.title}</div>
   <div class="flex-1">${item.content.map(c=>`<p class="px-4 py-2 text-gray-700">${c}</p>`).join('')}</div>`;
   grid.appendChild(div);
 });
