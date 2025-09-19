@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Login</title>
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Import Cinzel font -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     /* Gradient animation for background */
     @keyframes pastelGradient {
@@ -17,7 +21,7 @@
       background: linear-gradient(-45deg, #f3e5f5, #e1f5fe, #fff9c4, #e0f7fa, #fce4ec);
       background-size: 600% 600%;
       animation: pastelGradient 40s ease infinite;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Arial', sans-serif; /* Normal clean font */
     }
 
     .greek-card {
@@ -27,6 +31,7 @@
       padding: 2.5rem;
       box-shadow: 0 15px 40px rgba(0,0,0,0.08);
       backdrop-filter: blur(6px);
+      border: 2px solid #1e3c72; /* Blue outline */
     }
 
     .primary-btn { background-color: #1e3c72; }
@@ -36,6 +41,7 @@
     .greek-nav {
       background-color: #1e3c72; /* Deep Greek Blue */
       border-bottom: 4px solid #d4af37; /* Gold outline */
+      font-family: 'Cinzel', serif; /* Only nav in Cinzel */
     }
   </style>
 </head>
