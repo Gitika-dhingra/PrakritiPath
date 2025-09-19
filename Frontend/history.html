@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Patient History</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -17,18 +18,29 @@
       background: linear-gradient(to right, #0d3b66, #145374);
       color: white;
       padding: 15px 40px;
+      border-bottom: 6px solid #d4af37;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .header-title {
       text-align: center;
+      flex: 1;
       font-size: 22px;
       font-weight: bold;
       letter-spacing: 1px;
-      border-bottom: 6px solid #d4af37;
-      position: relative;
     }
 
     .logout {
-      position: absolute;
-      right: 40px;
-      top: 18px;
       background: #d4af37;
       color: #0d3b66;
       padding: 8px 16px;
@@ -37,6 +49,7 @@
       font-weight: bold;
       transition: 0.3s;
     }
+
     .logout:hover {
       background: #0d3b66;
       color: #fff;
@@ -104,7 +117,8 @@
 <body>
 
   <header>
-    Patient History
+    <div class="logo">PrakritiPath</div>
+    <div class="header-title">Patient History</div>
     <a href="index.html" class="logout">Logout</a>
   </header>
 

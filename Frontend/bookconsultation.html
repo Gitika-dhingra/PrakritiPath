@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Book Consultation - PrakritiPath</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --greek-blue:#0d3b66;
@@ -15,15 +15,15 @@
 /* Background */
 body{
   margin:0;
-  font-family:Inter, sans-serif;
-  background:linear-gradient(270deg,#fde2e4,#e2f0cb,#cfe0e8,#fff1e6);
-  background-size:800% 800%;
-  animation: pastelShift 25s ease infinite;
+  font-family:'Arial', sans-serif;
+  background: linear-gradient(-45deg, #f3e5f5, #e1f5fe, #fff9c4, #e0f7fa, #fce4ec);
+  background-size: 600% 600%;
+  animation: pastelGradient 40s ease infinite;
 }
-@keyframes pastelShift{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+@keyframes pastelGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Header */
@@ -35,7 +35,7 @@ header{
   justify-content:space-between;
   align-items:center;
   border-bottom:5px solid var(--greek-gold);
-  font-family:'Cinzel Decorative', serif;
+  font-family:'Cinzel', serif;
 }
 header h1{margin:0;font-size:22px;}
 header a{
@@ -61,7 +61,7 @@ header a:hover{background:white;color:var(--greek-blue);}
 }
 .container h2{
   text-align:center;
-  font-family:'Cinzel Decorative', serif;
+  font-family:'Arial', sans-serif;
   color:var(--greek-blue);
   margin-bottom:20px;
 }
@@ -106,8 +106,8 @@ form button:hover{
 <body>
 
 <header>
-  <h1>Book Consultation</h1>
-  <a href="patient-dashboard.html">Back</a>
+  <h1>PrakritiPath</h1>
+  <a href="#" id="backButton">Back</a>
 </header>
 
 <div class="container">
@@ -133,6 +133,20 @@ form button:hover{
     <button type="submit">Book Appointment</button>
   </form>
 </div>
+
+<script>
+// Simulating login status (replace with actual login logic)
+const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+document.getElementById("backButton").addEventListener("click", function(e){
+  e.preventDefault();
+  if(isLoggedIn){
+    window.location.href = "userdashboard.html";
+  } else {
+    window.location.href = "index.html";
+  }
+});
+</script>
 
 </body>
 </html>

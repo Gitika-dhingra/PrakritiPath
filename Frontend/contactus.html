@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us - PrakritiPath</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
   <style>
     /* Pastel Greek-style gradient background */
     @keyframes greekPastel {
@@ -13,28 +14,105 @@
       100% { background-position: 0% 50%; }
     }
     body {
-      background: linear-gradient(270deg, #fdfdfd, #d6e6f2, #fcefe8, #e6f7f1);
+      background: linear-gradient(-45deg, #f3e5f5, #e1f5fe, #fff9c4, #e0f7fa, #fce4ec);
       background-size: 600% 600%;
-      animation: greekPastel 25s ease infinite;
+      animation: greekPastel 40s ease infinite;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* Header styling */
+    nav {
+      background-color: #0d3b66; /* Greek blue */
+      border-bottom: 5px solid #d4af37; /* golden line */
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav a.text-2xl {
+      color: #ffffff; /* white text */
+      font-family: 'Arial', sans-serif; /* PrakritiPath font */
+      font-weight: 600;
+    }
+
+    /* Navigation links with golden rounded box and white text */
+    .nav-links a {
+      padding: 0.5rem 1rem;
+      border-radius: 9999px; /* full round */
+      border: 2px solid #d4af37;
+      color: #ffffff; /* changed to white */
+      font-weight: 600;
+      background-color: #ffd70033; /* subtle golden background */
+      transition: all 0.3s ease;
+    }
+    .nav-links a:hover {
+      background-color: #d4af37;
+      color: #0d3b66;
+    }
+
+    /* Contact box styling to match chatbot */
+    .contact-box {
+      background: #ffffff; /* elegant white */
+      border: 2px solid #0d3b66;
+      border-radius: 1.5rem;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+      padding: 2rem;
+    }
+    .contact-box h2 {
+      color: #0d3b66;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+    }
+    .contact-box button {
+      background: #d4af37;
+      color: #0d3b66;
+      font-weight: bold;
+      border-radius: 25px;
+      padding: 8px 16px;
+      border: none;
+      width: 100%;
+      transition: 0.3s;
+    }
+    .contact-box button:hover {
+      background: #0d3b66;
+      color: #ffd700;
+    }
+
+    /* Footer contact buttons */
+    .footer-contact a {
+      position: relative;
+      display: inline-block;
+      background: #d4af37;
+      color: #0d3b66;
+      padding: 8px 16px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+      margin: 0 5px;
+    }
+    .footer-contact a:hover {
+      background: #0d3b66;
+      color: #ffd700;
     }
   </style>
 </head>
-<body class="font-sans min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col">
 
   <!-- Navigation -->
-  <nav class="bg-white/60 backdrop-blur-lg p-4 flex justify-between items-center shadow-md border-b border-gray-200">
-    <a href="index.html" class="text-2xl font-bold text-[#2d4373] tracking-wide">PrakritiPath</a>
-    <div class="hidden md:flex space-x-6 text-[#2d4373] font-medium">
-      <a href="dashboard.html" class="hover:text-[#3a5a99] transition-colors">Dashboard</a>
-      <a href="about.html" class="hover:text-[#3a5a99] transition-colors">About</a>
-      <a href="contact.html" class="text-[#3a5a99] font-semibold">Contact</a>
+  <nav>
+    <a href="index.html" class="text-2xl font-bold tracking-wide">PrakritiPath</a>
+    <div class="hidden md:flex space-x-4 nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </div>
   </nav>
 
   <!-- Contact Section -->
   <div class="flex justify-center items-center flex-1 px-4 py-10">
-    <div class="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-2xl backdrop-blur-md border border-[#f1f1f1]">
-      <h2 class="text-3xl font-bold mb-2 text-center text-[#2d4373]">Contact Us</h2>
+    <div class="contact-box w-full max-w-2xl">
+      <h2 class="text-3xl font-bold mb-2">Contact Us</h2>
       <p class="text-center text-gray-600 mb-8">Have questions or need assistance? Please fill out the form below and our team will respond promptly.</p>
 
       <!-- Form -->
@@ -43,35 +121,32 @@
         <div>
           <label for="name" class="block text-gray-700 mb-1">Your Name</label>
           <input type="text" id="name" name="name" placeholder="Enter your name"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2d4373]" required>
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]" required>
         </div>
 
         <!-- Email -->
         <div>
           <label for="email" class="block text-gray-700 mb-1">Your Email</label>
           <input type="email" id="email" name="email" placeholder="Enter your email"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2d4373]" required>
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]" required>
         </div>
 
         <!-- Message -->
         <div>
           <label for="message" class="block text-gray-700 mb-1">Message</label>
           <textarea id="message" name="message" rows="5" placeholder="Write your message here..."
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2d4373]" required></textarea>
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]" required></textarea>
         </div>
 
         <!-- Submit -->
-        <button type="submit"
-          class="w-full bg-[#2d4373] text-white py-3 rounded-lg hover:bg-[#3a5a99] transition-colors font-semibold">
-          Send Message
-        </button>
+        <button type="submit">Send Message</button>
       </form>
 
       <!-- Contact Details -->
-      <div class="mt-10 text-center space-y-2">
-        <p class="text-gray-600">You can also reach us at:</p>
-        <p class="text-[#2d4373] font-semibold">support@prakritipath.com</p>
-        <p class="text-[#2d4373] font-semibold">+91 98765 43210</p>
+      <div class="mt-10 text-center space-y-2 footer-contact">
+        <p class="text-gray-600 mb-2">You can also reach us at:</p>
+        <a href="mailto:support@prakritipath.com">support@prakritipath.com</a>
+        <a href="tel:+919876543210">+91 98765 43210</a>
       </div>
     </div>
   </div>
@@ -83,3 +158,4 @@
 
 </body>
 </html>
+

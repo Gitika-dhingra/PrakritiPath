@@ -6,22 +6,53 @@
   <title>Reschedule Appointment</title>
   <style>
     body {
-      font-family: 'Georgia', serif;
-      background: linear-gradient(135deg, #fdfcfb, #f8ede3, #e0f7f4);
-      background-size: 400% 400%;
-      animation: pastelShift 20s ease infinite;
+      font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      background: linear-gradient(-45deg, #f3e5f5, #e1f5fe, #fff9c4, #e0f7fa, #fce4ec);
+      background-size: 600% 600%;
+      animation: pastelGradient 40s ease infinite;
     }
 
-    @keyframes pastelShift {
+    @keyframes pastelGradient {
       0% {background-position: 0% 50%;}
       50% {background-position: 100% 50%;}
       100% {background-position: 0% 50%;}
+    }
+
+    header {
+      background: linear-gradient(90deg, #0d3b66, #2a4d69, #d4af37);
+      color: #fff;
+      padding: 18px 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0px 5px 18px rgba(0,0,0,0.25);
+      font-family: 'Arial', sans-serif;
+      font-size: 24px;
+      position: relative;
+    }
+
+    .header-title {
+      margin: 0;
+    }
+
+    .back-btn {
+      position: absolute;
+      left: 20px;
+      background: #d4af37;
+      color: #0d3b66;
+      padding: 8px 16px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+      font-size: 14px;
+    }
+
+    .back-btn:hover {
+      background: #0d3b66;
+      color: #fff;
     }
 
     .reschedule-box {
@@ -32,10 +63,11 @@
       width: 420px;
       box-shadow: 0px 10px 28px rgba(0,0,0,0.18);
       text-align: center;
+      margin: 60px auto 0 auto;
     }
 
     .reschedule-box h1 {
-      font-family: 'Cinzel Decorative', serif;
+      font-family: 'Arial', sans-serif;
       font-size: 22px;
       margin-bottom: 20px;
       color: #0d3b66;
@@ -59,7 +91,7 @@
       border-radius: 10px;
       border: 1px solid #ccc;
       font-size: 14px;
-      font-family: 'Georgia', serif;
+      font-family:'Arial', sans-serif;
       background: #fafafa;
     }
 
@@ -100,11 +132,14 @@
   </style>
 </head>
 <body>
+  <header>
+    <a href="http://127.0.0.1:5500/Frontend/doctordashboard.html" class="back-btn">← Back</a>
+    <div class="header-title">Reschedule Appointment</div>
+  </header>
+
   <div class="reschedule-box">
-    <h1>Reschedule Appointment</h1>
-    <form>
+    <form onsubmit="redirectDashboard(event)">
       <label for="patientName">Patient Name</label>
-      <!-- Doctor can now type patient's name -->
       <input type="text" id="patientName" placeholder="Enter patient name" required>
 
       <label for="newDate">New Date</label>
@@ -118,8 +153,15 @@
 
       <button type="submit">Confirm Reschedule</button>
     </form>
-    <a href="doctor-dashboard.html" class="back-link">⬅ Back to Dashboard</a>
+    <a href="http://127.0.0.1:5500/Frontend/doctordashboard.html" class="back-link">⬅ Back to Dashboard</a>
   </div>
+
+  <script>
+    function redirectDashboard(event) {
+      event.preventDefault();
+      window.location.href = "http://127.0.0.1:5500/Frontend/doctordashboard.html";
+    }
+  </script>
 </body>
 </html>
 

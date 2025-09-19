@@ -4,15 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PrakritiPath Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-/* Smooth Gradient Background */
-body {
-  background: linear-gradient(135deg, #e6edf6, #f1ecf9, #f4f8fb); 
+/* Smooth Gradient Background (same as previous pages) */
+body {  
+  background: linear-gradient(-45deg, #f3e5f5, #e1f5fe, #fff9c4, #e0f7fa, #fce4ec); 
   background-size: 600% 600%;
-  animation: softFlow 22s ease infinite;
+  animation: pastelGradient 40s ease infinite;
 }
-@keyframes softFlow {
+@keyframes pastelGradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
@@ -20,16 +21,16 @@ body {
 
 /* Greek-style Border Enhancement */
 .greek-border {
-  border: 3px solid transparent;
+  border: 3px solid yellow; /* yellow border */
   border-radius: 18px;
-  background: white; /* ✅ Same clean white for all boxes */
+  background: white; 
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
   position: relative;
 }
 .greek-border::before {
   content: "";
   position: absolute;
-  inset: 0; /* ✅ Prevent border overflow */
+  inset: 0;
   border: 2px dashed rgba(0,0,0,0.08);
   border-radius: 18px;
   pointer-events: none;
@@ -60,16 +61,17 @@ body {
 
 /* Enhanced Buttons */
 .btn {
-  background: linear-gradient(135deg, #457b9d, #6d597a);
+  background: linear-gradient(135deg, #2c5282, #2b6cb0);
   color: white;
   font-weight: 600;
   padding: 0.6rem 1.2rem;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   transition: all 0.3s ease;
+  border: 2px solid yellow; /* yellow border */
 }
 .btn:hover {
-  background: linear-gradient(135deg, #6d597a, #e76f51);
+  background: linear-gradient(135deg, #2b6cb0, #2c5282);
   transform: scale(1.05);
   box-shadow: 0 6px 16px rgba(0,0,0,0.25);
 }
@@ -78,9 +80,12 @@ body {
 <body class="min-h-screen font-sans">
 
 <!-- Navbar -->
-<header class="flex justify-between items-center bg-white shadow-md px-8 py-4 rounded-b-xl greek-border">
-  <h1 class="text-2xl font-bold text-[#457b9d]">PrakritiPath</h1>
-  <a href="registration/logout.html" class="btn">Logout</a>
+<header class="flex justify-between items-center bg-[#2c5282] text-white shadow-md px-8 py-4 rounded-b-xl border-b-4 border-yellow-400">
+  <h1 class="text-2xl font-bold">PrakritiPath</h1>
+  <div class="flex gap-4">
+    <a href="bookconsultation.html" class="btn">Book Consultation</a>
+    <a href="registration/logout.html" class="btn">Logout</a>
+  </div>
 </header>
 
 <!-- Top Container -->
@@ -90,7 +95,7 @@ body {
   <div class="md:flex-1 greek-border p-6 card-hover">
     <div class="flex justify-between items-center mb-4">
       <button id="prevMonth" class="btn px-3 py-1">&lt;</button>
-      <h3 id="monthYear" class="text-[#6d597a] font-semibold text-lg">September 2025</h3>
+      <h3 id="monthYear" class="text-[#2c5282] font-semibold text-lg">September 2025</h3>
       <button id="nextMonth" class="btn px-3 py-1">&gt;</button>
     </div>
     <div class="grid grid-cols-7 gap-2 text-center font-medium text-gray-700" id="calendar"></div>
@@ -99,7 +104,7 @@ body {
   <!-- Next Appointment -->
   <div class="md:flex-1">
     <div class="greek-border overflow-hidden card-hover h-full">
-      <div class="bg-gradient-to-r from-[#457b9d] to-[#6d597a] text-white px-4 py-2 font-semibold text-sm">Next Appointment</div>
+      <div class="bg-[#2c5282] text-white px-4 py-2 font-semibold text-sm">Next Appointment</div>
       <div class="p-4 text-gray-700 space-y-2">
         <p><strong>Doctor:</strong> Dr. Deepu John</p>
         <p><strong>Date & Time:</strong> 22 Sep 2025, 10:00 AM</p>
@@ -115,8 +120,18 @@ body {
 <!-- Bottom Grid -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 pb-6 items-stretch" id="backendGrid"></div>
 
+<!-- Footer -->
+<footer class="bg-[#2c5282] text-white text-center py-4 mt-6 border-t-4 border-yellow-400">
+  <p class="text-sm">© 2025 PrakritiPath. All Rights Reserved.</p>
+  <div class="flex justify-center gap-6 mt-2">
+    <a href="dashboard.html" class="hover:underline">Dashboard</a>
+    <a href="about.html" class="hover:underline">About</a>
+    <a href="contact.html" class="hover:underline">Contact</a>
+  </div>
+</footer>
+
 <!-- Chatbot Icon -->
-<a href="chatbot.html" class="fixed bottom-6 right-6 bg-gradient-to-br from-[#457b9d] to-[#e76f51] text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:scale-110 transition transform">💬</a>
+<a href="http://127.0.0.1:5500/Frontend/chatbot.html" class="fixed bottom-6 right-6 bg-gradient-to-br from-[#2c5282] to-[#2b6cb0] text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:scale-110 transition transform">💬</a>
 
 <script>
 // Calendar JS
@@ -126,7 +141,6 @@ let today = new Date();
 let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
 
-// Example data
 const appointments = [
   {date: new Date(2025,8,20), status:'missed'},
   {date: new Date(2025,8,22), status:'visited'},
@@ -138,7 +152,7 @@ function renderCalendar(month, year){
   const daysOfWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   daysOfWeek.forEach(d => {
     const div = document.createElement('div');
-    div.className = 'font-semibold text-[#457b9d]';
+    div.className = 'font-semibold text-[#2c5282]';
     div.textContent = d;
     calendarEl.appendChild(div);
   });
@@ -154,15 +168,15 @@ function renderCalendar(month, year){
     div.innerHTML=`<span>${day}</span>`;
 
     if(day===today.getDate() && month===today.getMonth() && year===today.getFullYear()){
-      div.classList.add('bg-[#457b9d]','text-white','font-bold','rounded-lg');
+      div.classList.add('bg-[#2c5282]','text-white','font-bold','rounded-lg');
     }
 
     appointments.forEach(app=>{
       if(app.date.getDate()===day && app.date.getMonth()===month && app.date.getFullYear()===year){
         let borderColor='', label='';
-        if(app.status==='visited'){ borderColor='border-[#2a9d8f]'; label='Visited'; }
-        if(app.status==='missed'){ borderColor='border-[#e76f51]'; label='Missed'; }
-        if(app.status==='upcoming'){ borderColor='border-[#ffb703]'; label='Appointment'; }
+        if(app.status==='visited'){ borderColor='border-green-600'; label='Visited'; }
+        if(app.status==='missed'){ borderColor='border-red-500'; label='Missed'; }
+        if(app.status==='upcoming'){ borderColor='border-yellow-500'; label='Appointment'; }
 
         div.innerHTML=`<span class="date-circle border-2 ${borderColor}">${day}</span>
         <span class="text-xs mt-1 text-gray-600">${label}</span>`;
@@ -190,7 +204,10 @@ renderCalendar(currentMonth,currentYear);
 const backendItems=[
   {title:'Health Updates',content:['Blood Pressure: 120/80','Weight: 65 kg','Next Checkup: 30 Sep 2025']},
   {title:'Reminders',content:['Take morning medicine','Yoga session at 7 AM','Drink 2L water']},
-  {title:'Lab Reports',content:['Recent blood tests, urine tests, etc.']},
+  {title:'Lab Reports',content:[
+    'Recent blood tests, urine tests, etc.',
+    '<a href="labreports.html" class="btn mt-2 inline-block">View Lab Report</a>'
+  ]},
   {title:'Order Medicines',content:[
     'Order prescribed medicines online',
     '<a href="paymentgateway.html" class="btn mt-2 inline-block">Proceed to Payment</a>'
@@ -203,7 +220,7 @@ const grid=document.getElementById('backendGrid');
 backendItems.forEach(item=>{
   const div=document.createElement('div');
   div.className=`greek-border card-hover flex flex-col h-full`;
-  div.innerHTML=`<div class="bg-gradient-to-r from-[#457b9d] to-[#6d597a] text-white px-4 py-2 font-semibold">${item.title}</div>
+  div.innerHTML=`<div class="bg-[#2c5282] text-white px-4 py-2 font-semibold">${item.title}</div>
   <div class="flex-1">${item.content.map(c=>`<p class="px-4 py-2 text-gray-700">${c}</p>`).join('')}</div>`;
   grid.appendChild(div);
 });

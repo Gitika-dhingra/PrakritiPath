@@ -7,17 +7,17 @@
   <style>
     body {
       font-family: 'Georgia', serif;
-      background: linear-gradient(135deg, #fdfcfb, #f8ede3, #e0f7f4);
-      background-size: 400% 400%;
-      animation: pastelShift 25s ease infinite;
       margin: 0;
       padding: 0;
+      background: linear-gradient(-45deg, #f3e5f5, #e1f5fe, #fff9c4, #e0f7fa, #fce4ec);
+      background-size: 600% 600%;
+      animation: pastelGradient 40s ease infinite;
     }
 
-    @keyframes pastelShift {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+    @keyframes pastelGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     header {

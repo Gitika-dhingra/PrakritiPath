@@ -1,60 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PrakritiPath Chatbot</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(-45deg, #dce4f2, #f7f5eb, #e4eaf1, #f9f8ed);
-      background-size: 400% 400%;
-      animation: gradientShift 18s ease infinite;
-    }
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrakritiPath Chatbot</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(-45deg, #dce4f2, #f7f5eb, #e4eaf1, #f9f8ed);
+    background-size: 400% 400%;
+    animation: gradientShift 18s ease infinite;
+  }
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Navigation Bar */
+  nav {
+    background-color: #0d3b66;
+    border-bottom: 5px solid #d4af37; /* golden line */
+  }
+
+  /* Chat Container & Boxes */
+  .chat-container {
+    width: 100%;
+    max-width: 3xl; /* matched width */
+    height: 80vh; /* matched height */
+    background: #ffffff; /* elegant white */
+    border-radius: 1.5rem;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 2px solid #0d3b66;
+  }
+
+  .chat-header {
+    background-color: #0d3b66; /* dark Greek blue */
+    color: #ffd700; /* golden text */
+    text-align: center;
+    padding: 1rem;
+    font-family:'Arial', sans-serif ;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-bottom: 2px solid #d4af37; /* golden line */
+  }
+
+  .chat-box {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    background-color: #f1f1f1; /* soft elegant contrast */
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .chat-user {
+    background-color: #0d3b66; /* deep blue */
+    color: #ffd700; /* golden text */
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    max-width: 60%;
+    align-self: flex-end;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .chat-bot {
+    background-color: #ffd700; /* golden */
+    color: #0d3b66; /* Greek blue text */
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    max-width: 60%;
+    align-self: flex-start;
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .chat-input-container {
+    display: flex;
+    border-top: 2px solid #d4af37;
+  }
+
+  .chat-input-container input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+  }
+
+  .chat-input-container button {
+    background-color: #0d3b66;
+    color: #ffd700;
+    padding: 0.75rem 1.5rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .chat-input-container button:hover {
+    background-color: #ffd700;
+    color: #0d3b66;
+  }
+</style>
 </head>
 <body class="h-screen flex flex-col">
 
   <!-- Navigation Bar -->
-  <nav class="bg-blue-500 text-white shadow-md flex justify-between items-center px-6 py-3">
+  <nav class="flex justify-between items-center px-6 py-3">
     <a href="userdashboard.html" class="text-white hover:text-blue-200 font-semibold flex items-center space-x-2">
       <span class="text-xl">←</span>
       <span>Back</span>
     </a>
-    <h1 class="text-2xl font-bold font-[Cinzel] tracking-wide">PrakritiPath</h1>
+    <h1 class="text-2xl font-bold font-[Cinzel] tracking-wide text-white">PrakritiPath</h1>
   </nav>
 
   <!-- Chat Container -->
   <div class="flex-1 flex justify-center items-center p-4">
-    <div class="w-full max-w-3xl h-[80vh] bg-[#f0f4f8] rounded-2xl shadow-2xl flex flex-col overflow-hidden border-2 border-blue-300">
+    <div class="chat-container">
       
       <!-- Chat Header -->
-      <div class="bg-blue-400 text-white text-center py-4 font-[Cinzel] text-xl font-bold border-b-2 border-blue-300">
+      <div class="chat-header">
         🌿 PrakritiPath Chatbot
       </div>
       
       <!-- Chat Box -->
-      <div id="chatBox" class="flex-1 p-4 overflow-y-auto bg-[#f9f8ed] space-y-4">
-        <div class="bg-purple-300 text-white px-4 py-3 rounded-xl max-w-xs shadow-md font-[Cinzel]">
+      <div id="chatBox" class="chat-box">
+        <div class="chat-bot">
           Hello 🌿 How can I assist you today?
         </div>
       </div>
       
       <!-- Chat Input -->
-      <div class="flex border-t-2 border-blue-300">
-        <input id="userInput" type="text" placeholder="Type your message..." 
-          class="flex-1 px-4 py-3 focus:outline-none text-gray-800 font-medium bg-[#f0f4f8]" />
-        <button onclick="sendMessage()" 
-          class="bg-blue-400 hover:bg-blue-500 text-white font-bold px-6 py-3 border-l-2 border-blue-300 transition">
-          Send
-        </button>
+      <div class="chat-input-container">
+        <input id="userInput" type="text" placeholder="Type your message..." />
+        <button onclick="sendMessage()">Send</button>
       </div>
     </div>
   </div>
@@ -97,5 +184,5 @@
       chatBox.scrollTop = chatBox.scrollHeight;
     }
   </script>
-</body>
+</body>  
 </html>
