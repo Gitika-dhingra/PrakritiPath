@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logging Out...</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #f9fafb;
+      color: #333;
+    }
+    .message {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+  </style>
+  <script>
+    // Clear session/local storage
+    sessionStorage.clear();
+    localStorage.clear();
+
+    // Show message briefly then redirect
+    window.onload = function () {
+      setTimeout(function () {
+        // Redirect to Admin Login page
+        window.location.href = "adminlogin.html";
+      }, 1000); // 1 second delay
+    };
+  </script>
+</head>
+<body>
+  <div class="message">✅ You have been logged out successfully.</div>
+</body>
+</html>

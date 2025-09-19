@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Font for Nav -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Animated pastel gradient background */
+    @keyframes pastelGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    body {
+      background: linear-gradient(-45deg, #f3e5f5, #e1f5fe, #fff9c4, #e0f7fa, #fce4ec);
+      background-size: 600% 600%;
+      animation: pastelGradient 40s ease infinite;
+      font-family: 'Arial', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Greek-style nav bar */
+    .greek-nav {
+      background-color: #1e3c72;
+      border-bottom: 4px solid #d4af37;
+      font-family: 'Cinzel', serif;
+    }
+
+    /* Card styling */
+    .greek-card {
+      background: rgba(255,255,255,0.9);
+      border-radius: 2rem;
+      padding: 2.5rem;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+      backdrop-filter: blur(6px);
+      border: 2px solid #1e3c72;
+      max-width: 450px;
+      width: 100%;
+    }
+
+    .primary-btn { background-color: #1e3c72; }
+    .primary-btn:hover { background-color: #3a5ba0; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="greek-nav backdrop-blur-md px-6 py-4 flex justify-between items-center shadow-lg sticky top-0 z-50">
+    <a href="index.html" class="text-2xl font-extrabold text-white tracking-wide hover:scale-105 transition-transform">
+      PrakritiPath
+    </a>
+    <div>
+      <a href="adminlogin.html" class="px-4 py-2 border border-[#d4af37] rounded-lg text-white hover:bg-[#d4af37] hover:text-[#1e3c72] transition-all font-medium shadow-md">
+        Login
+      </a>
+    </div>
+  </nav>
+
+  <!-- Signup Form -->
+  <div class="flex justify-center items-center flex-1 mt-12 mb-12">
+    <div class="greek-card">
+
+      <h2 class="text-3xl font-bold mb-6 text-[#1e3c72] text-center">Admin Sign Up</h2>
+
+      <form id="adminSignupForm" class="space-y-4">
+
+        <!-- Name -->
+        <div>
+          <label for="name" class="block text-gray-700 mb-1">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-gray-700 mb-1">Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
+        </div>
+
+        <!-- Password -->
+        <div class="relative">
+          <label for="password" class="block text-gray-700 mb-1">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
+          <button type="button" onclick="togglePassword(event)" class="absolute right-3 top-9 text-gray-500 text-sm">
+            Show
+          </button>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="relative">
+          <label for="confirmPassword" class="block text-gray-700 mb-1">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
+          <button type="button" onclick="toggleConfirmPassword(event)" class="absolute right-3 top-9 text-gray-500 text-sm">
+            Show
+          </button>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="w-full primary-btn text-white py-2 rounded-lg font-semibold">
+          Sign Up
+        </button>
+
+      </form>
+
+      <p class="mt-4 text-center text-gray-500 text-sm">
+        Already have an account? <a href="adminlogin.html" class="text-[#1e3c72] hover:underline">Login</a>
+      </p>
+
+    </div>
+  </div>
+
+  <script>
+    function togglePassword(event) {
+      const input = document.getElementById('password');
+      const btn = event.currentTarget;
+      input.type = input.type === 'password' ? 'text' : 'password';
+      btn.textContent = btn.textContent === 'Show' ? 'Hide' : 'Show';
+    }
+    function toggleConfirmPassword(event) {
+      const input = document.getElementById('confirmPassword');
+      const btn = event.currentTarget;
+      input.type = input.type === 'password' ? 'text' : 'password';
+      btn.textContent = btn.textContent === 'Show' ? 'Hide' : 'Show';
+    }
+
+    // Redirect admin after signup
+    document.getElementById("adminSignupForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      window.location.href = "admindashboard.html";
+    });
+  </script>
+
+</body>
+</html>
