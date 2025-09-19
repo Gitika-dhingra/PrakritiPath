@@ -6,36 +6,50 @@
   <title>User Login</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @keyframes greekGradient {
+    /* Gradient animation for background */
+    @keyframes pastelGradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+
     body {
-      background: linear-gradient(270deg, #a1c4fd, #c2e9fb, #f0f4f8, #ffffff);
-      background-size: 800% 800%;
-      animation: greekGradient 25s ease infinite;
+      background: linear-gradient(-45deg, #f3e5f5, #e1f5fe, #fff9c4, #e0f7fa, #fce4ec);
+      background-size: 600% 600%;
+      animation: pastelGradient 40s ease infinite;
       font-family: 'Arial', sans-serif;
     }
+
     .greek-card {
-      background: linear-gradient(135deg, #ffffff 25%, #f7f7f7 25%, #f7f7f7 50%, #ffffff 50%, #ffffff 75%, #f7f7f7 75%);
+      background: linear-gradient(135deg, #ffffffcc 25%, #f7f7f7cc 25%, #f7f7f7cc 50%, #ffffffcc 50%, #ffffffcc 75%, #f7f7f7cc 75%);
       background-size: 20px 20px;
       border-radius: 2rem;
       padding: 2.5rem;
       box-shadow: 0 15px 40px rgba(0,0,0,0.08);
       backdrop-filter: blur(6px);
     }
+
     .primary-btn { background-color: #1e3c72; }
     .primary-btn:hover { background-color: #3a5ba0; }
+
+    /* Greek-style nav bar */
+    .greek-nav {
+      background-color: #1e3c72; /* Deep Greek Blue */
+      border-bottom: 4px solid #d4af37; /* Gold outline */
+    }
   </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
   <!-- Navigation -->
-  <nav class="bg-white/30 backdrop-blur-md p-4 flex justify-between items-center shadow-md">
-    <a href="../index.html" class="text-2xl font-bold text-[#1e3c72]">PrakritiPath</a>
+  <nav class="greek-nav backdrop-blur-md px-6 py-4 flex justify-between items-center shadow-lg sticky top-0 z-50">
+    <a href="../index.html" class="text-2xl font-extrabold text-white tracking-wide hover:scale-105 transition-transform">
+      PrakritiPath
+    </a>
     <div>
-      <a href="signup.html" class="px-3 py-1 border border-[#1e3c72] rounded hover:bg-[#1e3c72] hover:text-white transition-colors">Sign Up</a>
+      <a href="signup.html" class="px-4 py-2 border border-[#d4af37] rounded-lg text-white hover:bg-[#d4af37] hover:text-[#1e3c72] transition-all font-medium shadow-md">
+        Sign Up
+      </a>
     </div>
   </nav>
 
