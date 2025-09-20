@@ -1,175 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Patient History</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to right, #f7f9fc, #eef2f3);
-      color: #333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette */
+            --light-rose-gold: #F3E5F5;
+            --medium-rose-gold: #D9A7C7;
+            --dark-rose-gold: #B76E79;
+            --standard-gold: #D4AF37;
+            --light-gold: #E8C15E;
+            --soft-peach: #FFF7ED;
+            --light-cool-gray: #f3f4f6;
+            --medium-gray: #d1d5db;
+            --dark-gray: #9ca3af;
+            --dark-slate: #1f2937;
+            --light-slate: #475569;
+        }
 
-    header {
-      background: linear-gradient(to right, #0d3b66, #145374);
-      color: white;
-      padding: 15px 40px;
-      border-bottom: 6px solid #d4af37;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+        /* --- 1. Base & Layout --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background: linear-gradient(to right, var(--light-cool-gray), var(--medium-gray));
+            background-size: 200% 200%;
+            animation: liveGradient 15s ease infinite;
+            color: var(--dark-slate);
+        }
 
-    .logo {
-      font-family: 'Cinzel', serif;
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
+        @keyframes liveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    .header-title {
-      text-align: center;
-      flex: 1;
-      font-size: 22px;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
+        .container {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+        }
 
-    .logout {
-      background: #d4af37;
-      color: #0d3b66;
-      padding: 8px 16px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+        /* --- 2. Header --- */
+        header {
+            background: var(--light-slate);
+            color: var(--light-rose-gold);
+            padding: 1rem 2.5rem;
+            border-bottom: 6px solid var(--standard-gold);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
 
-    .logout:hover {
-      background: #0d3b66;
-      color: #fff;
-    }
+        .logo {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.5rem; /* 24px */
+            font-weight: 600;
+        }
 
-    .container {
-      padding: 30px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
-    }
+        .header-title {
+            text-align: center;
+            flex: 1;
+            font-size: 1.5rem; /* 24px */
+            font-weight: bold;
+            font-family: 'Cinzel Decorative', serif;
+        }
 
-    .box {
-      background: #fff;
-      border: 3px solid #d4af37;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0px 6px 12px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
-    }
-    .box:hover {
-      transform: translateY(-5px);
-    }
+        .logout-btn {
+            background: var(--standard-gold);
+            color: var(--dark-slate);
+            padding: 0.5rem 1.25rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .logout-btn:hover {
+            background: var(--light-gold);
+            transform: scale(1.05);
+        }
 
-    .box h2 {
-      font-size: 20px;
-      color: #0d3b66;
-      margin-bottom: 10px;
-      border-bottom: 2px solid #d4af37;
-      padding-bottom: 5px;
-    }
+        /* --- 3. Content Boxes --- */
+        .box {
+            background: var(--soft-peach);
+            border: 3px solid var(--medium-rose-gold);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
 
-    .history-details {
-      font-size: 15px;
-      line-height: 1.6;
-    }
+        .box h2 {
+            font-size: 1.25rem; /* 20px */
+            color: var(--dark-rose-gold);
+            margin: 0 0 1rem 0;
+            border-bottom: 2px solid var(--medium-rose-gold);
+            padding-bottom: 0.5rem;
+            font-family: 'Cinzel Decorative', serif;
+        }
 
-    .chat-box {
-      background: #f1f5f9;
-      border-radius: 12px;
-      padding: 12px;
-      margin: 10px 0;
-      font-size: 14px;
-      position: relative;
-    }
+        .history-details {
+            font-size: 1rem; /* 16px */
+            line-height: 1.7;
+            color: var(--dark-slate);
+        }
+        .history-details p {
+            margin-bottom: 0.5rem;
+        }
 
-    .chat-patient {
-      background: #dceefb;
-      border-left: 4px solid #0d3b66;
-    }
+        /* --- 4. Chat History --- */
+        .chat-container {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px; /* For scrollbar */
+        }
+        
+        .chat-box {
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            margin: 0.75rem 0;
+            font-size: 0.875rem; /* 14px */
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
 
-    .chat-bot {
-      background: #fef6e4;
-      border-left: 4px solid #d4af37;
-    }
+        .chat-patient {
+            background: var(--light-rose-gold);
+            border-left: 4px solid var(--dark-rose-gold);
+            color: var(--dark-slate);
+        }
 
-    .timestamp {
-      font-size: 12px;
-      color: gray;
-      text-align: right;
-      margin-top: 4px;
-    }
-  </style>
+        .chat-bot {
+            background: var(--light-slate);
+            border-left: 4px solid var(--standard-gold);
+            color: var(--light-rose-gold);
+        }
+
+        .timestamp {
+            font-size: 0.75rem; /* 12px */
+            color: var(--dark-gray);
+            text-align: right;
+            margin-top: 0.25rem;
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">PrakritiPath</div>
-    <div class="header-title">Patient History</div>
-    <a href="index.html" class="logout">Logout</a>
-  </header>
+    <header>
+        <div class="logo">PrakritiPath</div>
+        <div class="header-title">Patient History</div>
+        <a href="index.html" class="logout-btn">Logout</a>
+    </header>
 
-  <div class="container">
-    <!-- Medical History -->
-    <div class="box">
-      <h2>Medical History</h2>
-      <div class="history-details">
-        <p><strong>Past Consultations:</strong>  
-          <br> - 10 Aug 2025: General Checkup with Dr. Sharma  
-          <br> - 22 Aug 2025: Panchakarma Consultation with Dr. Raghavan  
-          <br> - 5 Sept 2025: Ayurvedic follow-up with Dr. Mehta  
-        </p>
-        <p><strong>Prescriptions:</strong>  
-          <br> - Ashwagandha Tablets (2/day)  
-          <br> - Triphala Powder (before sleep)  
-          <br> - Chyawanprash (1 tsp daily)  
-        </p>
-        <p><strong>Therapies Taken:</strong>  
-          <br> - Shirodhara (Aug 2025)  
-          <br> - Abhyanga Oil Massage (Sept 2025)  
-        </p>
-      </div>
+    <div class="container">
+        <div class="box">
+            <h2>Consultations</h2>
+            <div class="history-details" id="consultations">
+                <p>Loading consultations...</p>
+            </div>
+        </div>
+
+        <div class="box">
+            <h2>Prescriptions</h2>
+            <div class="history-details" id="prescriptions">
+                <p>Loading prescriptions...</p>
+            </div>
+        </div>
+
+        <div class="box">
+            <h2>Therapies</h2>
+            <div class="history-details" id="therapies">
+                <p>Loading therapies...</p>
+            </div>
+        </div>
+
+        <div class="box">
+            <h2>Chatbot Interaction History</h2>
+            <div class="chat-container" id="chatHistory">
+                <p>Loading chat history...</p>
+            </div>
+        </div>
     </div>
 
-    <!-- Chatbot History -->
-    <div class="box">
-      <h2>Chatbot Interaction History</h2>
-      
-      <div class="chat-box chat-patient">
-        <p>I'm feeling tired all the time and my head hurts a lot.</p>
-        <div class="timestamp">2 Sept 2025, 10:15 AM</div>
-      </div>
+<script>
+    const patientId = 1; // In a real app, this would be dynamic (e.g., from URL or localStorage)
 
-      <div class="chat-box chat-bot">
-        <p>It seems like you may be experiencing stress or lack of sleep. Would you like me to suggest some Ayurvedic remedies?</p>
-        <div class="timestamp">2 Sept 2025, 10:16 AM</div>
-      </div>
+    /**
+     * Reusable function to populate a list from an array of strings.
+     * @param {string} containerId - The ID of the container element.
+     * @param {Array} dataArray - The array of data to display.
+     * @param {string} emptyMessage - Message to show if the array is empty.
+     * @param {function} formatter - A function to format each item into a string.
+     */
+    function populateList(containerId, dataArray, emptyMessage, formatter) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = ""; // Clear loading message
+        if (dataArray.length === 0) {
+            container.textContent = emptyMessage;
+        } else {
+            dataArray.forEach(item => {
+                const p = document.createElement("p");
+                p.innerHTML = formatter(item); // Use innerHTML for potential bolding, etc.
+                container.appendChild(p);
+            });
+        }
+    }
 
-      <div class="chat-box chat-patient">
-        <p>Yes, please suggest some remedies.</p>
-        <div class="timestamp">2 Sept 2025, 10:18 AM</div>
-      </div>
+    // Load Medical History
+    async function loadMedicalHistory() {
+        try {
+            // Corrected syntax using backticks (`) for template literals
+            const res = await fetch(`http://localhost:5000/api/patients/${patientId}/history`);
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            const data = await res.json();
 
-      <div class="chat-box chat-bot">
-        <p>You can try Brahmi tea for relaxation and Shirodhara therapy for stress relief. Do you want to book a consultation with a doctor?</p>
-        <div class="timestamp">2 Sept 2025, 10:20 AM</div>
-      </div>
+            // Populate each section using the reusable function
+            populateList("consultations", data.consultations, "No consultations found.", 
+                c => `<strong>${new Date(c.date).toLocaleDateString()}:</strong> ${c.details}`
+            );
+            populateList("prescriptions", data.prescriptions, "No prescriptions found.", 
+                p => `- ${p}`
+            );
+            populateList("therapies", data.therapies, "No therapies found.", 
+                t => `- ${t}`
+            );
+        } catch(err) {
+            console.error("Error loading medical history:", err);
+            document.getElementById("consultations").textContent = "Unable to load consultations.";
+            document.getElementById("prescriptions").textContent = "Unable to load prescriptions.";
+            document.getElementById("therapies").textContent = "Unable to load therapies.";
+        }
+    }
 
-    </div>
-  </div>
+    // Load Chatbot History
+    async function loadChatHistory() {
+        try {
+            // Corrected syntax using backticks (`) for template literals
+            const res = await fetch(`http://localhost:5000/api/patients/${patientId}/chathistory`);
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            const chats = await res.json();
+
+            const container = document.getElementById("chatHistory");
+            container.innerHTML = ""; // Clear loading message
+            
+            if (chats.length === 0) {
+                container.textContent = "No chat history found.";
+                return;
+            }
+
+            chats.forEach(chat => {
+                const div = document.createElement("div");
+                // Use template literals for class names too
+                div.className = `chat-box ${chat.sender === 'patient' ? 'chat-patient' : 'chat-bot'}`;
+                // Use template literals for innerHTML
+                div.innerHTML = `<p>${chat.message}</p><div class="timestamp">${new Date(chat.timestamp).toLocaleString()}</div>`;
+                container.appendChild(div);
+            });
+        } catch(err) {
+            console.error("Error loading chat history:", err);
+            document.getElementById("chatHistory").textContent = "Unable to load chat history.";
+        }
+    }
+
+    // Initial load when the page is ready
+    document.addEventListener('DOMContentLoaded', () => {
+        loadMedicalHistory();
+        loadChatHistory();
+    });
+</script>
 
 </body>
 </html>

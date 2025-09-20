@@ -6,355 +6,450 @@
 <title>Admin Dashboard - PrakritiPath</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --greek-blue:#0d3b66;
-  --greek-gold:#d4af37;
-  --greek-light:#f4f4f4;
-  --bg:#f9fafb;
+:root {
+    /* Colors from the provided table */
+    --light-rose-gold: #F3E5F5;
+    --medium-rose-gold: #D9A7C7;
+    --dark-rose-gold: #B76E79;
+    --light-tangerine: #FDBA74;
+    --deep-orange: #DD6B20;
+    --soft-peach: #FFF7ED;
+    --standard-gold: #D4AF37;
+    --light-gold: #E8C15E;
+    --light-cool-gray: #f3f4f6;
+    --light-gray: #e5e7eb;
+    --medium-gray: #d1d5db;
+    --dark-gray: #9ca3af;
+    --dark-slate: #1f2937;
+    --light-slate: #475569;
 }
 
-body{
-  margin:0;
-  font-family:Inter, sans-serif;
-  background:linear-gradient(270deg,#fde2e4,#e2f0cb,#cfe0e8,#fff1e6);
-  background-size:800% 800%;
-  animation: pastelShift 25s ease infinite;
+/* Live Background Animation */
+body {
+    margin: 0;
+    font-family: Inter, sans-serif;
+    background: linear-gradient(135deg, var(--light-gray), var(--medium-gray), var(--dark-gray));
+    background-size: 300% 300%;
+    animation: liveGradient 15s ease infinite;
+    color: var(--dark-slate);
 }
-@keyframes pastelShift{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+
+@keyframes liveGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* Header */
-header{
-  background:var(--greek-blue);
-  color:white;
-  padding:15px 25px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-family:'Cinzel Decorative', serif;
-  border-bottom:5px solid var(--greek-gold);
+header {
+    background: var(--dark-slate);
+    color: var(--light-rose-gold);
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Cinzel Decorative', serif;
+    border-bottom: 5px solid var(--standard-gold);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
 }
-header h1{margin:0;font-size:22px;}
-header a{
-  background:var(--greek-gold);
-  color:var(--greek-blue);
-  padding:8px 16px;
-  border-radius:25px;
-  text-decoration:none;
-  font-weight:bold;
-  transition:0.3s;
+header h1 { margin: 0; font-size: 26px; }
+header a {
+    background: var(--standard-gold);
+    color: var(--dark-slate);
+    padding: 8px 18px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
-header a:hover{background:white;color:var(--greek-blue);}
+header a:hover {
+    background: var(--light-gold);
+    transform: scale(1.05);
+}
 
 /* Layout */
-.container{
-  display:flex;
-  min-height:calc(100vh - 60px);
+.container {
+    display: flex;
+    min-height: calc(100vh - 81px); /* Adjusted for header height */
 }
 
 /* Sidebar */
-.sidebar{
-  width:220px;
-  background:var(--greek-light);
-  border-right:3px solid var(--greek-gold);
-  padding:20px;
+.sidebar {
+    width: 220px;
+    background: var(--dark-slate);
+    color: var(--light-rose-gold);
+    border-right: 4px solid var(--medium-rose-gold);
+    padding: 20px;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.12);
 }
-.sidebar h2{
-  font-family:'Cinzel Decorative', serif;
-  font-size:18px;
-  color:var(--greek-blue);
-  margin-bottom:20px;
+.sidebar h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 18px;
+    color: var(--light-rose-gold);
+    margin-bottom: 20px;
 }
-.sidebar a{
-  display:block;
-  padding:10px 12px;
-  margin-bottom:10px;
-  color:var(--greek-blue);
-  text-decoration:none;
-  border-radius:8px;
-  transition:0.3s;
-  font-weight:500;
-  cursor:pointer;
+.sidebar a {
+    display: block;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    color: var(--light-rose-gold);
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    background: rgba(243, 229, 245, 0.05);
+    cursor: pointer;
 }
-.sidebar a:hover{
-  background:var(--greek-gold);
-  color:white;
+.sidebar a:hover {
+    background: linear-gradient(90deg, var(--medium-rose-gold), var(--light-rose-gold));
+    color: var(--dark-slate);
+    transform: translateX(6px) scale(1.05);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.2);
 }
 
 /* Main Content */
-.main{
-  flex:1;
-  padding:25px;
+.main {
+    flex: 1;
+    padding: 30px;
+    background-color: var(--light-cool-gray);
 }
-.main h2{
-  font-family:'Cinzel Decorative', serif;
-  color:var(--greek-blue);
-  margin-bottom:15px;
+.main h2 {
+    font-family: 'Cinzel Decorative', serif;
+    color: var(--dark-rose-gold);
+    margin-bottom: 15px;
 }
-.table-container{
-  background:white;
-  padding:20px;
-  border-radius:16px;
-  margin-bottom:30px;
-  border:3px solid var(--greek-gold);
-  box-shadow:0 8px 20px rgba(0,0,0,0.08);
-  display:none; /* hidden by default */
+.table-container {
+    background: var(--soft-peach);
+    padding: 22px;
+    border-radius: 18px;
+    margin-bottom: 30px;
+    border: 3px solid var(--medium-rose-gold);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+    display: none; /* hidden by default */
 }
-table{
-  width:100%;
-  border-collapse:collapse;
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
-table th, table td{
-  padding:12px;
-  text-align:left;
-  border-bottom:1px solid #ddd;
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--light-rose-gold);
 }
-table th{
-  background:#f8f1dc;
-  color:var(--greek-blue);
+table th {
+    background: var(--light-rose-gold);
+    color: var(--dark-slate);
 }
-.actions button{
-  padding:6px 12px;
-  border:none;
-  border-radius:6px;
-  margin-right:5px;
-  cursor:pointer;
-  font-size:14px;
-  font-weight:600;
+table tr {
+    transition: 0.3s;
 }
-.edit-btn{background:var(--greek-gold);color:var(--greek-blue);}
-.delete-btn{background:#e63946;color:white;}
-.edit-btn:hover{opacity:0.85;}
-.delete-btn:hover{opacity:0.85;}
+table tr:hover {
+    background: rgba(243, 229, 245, 0.5);
+    transform: scale(1.01);
+}
+.actions button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    margin-right: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.edit-btn { background: var(--standard-gold); color: var(--dark-slate); }
+.delete-btn { background: var(--dark-rose-gold); color: white; }
+.edit-btn:hover, .delete-btn:hover {
+    opacity: 0.9;
+    transform: scale(1.08);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
 
 /* Welcome Screen */
-.welcome-box{
-  background:white;
-  padding:30px;
-  border-radius:16px;
-  border:3px solid var(--greek-gold);
-  box-shadow:0 8px 20px rgba(0,0,0,0.1);
-  text-align:center;
+.welcome-box {
+    background: var(--soft-peach);
+    padding: 35px;
+    border-radius: 20px;
+    border: 3px solid var(--medium-rose-gold);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+    text-align: center;
 }
-.welcome-box h2{
-  font-family:'Cinzel Decorative', serif;
-  font-size:24px;
-  color:var(--greek-blue);
+.welcome-box h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 26px;
+    color: var(--dark-rose-gold);
 }
-.welcome-box p{
-  font-size:16px;
-  color:#333;
+.welcome-box p {
+    font-size: 16px;
+    color: var(--dark-slate);
 }
 
 /* Stats Cards */
-.stats{
-  display:flex;
-  justify-content:space-around;
-  margin-top:25px;
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 25px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
-.stat-card{
-  background:#fefefe;
-  border:2px solid var(--greek-gold);
-  border-radius:14px;
-  padding:20px;
-  width:28%;
-  box-shadow:0 5px 12px rgba(0,0,0,0.1);
-  text-align:center;
+.stat-card {
+    background: linear-gradient(135deg, var(--light-tangerine), var(--deep-orange));
+    border-radius: 16px;
+    padding: 22px;
+    width: 28%;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    text-align: center;
+    transition: 0.3s;
+    color: white;
 }
-.stat-card h3{
-  font-size:20px;
-  color:var(--greek-blue);
+.stat-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25);
 }
-.stat-card p{
-  font-size:28px;
-  font-weight:bold;
-  color:var(--greek-gold);
+.stat-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.stat-card p {
+    font-size: 32px;
+    font-weight: bold;
 }
 
 /* Settings form */
-.settings-form label{
-  display:block;
-  margin:12px 0 6px;
-  font-weight:600;
+.settings-form label {
+    display: block;
+    margin: 12px 0 6px;
+    font-weight: 600;
 }
-.settings-form input, .settings-form select{
-  width:100%;
-  padding:10px;
-  border-radius:8px;
-  border:1px solid #ccc;
-  margin-bottom:15px;
+.settings-form input, .settings-form select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--medium-rose-gold);
+    margin-bottom: 15px;
+    transition: 0.3s;
 }
-.settings-form button{
-  background:var(--greek-blue);
-  color:white;
-  border:none;
-  padding:10px 18px;
-  border-radius:25px;
-  cursor:pointer;
-  font-weight:bold;
+.settings-form input:focus, .settings-form select:focus {
+    border-color: var(--dark-rose-gold);
+    outline: none;
+    box-shadow: 0 0 6px var(--dark-rose-gold);
 }
-.settings-form button:hover{
-  background:var(--greek-gold);
-  color:var(--greek-blue);
+.settings-form button {
+    background: var(--dark-rose-gold);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.settings-form button:hover {
+    background: var(--standard-gold);
+    color: var(--dark-slate);
+    transform: scale(1.07);
 }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Admin Dashboard</h1>
-  <a href="adminlogout.html">Logout</a>
+    <h1>Admin Dashboard</h1>
+    <a href="adminlogout.html">Logout</a>
 </header>
 
 <div class="container">
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h2>Navigation</h2>
-    <a href="admindashboard.html">Home</a>
-    <a onclick="showSection('patients')">Patients</a>
-    <a onclick="showSection('doctors')">Doctors</a>
-    <a onclick="showSection('users')">Users</a>
-<<<<<<< HEAD
-    <a href="../labreports.html">Lab Reports</a>
-=======
-    <a href="../Frontend/labreports.html">Lab Reports</a>
->>>>>>> eb9db2f1e3fbdb9375bb1648a8177532ecd1fe1a
-    <a onclick="showSection('settings')">Settings</a>
-  </div>
-  
-  <!-- Main Content -->
-  <div class="main">
-    <!-- Welcome screen -->
-    <div class="welcome-box" id="welcome">
-      <h2>Welcome to PrakritiPath Admin Panel</h2>
-      <p>Select a category from the navigation bar to manage system data.</p>
-      <div class="stats">
-        <div class="stat-card">
-          <h3>Total Patients</h3>
-          <p id="totalPatients">0</p>
+    <div class="sidebar">
+        <h2>Navigation</h2>
+        <a href="admindashboard.html">Home</a>
+        <a onclick="showSection('patients')">Patients</a>
+        <a onclick="showSection('doctors')">Doctors</a>
+        <a onclick="showSection('users')">Users</a>
+        <a onclick="showSection('reports')">Lab Reports</a>
+        <a onclick="showSection('settings')">Settings</a>
+    </div>
+
+    <div class="main">
+        <div class="welcome-box" id="welcome">
+            <h2>Welcome to PrakritiPath Admin Panel</h2>
+            <p>Select a category from the navigation bar to manage system data.</p>
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Total Patients</h3>
+                    <p id="totalPatients">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Doctors</h3>
+                    <p id="totalDoctors">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Users</h3>
+                    <p id="totalUsers">0</p>
+                </div>
+            </div>
         </div>
-        <div class="stat-card">
-          <h3>Total Doctors</h3>
-          <p id="totalDoctors">0</p>
+
+        <div class="table-container" id="patients">
+            <h2>Patients</h2>
+            <table>
+                <thead>
+                    <tr><th>Name</th><th>Age</th><th>Contact</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="patientsTableBody"></tbody>
+            </table>
         </div>
-        <div class="stat-card">
-          <h3>Total Users</h3>
-          <p id="totalUsers">0</p>
+
+        <div class="table-container" id="doctors">
+            <h2>Doctors</h2>
+            <table>
+                <thead>
+                    <tr><th>Name</th><th>Specialization</th><th>Contact</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="doctorsTableBody"></tbody>
+            </table>
         </div>
-      </div>
+
+        <div class="table-container" id="users">
+            <h2>Users</h2>
+            <table>
+                <thead>
+                    <tr><th>Username</th><th>Email</th><th>Status</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="usersTableBody"></tbody>
+            </table>
+        </div>
+
+        <div class="table-container" id="reports">
+            <h2>Lab Reports</h2>
+            <table>
+                <thead>
+                    <tr><th>Patient</th><th>Report Type</th><th>Date</th><th>Status</th></tr>
+                </thead>
+                <tbody id="reportsTableBody"></tbody>
+            </table>
+        </div>
+
+        <div class="table-container" id="settings">
+            <h2>Settings</h2>
+            <form class="settings-form">
+                <label for="password">Change Password</label>
+                <input type="password" id="password" placeholder="Enter new password">
+                <label for="theme">Theme</label>
+                <select id="theme">
+                    <option>Default</option>
+                    <option>Dark Mode</option>
+                    <option>Light Mode</option>
+                </select>
+                <label for="notifications">Notification Preferences</label>
+                <select id="notifications">
+                    <option>Email</option>
+                    <option>SMS</option>
+                    <option>Both</option>
+                </select>
+                <button type="submit">Save Settings</button>
+            </form>
+        </div>
     </div>
-
-    <!-- Patients Table -->
-    <div class="table-container" id="patients">
-      <h2>Patients</h2>
-      <table>
-        <thead>
-          <tr><th>Name</th><th>Age</th><th>Contact</th><th>Actions</th></tr>
-        </thead>
-        <tbody id="patientsTableBody">
-          <!-- Rows populated dynamically -->
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Other tables (Doctors, Users, Lab Reports, Settings) remain unchanged -->
-    <div class="table-container" id="doctors">
-      <h2>Doctors</h2>
-      <table>
-        <tr><th>Name</th><th>Specialization</th><th>Contact</th><th>Actions</th></tr>
-      </table>
-    </div>
-
-    <div class="table-container" id="users">
-      <h2>Users</h2>
-      <table>
-        <tr><th>Username</th><th>Email</th><th>Status</th><th>Actions</th></tr>
-      </table>
-    </div>
-
-    <div class="table-container" id="settings">
-      <h2>Settings</h2>
-      <form class="settings-form">
-        <label for="password">Change Password</label>
-        <input type="password" id="password" placeholder="Enter new password">
-
-        <label for="theme">Theme</label>
-        <select id="theme">
-          <option>Default</option>
-          <option>Dark Mode</option>
-          <option>Light Mode</option>
-        </select>
-
-        <label for="notifications">Notification Preferences</label>
-        <select id="notifications">
-          <option>Email</option>
-          <option>SMS</option>
-          <option>Both</option>
-        </select>
-
-        <button type="submit">Save Settings</button>
-      </form>
-    </div>
-  </div>
 </div>
 
 <script>
-function showSection(sectionId){
-  document.getElementById("welcome").style.display="none";
-  document.querySelectorAll(".table-container").forEach(el=>el.style.display="none");
-  document.getElementById(sectionId).style.display="block";
+const apiUrl = "http://192.168.223.103:3000";
+
+function showSection(sectionId) {
+    document.getElementById("welcome").style.display = "none";
+    document.querySelectorAll(".table-container").forEach(el => el.style.display = "none");
+    document.getElementById(sectionId).style.display = "block";
 }
 
-// Load Home stats from backend
-async function loadStats(){
-  try {
-    const res = await fetch("http://localhost:5000/api/admin/stats"); // replace with backend API
-    const stats = await res.json();
-    document.getElementById("totalPatients").textContent = stats.totalPatients;
-    document.getElementById("totalDoctors").textContent = stats.totalDoctors;
-    document.getElementById("totalUsers").textContent = stats.totalUsers;
-  } catch(err){
-    console.error("Error loading stats:", err);
-  }
+/**
+ * A reusable function to fetch data and populate a table.
+ * @param {string} endpoint - The API endpoint to fetch from (e.g., '/admin/patients').
+ * @param {string} tbodyId - The ID of the table body to populate.
+ * @param {function} rowTemplate - A function that takes a data item and returns an HTML row string.
+ */
+async function populateTable(endpoint, tbodyId, rowTemplate) {
+    try {
+        const res = await fetch(`${apiUrl}${endpoint}`); // Corrected syntax
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const data = await res.json();
+        
+        const tbody = document.getElementById(tbodyId);
+        tbody.innerHTML = data.map(rowTemplate).join('');
+    } catch (err) {
+        console.error(`Failed to load data for ${tbodyId}:`, err);
+        const tbody = document.getElementById(tbodyId);
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:red;">Failed to load data.</td></tr>`;
+    }
 }
 
-// Load Patients dynamically
-async function loadPatients() {
-  try {
-    const res = await fetch("http://localhost:5000/api/admin/patients"); // replace with backend API
-    const data = await res.json();
+async function loadStats() {
+    try {
+        const res = await fetch(`${apiUrl}/admin/stats`); // Corrected syntax
+        const data = await res.json();
+        document.getElementById("totalPatients").textContent = data.totalPatients || 0;
+        document.getElementById("totalDoctors").textContent = data.totalDoctors || 0;
+        document.getElementById("totalUsers").textContent = data.totalUsers || 0;
+    } catch (err) {
+        console.error("Failed to load stats:", err);
+    }
+}
 
-    const tbody = document.getElementById("patientsTableBody");
-    tbody.innerHTML = "";
+// --- Define Row Templates ---
 
-    data.forEach(patient => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${patient.name}</td>
-        <td>${patient.age}</td>
-        <td>${patient.contact}</td>
+const patientRow = p => `
+    <tr>
+        <td>${p.name}</td>
+        <td>${p.age}</td>
+        <td>${p.contact}</td>
         <td class="actions">
-          <button class="edit-btn" onclick="editPatient(${patient.id})">Edit</button>
-          <button class="delete-btn" onclick="deletePatient(${patient.id})">Delete</button>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
         </td>
-      `;
-      tbody.appendChild(row);
-    });
-  } catch (err) {
-    console.error("Error loading patients:", err);
-    document.getElementById("patientsTableBody").innerHTML = `<tr><td colspan="4">Unable to load data</td></tr>`;
-  }
+    </tr>`;
+
+const doctorRow = d => `
+    <tr>
+        <td>${d.name}</td>
+        <td>${d.specialization}</td>
+        <td>${d.contact}</td>
+        <td class="actions">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+        </td>
+    </tr>`;
+
+const userRow = u => `
+    <tr>
+        <td>${u.username}</td>
+        <td>${u.email}</td>
+        <td>${u.status}</td>
+        <td class="actions">
+            <button class="edit-btn">Edit</button>
+            <button class.="delete-btn">Delete</button>
+        </td>
+    </tr>`;
+
+const reportRow = r => `
+    <tr>
+        <td>${r.patient}</td>
+        <td>${r.type}</td>
+        <td>${new Date(r.date).toLocaleDateString()}</td>
+        <td>${r.status}</td>
+    </tr>`;
+
+// --- Initial Load ---
+
+function initializeDashboard() {
+    loadStats();
+    populateTable('/admin/patients', 'patientsTableBody', patientRow);
+    populateTable('/admin/doctors', 'doctorsTableBody', doctorRow);
+    populateTable('/admin/users', 'usersTableBody', userRow);
+    populateTable('/admin/reports', 'reportsTableBody', reportRow);
 }
 
-function editPatient(id){ console.log("Edit patient ID:", id); }
-function deletePatient(id){ console.log("Delete patient ID:", id); }
-
-// Initial load
-loadStats();
-loadPatients();
+initializeDashboard();
 </script>
 
 </body>

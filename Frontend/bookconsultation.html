@@ -4,217 +4,219 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Book Consultation - PrakritiPath</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --greek-blue: #0d3b66;
-    --greek-gold: #d4af37;
-    --greek-light: #f4f4f4;
-  }
-  body {
+:root {
+    /* Colors from the provided table */
+    --light-rose-gold: #F3E5F5;
+    --medium-rose-gold: #D9A7C7;
+    --dark-rose-gold: #B76E79;
+    --light-tangerine: #FDBA74;
+    --deep-orange: #DD6B20;
+    --soft-peach: #FFF7ED;
+    --standard-gold: #D4AF37;
+    --light-gold: #E8C15E;
+    --light-cool-gray: #f3f4f6;
+    --light-gray: #e5e7eb;
+    --medium-gray: #d1d5db;
+    --dark-gray: #9ca3af;
+    --dark-slate: #1f2937;
+    --light-slate: #475569;
+}
+
+body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(-45deg, #f3e5f5, #e1f5fe, #fff9c4, #e0f7fa, #fce4ec);
-    background-size: 600% 600%;
-    animation: pastelGradient 40s ease infinite;
-  }
-  @keyframes pastelGradient {
+    background: linear-gradient(-45deg, var(--light-gray), var(--medium-gray), var(--dark-gray));
+    background-size: 300% 300%;
+    animation: liveGradient 15s ease infinite;
+    color: var(--dark-slate);
+}
+
+@keyframes liveGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
-  }
-  header {
-    background: var(--greek-blue);
-    color: white;
+}
+
+header {
+    background: var(--dark-slate);
+    color: var(--light-rose-gold);
     padding: 15px 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 5px solid var(--greek-gold);
-    font-family: 'Cinzel', serif;
-  }
-  header h1 { margin: 0; font-size: 22px; }
-  header a {
-    background: var(--greek-gold);
-    color: var(--greek-blue);
-    padding: 8px 16px;
+    border-bottom: 5px solid var(--standard-gold);
+    font-family: 'Cinzel Decorative', serif;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+header h1 {
+    margin: 0;
+    font-size: 26px;
+    color: var(--light-rose-gold);
+}
+header a {
+    background: var(--standard-gold);
+    color: var(--dark-slate);
+    padding: 8px 18px;
     border-radius: 25px;
     text-decoration: none;
     font-weight: bold;
     transition: 0.3s;
-  }
-  header a:hover { background: white; color: var(--greek-blue); }
-  .container {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+header a:hover {
+    background: var(--light-gold);
+    color: var(--dark-slate);
+    transform: scale(1.05);
+}
+
+.container {
     max-width: 700px;
     margin: 50px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 18px;
-    border: 3px solid var(--greek-blue);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  }
-  .container h2 {
+    background: var(--soft-peach);
+    padding: 35px;
+    border-radius: 20px;
+    border: 3px solid var(--medium-rose-gold);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.2);
+}
+
+.container h2 {
     text-align: center;
-    font-family: 'Cinzel', serif;
-    color: var(--greek-blue);
-    margin-bottom: 20px;
-  }
-  form label {
+    font-family: 'Cinzel Decorative', serif;
+    color: var(--dark-rose-gold);
+    margin-bottom: 25px;
+}
+
+form label {
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     font-weight: 600;
-    color: var(--greek-blue);
-  }
-  form input, form select, form textarea {
+    color: var(--dark-slate);
+}
+form input, form select, form textarea {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     margin-bottom: 20px;
-    border: 2px solid #ccc;
-    border-radius: 10px;
+    border: 2px solid var(--light-rose-gold);
+    border-radius: 12px;
     font-size: 15px;
-    box-sizing: border-box; /* Ensures padding doesn't affect width */
-    transition: 0.3s;
-  }
-  form input:focus, form select:focus, form textarea:focus {
-    border-color: var(--greek-gold);
+    transition: 0.3s, box-shadow 0.3s;
+    background-color: var(--soft-peach);
+}
+form input:focus, form select:focus, form textarea:focus {
+    border-color: var(--dark-rose-gold);
     outline: none;
-  }
-  form button {
-    background: var(--greek-gold);
-    color: var(--greek-blue);
+    box-shadow: 0 0 10px rgba(183, 110, 121, 0.3);
+}
+
+form button {
+    background: var(--dark-rose-gold);
+    color: white;
     font-weight: bold;
-    padding: 12px 20px;
+    padding: 14px 25px;
     border: none;
     border-radius: 25px;
     font-size: 16px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.3s, box-shadow 0.3s;
     display: block;
     margin: auto;
-  }
-  form button:hover {
-    background: var(--greek-blue);
-    color: white;
-  }
-  #message {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+form button:hover {
+    background: var(--standard-gold);
+    color: var(--dark-slate);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transform: scale(1.05);
+}
+
+#message {
     text-align: center;
     font-weight: bold;
     margin-top: 15px;
-    min-height: 20px; /* Prevents layout shift */
-  }
-  #message.success { color: green; }
-  #message.error { color: red; }
+    font-size: 16px;
+}
+
+#message.success { color: #1E5631; }
+#message.error { color: #DD6B20; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>PrakritiPath</h1>
-  <a href="#" id="backButton">Back</a>
+    <h1>PrakritiPath</h1>
+    <a href="#" id="backButton">Back</a>
 </header>
 
 <div class="container">
-  <h2>Consultation Request</h2>
-  <form id="consultationForm">
-    <label for="doctor">Select Doctor</label>
-    <select id="doctor" name="doctor" required>
-      <option value="">-- Choose Doctor --</option>
-      </select>
+    <h2>Consultation Request</h2>
+    <form id="consultationForm">
+        <label for="doctor">Select Doctor</label>
+        <select id="doctor" name="doctor" required>
+            <option value="">-- Choose Doctor --</option>
+            <option value="1">Dr. Deepu John – Ayurvedic Therapy</option>
+            <option value="2">Dr. Ashikha Raj – Panchakarma</option>
+            <option value="3">Dr. Meera Iyer – Holistic Healing</option>
+        </select>
 
-    <label for="date">Select Date</label>
-    <input type="date" id="date" name="date" required>
+        <label for="date">Select Date</label>
+        <input type="date" id="date" name="date" required>
 
-    <label for="time">Select Time</label>
-    <input type="time" id="time" name="time" required>
+        <label for="time">Select Time</label>
+        <input type="time" id="time" name="time" required>
 
-    <label for="reason">Reason for Consultation</label>
-    <textarea id="reason" name="reason" rows="4" placeholder="Describe your health concern..." required></textarea>
+        <label for="reason">Reason for Consultation</label>
+        <textarea id="reason" name="reason" rows="4" placeholder="Describe your health concern..." required></textarea>
 
-    <button type="submit">Book Appointment</button>
-  </form>
-  <div id="message"></div>
+        <button type="submit">Book Appointment</button>
+    </form>
+    <div id="message"></div>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  const apiUrl = "http://localhost:3000"; // Define base URL for your API
-  const doctorSelect = document.getElementById("doctor");
-  const messageDiv = document.getElementById("message");
+    document.getElementById("backButton").addEventListener("click", function(e) {
+        e.preventDefault();
+        window.location.href = "userdashboard.html";
+    });
 
-  // ---------------- FETCH AND LOAD DOCTORS ----------------
-  async function loadDoctors() {
-    try {
-      const response = await fetch(`${apiUrl}/doctors`); // Fetch from your new endpoint
-      if (!response.ok) {
-        throw new Error("Could not fetch doctors.");
-      }
-      const doctors = await response.json();
+    document.getElementById("consultationForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+        const userId = localStorage.getItem("userId") ? parseInt(localStorage.getItem("userId")) : 1;
+        const doctor_id = parseInt(document.getElementById("doctor").value, 10);
+        const date = document.getElementById("date").value;
+        const time = document.getElementById("time").value;
+        const reason = document.getElementById("reason").value;
+        const messageDiv = document.getElementById("message");
 
-      // Loop through the fetched doctors and create an <option> for each
-      doctors.forEach(doctor => {
-        const option = document.createElement("option");
-        option.value = doctor.id; // The value will be the doctor's ID
-        option.textContent = `${doctor.name} – ${doctor.specialty}`; // The text seen by the user
-        doctorSelect.appendChild(option);
-      });
+        try {
+            const res = await fetch('http://localhost:3000/consultation/book', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_id: userId, doctor_id, date, time, reason })
+            });
 
-    } catch (err) {
-      console.error(err);
-      // Let the user know if doctors couldn't be loaded
-      messageDiv.textContent = "❌ Failed to load doctor list. Please refresh.";
-      messageDiv.className = "error";
-    }
-  }
-
-  // Call the function to populate doctors when the page is ready
-  loadDoctors();
-
-  // ---------------- BACK BUTTON ----------------
-  document.getElementById("backButton").addEventListener("click", function(e){
-    e.preventDefault();
-    // Make sure you have a userdashboard.html file or change this URL
-    window.location.href = "userdashboard.html";
-  });
-
-  // ---------------- BOOK CONSULTATION ----------------
-  document.getElementById("consultationForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
-
-    // Dynamically get the logged-in user's ID
-    const userId = localStorage.getItem("userId");
-    if (!userId) {
-        messageDiv.textContent = "❌ You must be logged in to book an appointment.";
-        messageDiv.className = "error";
-        return; // Stop the function if no user is logged in
-    }
-
-    const doctor_id = parseInt(doctorSelect.value, 10);
-    const date = document.getElementById("date").value;
-    const time = document.getElementById("time").value;
-    const reason = document.getElementById("reason").value;
-
-    try {
-      const res = await fetch(`${apiUrl}/consultation/book`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: parseInt(userId), doctor_id, date, time, reason })
-      });
-
-      const data = await res.json();
-      if (res.ok) { // Check for successful HTTP status codes (e.g., 200, 201)
-        messageDiv.textContent = "✅ Consultation booked successfully!";
-        messageDiv.className = "success";
-        document.getElementById("consultationForm").reset();
-      } else {
-        messageDiv.textContent = "❌ " + (data.message || "Failed to book consultation.");
-        messageDiv.className = "error";
-      }
-    } catch (err) {
-      console.error(err);
-      messageDiv.textContent = "❌ Server error. Please try again later.";
-      messageDiv.className = "error";
-    }
-  });
+            const data = await res.json();
+            if (data.success) {
+                messageDiv.textContent = "✅ Consultation booked successfully!";
+                messageDiv.className = "success";
+                document.getElementById("consultationForm").reset();
+            } else {
+                messageDiv.textContent = "❌ " + (data.message || "Failed to book consultation.");
+                messageDiv.className = "error";
+            }
+        } catch (err) {
+            console.error(err);
+            messageDiv.textContent = "❌ Server error. Try again later.";
+            messageDiv.className = "error";
+        }
+    });
 });
 </script>
 

@@ -1,140 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Select Therapy</title>
-  <style>
-    body {
-      font-family: 'Georgia', serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #fdfcfb, #f8ede3, #e0f7f4);
-      background-size: 400% 400%;
-      animation: pastelShift 25s ease infinite;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Therapy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette */
+            --light-rose-gold: #F3E5F5;
+            --medium-rose-gold: #D9A7C7;
+            --dark-rose-gold: #B76E79;
+            --standard-gold: #D4AF37;
+            --light-gold: #E8C15E;
+            --soft-peach: #FFF7ED;
+            --light-cool-gray: #f3f4f6;
+            --medium-gray: #d1d5db;
+            --dark-slate: #1f2937;
+            --light-slate: #475569;
+        }
 
-    @keyframes pastelShift {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
+        /* --- 1. Base & Layout --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, var(--light-cool-gray), var(--medium-gray));
+            background-size: 400% 400%;
+            animation: liveGradient 25s ease infinite;
+            color: var(--dark-slate);
+        }
 
-    header {
-      background: linear-gradient(90deg, #0d3b66, #2a4d69, #d4af37);
-      color: #fff;
-      padding: 18px 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0px 5px 18px rgba(0,0,0,0.25);
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 24px;
-      position: relative;
-    }
+        @keyframes liveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    .back-btn {
-      position: absolute;
-      left: 20px;
-      background: #d4af37;
-      color: #0d3b66;
-      padding: 8px 16px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-      font-size: 14px;
-    }
+        /* --- 2. Header --- */
+        header {
+            background: var(--light-slate);
+            color: var(--light-rose-gold);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.25);
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.5rem; /* 24px */
+            position: relative;
+            border-bottom: 5px solid var(--standard-gold);
+        }
 
-    .back-btn:hover {
-      background: #0d3b66;
-      color: #fff;
-    }
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            background: var(--standard-gold);
+            color: var(--dark-slate);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 0.875rem; /* 14px */
+            font-family: 'Inter', sans-serif;
+        }
 
-    .therapy-box {
-      background: #fff;
-      border: 2px solid #d4af37;
-      border-radius: 18px;
-      padding: 30px 40px;
-      width: 450px;
-      box-shadow: 0px 10px 28px rgba(0,0,0,0.18);
-      text-align: center;
-      margin: 60px auto;
-    }
+        .back-btn:hover {
+            background: var(--light-gold);
+            transform: scale(1.05);
+        }
 
-    .therapy-box h1 {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 22px;
-      margin-bottom: 20px;
-      color: #0d3b66;
-      border-bottom: 2px solid #d4af37;
-      padding-bottom: 10px;
-    }
+        /* --- 3. Therapy Selection Card --- */
+        .therapy-box {
+            background: var(--soft-peach);
+            border: 2px solid var(--medium-rose-gold);
+            border-radius: 1.25rem; /* 20px */
+            padding: 2rem 2.5rem;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+            text-align: center;
+            margin: 4rem auto;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .therapy-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.22);
+        }
 
-    select {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 15px;
-      font-family: 'Georgia', serif;
-      background: #fafafa;
-    }
+        .therapy-box h1 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.5rem; /* 24px */
+            margin: 0 0 1.5rem 0;
+            color: var(--dark-rose-gold);
+            border-bottom: 2px solid var(--medium-rose-gold);
+            padding-bottom: 0.75rem;
+        }
 
-    button {
-      width: 100%;
-      background: #0d3b66;
-      color: #fff;
-      padding: 12px;
-      border: none;
-      border-radius: 25px;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+        /* --- 4. Form Elements --- */
+        .therapy-box label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        .therapy-box select {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.75rem; /* 12px */
+            border: 2px solid var(--medium-rose-gold);
+            font-size: 1rem; /* 16px */
+            font-family: 'Inter', sans-serif;
+            background: var(--soft-peach);
+            color: var(--dark-slate);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .therapy-box select:focus {
+            outline: none;
+            border-color: var(--dark-rose-gold);
+            box-shadow: 0 0 10px rgba(183, 110, 121, 0.4);
+            background-color: white;
+        }
 
-    button:hover {
-      background: #d4af37;
-      color: #0d3b66;
-    }
-  </style>
+        .therapy-box button {
+            width: 100%;
+            background: var(--dark-rose-gold);
+            color: #fff;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem; /* 16px */
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .therapy-box button:hover {
+            background: var(--standard-gold);
+            color: var(--dark-slate);
+            transform: scale(1.03);
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <a href="Userdashboard.html" class="back-btn">← Back</a>
-    Select Therapy
-  </header>
+    <header>
+        <a href="userdashboard.html" class="back-btn">← Back</a>
+        Select Therapy
+    </header>
 
-  <div class="therapy-box">
-    <h1>Choose Your Therapy</h1>
-    <form onsubmit="bookTherapy(event)">
-      <label for="therapy">Select Therapy</label>
-      <select id="therapy" required>
-        <option value="">-- Choose a therapy --</option>
-        <option value="Panchakarma">Panchakarma</option>
-        <option value="Shirodhara">Shirodhara</option>
-        <option value="Abhyanga">Abhyanga</option>
-        <option value="Swedana">Swedana</option>
-        <option value="Nasya">Nasya</option>
-        <option value="YogaTherapy">Yoga Therapy</option>
-      </select>
+    <div class="therapy-box">
+        <h1>Choose Your Therapy</h1>
+        <form onsubmit="bookTherapy(event)">
+            <label for="therapy">Select a therapy from the list below:</label>
+            <select id="therapy" required>
+                <option value="">-- Choose a therapy --</option>
+                <option value="Panchakarma">Panchakarma</option>
+                <option value="Shirodhara">Shirodhara</option>
+                <option value="Abhyanga">Abhyanga</option>
+                <option value="Swedana">Swedana</option>
+                <option value="Nasya">Nasya</option>
+                <option value="YogaTherapy">Yoga Therapy</option>
+            </select>
+            <button type="submit">Confirm Therapy</button>
+        </form>
+    </div>
 
-      <button type="submit">Confirm Therapy</button>
-    </form>
-  </div>
+    <script>
+        const apiUrl = "http://192.168.223.103:3000"; // Replace with your backend IP and port
 
-  <script>
-    function bookTherapy(event) {
-      event.preventDefault();
-      const therapy = document.getElementById("therapy").value;
-      if(therapy) {
-        alert("You have successfully selected: " + therapy);
-        window.location.href = "userdashboard.html";
-      }
-    }
-  </script>
+        function bookTherapy(event) {
+            event.preventDefault();
+            const therapy = document.getElementById("therapy").value;
+            
+            if (therapy) {
+                // In a real app, you might get a userId from localStorage
+                // const userId = localStorage.getItem('userId');
+                
+                // Corrected syntax using backticks (`) for template literals
+                fetch(`${apiUrl}/book-therapy`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ therapy: therapy /*, userId: userId */ })
+                })
+                .then(res => {
+                    if (!res.ok) {
+                        // Handle server errors (like 404, 500)
+                        return res.json().then(err => { throw new Error(err.message || 'Server error') });
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    alert("You have successfully selected: " + therapy);
+                    window.location.href = "userdashboard.html";
+                })
+                .catch(err => {
+                    console.error('Fetch Error:', err);
+                    alert("Failed to update therapy. Please try again. Error: " + err.message);
+                });
+            }
+        }
+    </script>
 </body>
 </html>
-

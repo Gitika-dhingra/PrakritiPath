@@ -1,39 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Logging Out...</title>
-  <style>
-    body {
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      font-family: Arial, sans-serif;
-      background: #f9fafb;
-      color: #333;
-    }
-    .message {
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
-  </style>
-  <script>
-    // Clear session/local storage
-    sessionStorage.clear();
-    localStorage.clear();
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logging Out...</title>
+    <style>
+        :root {
+            /* Colors from the provided table */
+            --light-rose-gold: #F3E5F5;
+            --medium-rose-gold: #D9A7C7;
+            --dark-rose-gold: #B76E79;
+            --light-tangerine: #FDBA74;
+            --deep-orange: #DD6B20;
+            --soft-peach: #FFF7ED;
+            --standard-gold: #D4AF37;
+            --light-gold: #E8C15E;
+            --light-cool-gray: #f3f4f6;
+            --light-gray: #e5e7eb;
+            --medium-gray: #d1d5db;
+            --dark-gray: #9ca3af;
+            --dark-slate: #1f2937;
+            --light-slate: #475569;
+        }
 
-    // Show message for 2.5s then redirect
-    window.onload = function () {
-      setTimeout(function () {
-        window.location.href = "../index.html";
-      }, 1000); // 1.0 seconds
-    };
-  </script>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background: var(--light-cool-gray);
+        }
+
+        .greek-card {
+            background: var(--soft-peach);
+            border-radius: 1.5rem;
+            padding: 2.5rem 3rem;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+            border: 2px solid var(--medium-rose-gold);
+            text-align: center;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .greek-card p {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-slate);
+            margin-bottom: 1rem;
+        }
+
+        .greek-card p::before {
+            content: "✅ ";
+            color: var(--dark-rose-gold);
+        }
+
+        .redirect-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--dark-rose-gold);
+            color: white;
+            font-weight: 600;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .redirect-btn:hover {
+            background-color: var(--standard-gold);
+            color: var(--dark-slate);
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+    <script>
+        // Clear session/local storage
+        sessionStorage.clear();
+        localStorage.clear();
+
+        // Redirect after 1 second
+        window.onload = function () {
+            setTimeout(function () {
+                window.location.href = "../index.html";
+            }, 1000); 
+        };
+    </script>
 </head>
 <body>
-  <div class="message">✅ You have been logged out successfully.</div>
+    <div class="greek-card">
+        <p>You have been logged out successfully.</p>
+        <a href="../index.html" class="redirect-btn">Go to Home Page</a>
+    </div>
 </body>
 </html>

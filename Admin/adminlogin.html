@@ -1,116 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Import Cinzel font -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-  <style>
-    /* Gradient animation for background */
-    @keyframes pastelGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+    <style>
+        :root {
+            /* Colors from the provided table */
+            --light-rose-gold: #F3E5F5;
+            --medium-rose-gold: #D9A7C7;
+            --dark-rose-gold: #B76E79;
+            --light-tangerine: #FDBA74;
+            --deep-orange: #DD6B20;
+            --soft-peach: #FFF7ED;
+            --standard-gold: #D4AF37;
+            --light-gold: #E8C15E;
+            --light-cool-gray: #f3f4f6;
+            --light-gray: #e5e7eb;
+            --medium-gray: #d1d5db;
+            --dark-gray: #9ca3af;
+            --dark-slate: #1f2937;
+            --light-slate: #475569;
+        }
 
-    body {
-      background: linear-gradient(-45deg, #f3e5f5, #e1f5fe, #fff9c4, #e0f7fa, #fce4ec);
-      background-size: 600% 600%;
-      animation: pastelGradient 40s ease infinite;
-      font-family: 'Arial', sans-serif; /* Normal clean font */
-    }
+        /* Live background animation */
+        body {
+            background: linear-gradient(135deg, var(--light-gray), var(--medium-gray), var(--dark-gray));
+            background-size: 200% 200%;
+            animation: gradientFlow 18s ease infinite;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--dark-slate);
+        }
 
-    .greek-card {
-      background: linear-gradient(135deg, #ffffffcc 25%, #f7f7f7cc 25%, #f7f7f7cc 50%, #ffffffcc 50%, #ffffffcc 75%, #f7f7f7cc 75%);
-      background-size: 20px 20px;
-      border-radius: 2rem;
-      padding: 2.5rem;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-      backdrop-filter: blur(6px);
-      border: 2px solid #1e3c72; /* Blue outline */
-    }
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    .primary-btn { background-color: #1e3c72; }
-    .primary-btn:hover { background-color: #3a5ba0; }
+        /* Styled card */
+        .greek-card {
+            background: var(--soft-peach);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 2px solid var(--medium-rose-gold);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .greek-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+        }
 
-    /* Greek-style nav bar */
-    .greek-nav {
-      background-color: #1e3c72; /* Deep Greek Blue */
-      border-bottom: 4px solid #d4af37; /* Gold outline */
-      font-family: 'Cinzel', serif; /* Only nav in Cinzel */
-    }
-  </style>
+        /* Buttons */
+        .primary-btn {
+            background: var(--dark-rose-gold);
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .primary-btn:hover {
+            background: var(--standard-gold);
+            color: var(--dark-slate);
+            transform: scale(1.02);
+        }
+
+        /* Navbar */
+        .greek-nav {
+            background: var(--light-slate);
+            border-bottom: 3px solid var(--standard-gold);
+            font-family: 'Cinzel Decorative', serif;
+            color: var(--light-rose-gold);
+        }
+
+        .greek-nav a {
+            color: var(--light-rose-gold);
+            transition: all 0.3s ease;
+        }
+
+        .greek-nav a:hover {
+            color: var(--standard-gold);
+        }
+
+        /* Input fields */
+        .input-field {
+            background: var(--soft-peach);
+            border: 1px solid var(--light-rose-gold);
+            transition: all 0.3s ease;
+            color: var(--dark-slate);
+        }
+        .input-field:focus {
+            border-color: var(--dark-rose-gold);
+            box-shadow: 0 0 10px rgba(183, 110, 121, 0.4);
+            background: var(--soft-peach);
+            outline: none;
+        }
+
+        /* Heading effect */
+        .login-title {
+            color: var(--dark-rose-gold);
+            font-family: 'Cinzel Decorative', serif;
+        }
+
+        .signup-btn {
+            color: var(--light-rose-gold);
+            border: 2px solid var(--light-rose-gold);
+            border-radius: 10px;
+            padding: 8px 16px;
+            transition: all 0.3s ease;
+        }
+        .signup-btn:hover {
+            background: var(--light-rose-gold);
+            color: var(--dark-slate);
+            border-color: var(--light-rose-gold);
+        }
+
+        /* Admin Icon Background */
+        .admin-icon-bg {
+            background: var(--dark-rose-gold); /* Changed to match primary-btn background */
+        }
+    </style>
 </head>
-<body class="flex flex-col min-h-screen">
+<body>
 
-  <!-- Navigation -->
-  <nav class="greek-nav backdrop-blur-md px-6 py-4 flex justify-between items-center shadow-lg sticky top-0 z-50">
-    <a href="../index.html" class="text-2xl font-extrabold text-white tracking-wide hover:scale-105 transition-transform">
-      PrakritiPath
-    </a>
-    <div>
-      <a href="adminsignup.html" class="px-4 py-2 border border-[#d4af37] rounded-lg text-white hover:bg-[#d4af37] hover:text-[#1e3c72] transition-all font-medium shadow-md">
-        Sign Up
-      </a>
-    </div>
-  </nav>
-
-  <!-- Login Form -->
-  <div class="flex justify-center items-center flex-1">
-    <div class="greek-card w-full max-w-md">
-      <h2 class="text-3xl font-bold mb-6 text-[#1e3c72] text-center">Admin Login</h2>
-
-      <form id="adminLoginForm" class="space-y-4">
-
-        <!-- Email -->
+    <nav class="greek-nav px-6 py-4 flex justify-between items-center shadow-md sticky top-0 z-50">
+        <a href="../index.html" class="text-2xl font-extrabold tracking-wide hover:scale-105 transition-transform">
+            PrakritiPath
+        </a>
         <div>
-          <label for="email" class="block text-gray-700 mb-1">Email</label>
-          <input type="email" id="email" name="email" placeholder="Enter admin email"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
+            <a href="adminsignup.html" class="signup-btn">
+                Sign Up
+            </a>
         </div>
+    </nav>
 
-        <!-- Password -->
-        <div class="relative">
-          <label for="password" class="block text-gray-700 mb-1">Password</label>
-          <input type="password" id="password" name="password" placeholder="Enter admin password"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
-          <button type="button" onclick="togglePassword(event)" class="absolute right-3 top-9 text-gray-500 text-sm">
-            Show
-          </button>
+    <div class="flex justify-center items-center flex-1 px-4">
+        <div class="greek-card w-full max-w-md">
+
+            <div class="flex justify-center mb-5">
+                <div class="h-16 w-16 flex items-center justify-center rounded-full admin-icon-bg shadow-lg"> <span class="text-white text-2xl font-bold font-['Cinzel Decorative']">A</span>
+                </div>
+            </div>
+
+            <h2 class="text-3xl font-bold mb-6 text-center login-title">Admin Login</h2>
+
+            <form id="adminLoginForm" class="space-y-5">
+
+                <div>
+                    <label for="email" class="block mb-1 text-sm font-medium">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter admin email"
+                        class="input-field w-full px-4 py-2 border rounded-lg focus:outline-none" required>
+                </div>
+
+                <div class="relative">
+                    <label for="password" class="block mb-1 text-sm font-medium">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter admin password"
+                        class="input-field w-full px-4 py-2 border rounded-lg focus:outline-none" required>
+                    <button type="button" onclick="togglePassword(event)" 
+                        class="absolute right-3 top-9 text-sm text-dark-rose-gold hover:text-dark-rose-gold">
+                        Show
+                    </button>
+                </div>
+
+                <button type="submit"
+                    class="w-full primary-btn text-white py-2 rounded-lg transition-colors font-semibold shadow-md">
+                    Login
+                </button>
+            </form>
         </div>
-
-        <!-- Submit -->
-        <button type="submit"
-          class="w-full primary-btn text-white py-2 rounded-lg transition-colors font-semibold">
-          Login
-        </button>
-      </form>
     </div>
-  </div>
 
-  <script>
-    function togglePassword(event) {
-      const passwordInput = document.getElementById('password');
-      const btn = event.currentTarget;
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        btn.textContent = 'Hide';
-      } else {
-        passwordInput.type = 'password';
-        btn.textContent = 'Show';
-      }
-    }
+    <script>
+        function togglePassword(event) {
+            const passwordInput = document.getElementById('password');
+            const btn = event.currentTarget;
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                btn.textContent = 'Hide';
+            } else {
+                passwordInput.type = 'password';
+                btn.textContent = 'Show';
+            }
+        }
 
-    document.getElementById("adminLoginForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      // Redirect to admin dashboard
-      window.location.href = "admindashboard.html";
-    });
-  </script>
+        document.getElementById("adminLoginForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            // Redirect to admin dashboard
+            window.location.href = "admindashboard.html";
+        });
+    </script>
 
 </body>
 </html>

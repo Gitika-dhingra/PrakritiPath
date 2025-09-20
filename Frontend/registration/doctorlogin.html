@@ -1,126 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Doctor Login</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Font for Nav -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-  <style>
-    @keyframes greekGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    body {
-      background: linear-gradient(270deg, #f3e5f5, #e1f5fe, #fff9c4, #e0f7fa, #fce4ec);
-      background-size: 600% 600%;
-      animation: greekGradient 40s ease infinite;
-      font-family: 'Arial', sans-serif;
-    }
+    <style>
+        :root {
+            /* Colors from the provided table */
+            --light-rose-gold: #F3E5F5;
+            --medium-rose-gold: #D9A7C7;
+            --dark-rose-gold: #B76E79;
+            --light-tangerine: #FDBA74;
+            --deep-orange: #DD6B20;
+            --soft-peach: #FFF7ED;
+            --standard-gold: #D4AF37;
+            --light-gold: #E8C15E;
+            --light-cool-gray: #f3f4f6;
+            --light-gray: #e5e7eb;
+            --medium-gray: #d1d5db;
+            --dark-gray: #9ca3af;
+            --dark-slate: #1f2937;
+            --light-slate: #475569;
+        }
 
-    .greek-card {
-      background: linear-gradient(135deg, #ffffffcc 25%, #f7f7f7cc 25%, #f7f7f7cc 50%, #ffffffcc 50%, #ffffffcc 75%, #f7f7f7cc 75%);
-      background-size: 20px 20px;
-      border-radius: 2rem;
-      padding: 3rem;
-      min-height: 480px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-      backdrop-filter: blur(6px);
-      border: 2px solid #1e3c72;
-    }
+        /* Live animated gradient background */
+        @keyframes liveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        body {
+            background: linear-gradient(270deg, var(--light-gray), var(--medium-gray), var(--dark-gray));
+            background-size: 600% 600%;
+            animation: liveGradient 30s ease infinite;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--dark-slate);
+        }
 
-    .primary-btn {
-      background-color: #1e3c72;
-    }
-    .primary-btn:hover {
-      background-color: #3a5ba0;
-    }
+        /* Styled card */
+        .greek-card {
+            background: var(--soft-peach);
+            border-radius: 2rem;
+            padding: 3rem;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border: 2px solid var(--medium-rose-gold);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .greek-nav {
-      background-color: #1e3c72;
-      border-bottom: 4px solid #d4af37;
-      font-family: 'Cinzel', serif;
-    }
-  </style>
+        .greek-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        input {
+            transition: all 0.3s ease;
+            background-color: var(--soft-peach);
+            border-color: var(--light-rose-gold);
+            color: var(--dark-slate);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--dark-rose-gold);
+            box-shadow: 0 0 10px rgba(183, 110, 121, 0.3);
+        }
+
+        /* Button styling */
+        .primary-btn {
+            background-color: var(--dark-rose-gold);
+            color: white;
+            transition: all 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .primary-btn:hover {
+            background-color: var(--standard-gold);
+            color: var(--dark-slate);
+            transform: translateY(-2px);
+        }
+
+        /* Navbar styling */
+        .greek-nav {
+            background-color: var(--light-slate);
+            border-bottom: 4px solid var(--standard-gold);
+            font-family: 'Cinzel Decorative', serif;
+        }
+
+        .greek-nav a {
+            color: var(--light-rose-gold);
+            transition: all 0.3s ease;
+        }
+
+        .greek-nav a:hover {
+            color: var(--standard-gold);
+        }
+
+        .login-title {
+            color: var(--dark-rose-gold);
+            font-family: 'Cinzel Decorative', serif;
+        }
+
+        .signup-link {
+            color: var(--dark-rose-gold);
+            transition: all 0.3s ease;
+        }
+
+        .signup-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
-  <!-- Navigation -->
-  <nav class="greek-nav backdrop-blur-md px-6 py-4 flex justify-between items-center shadow-lg sticky top-0 z-50">
-    <a href="../index.html" class="text-2xl font-extrabold text-white tracking-wide hover:scale-105 transition-transform">
-      PrakritiPath
-    </a>
-  </nav>
+    <nav class="greek-nav backdrop-blur-md px-6 py-4 flex justify-between items-center shadow-lg sticky top-0 z-50">
+        <a href="../index.html" class="text-2xl font-extrabold tracking-wide hover:scale-105 transition-transform">
+            PrakritiPath
+        </a>
+    </nav>
 
-  <!-- Doctor Login Form -->
-  <div class="flex justify-center items-center flex-1">
-    <div class="greek-card w-full max-w-md">
-      <h2 class="text-3xl font-bold mb-6 text-[#1e3c72] text-center">Doctor Login</h2>
+    <div class="flex justify-center items-center flex-1">
+        <div class="greek-card w-full max-w-md">
+            <h2 class="text-3xl font-bold mb-6 text-center login-title">Doctor Login</h2>
 
-      <form id="doctorLoginForm" class="space-y-4">
-        <!-- Email -->
-        <div>
-          <label for="email" class="block text-gray-700 mb-1">Email</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
+            <form id="doctorLoginForm" class="space-y-4">
+                <div>
+                    <label for="email" class="block text-gray-700 mb-1">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff6f61]" required>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-gray-700 mb-1">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff6f61]" required>
+                </div>
+
+                <button type="submit"
+                    class="w-full primary-btn text-white py-2 rounded-lg font-semibold">
+                    Login as Doctor
+                </button>
+            </form>
+
+            <p class="mt-6 text-center text-gray-600 text-sm">
+                Don’t have an account? <a href="doctorsignup.html" class="signup-link">Sign Up as Doctor</a>
+            </p>
         </div>
-
-        <!-- Password -->
-        <div>
-          <label for="password" class="block text-gray-700 mb-1">Password</label>
-          <input type="password" id="password" name="password" placeholder="Enter your password"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
-        </div>
-
-        <!-- Submit -->
-        <button type="submit"
-          class="w-full primary-btn text-white py-2 rounded-lg hover:primary-btn transition-colors font-semibold">
-          Login as Doctor
-        </button>
-      </form>
-
-      <!-- Doctor Signup Link -->
-      <p class="mt-6 text-center text-gray-500 text-sm">
-        Don’t have an account? <a href="doctorsignup.html" class="text-[#1e3c72] hover:underline">Sign Up as Doctor</a>
-      </p>
     </div>
-  </div>
 
-  <script>
-    document.getElementById("doctorLoginForm").addEventListener("submit", async function(e) {
-      e.preventDefault();
+    <script>
+        document.getElementById("doctorLoginForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
 
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
 
-      try {
-        const res = await fetch("http://localhost:3000/doctor/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password })
+            try {
+                const res = await fetch("http://localhost:3000/doctor/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    alert(data.message);
+                    window.location.href = "../doctordashboard.html";
+                } else {
+                    alert(data.message);
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Server error. Please try again later.");
+            }
         });
-
-        const data = await res.json();
-
-        if (data.success) {
-          alert(data.message);
-          window.location.href = "../doctordashboard.html";
-        } else {
-          alert(data.message);
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Server error. Please try again later.");
-      }
-    });
-  </script>
+    </script>
 
 </body>
 </html>

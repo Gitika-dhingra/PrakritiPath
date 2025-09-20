@@ -1,40 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Logging Out...</title>
-  <style>
-    body {
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      font-family: Arial, sans-serif;
-      background: #f9fafb;
-      color: #333;
-    }
-    .message {
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
-  </style>
-  <script>
-    // Clear session/local storage
-    sessionStorage.clear();
-    localStorage.clear();
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logging Out...</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Colors from the provided table */
+            --light-rose-gold: #F3E5F5;
+            --medium-rose-gold: #D9A7C7;
+            --dark-rose-gold: #B76E79;
+            --light-tangerine: #FDBA74;
+            --deep-orange: #DD6B20;
+            --soft-peach: #FFF7ED;
+            --standard-gold: #D4AF37;
+            --light-gold: #E8C15E;
+            --light-cool-gray: #f3f4f6;
+            --light-gray: #e5e7eb;
+            --medium-gray: #d1d5db;
+            --dark-gray: #9ca3af;
+            --dark-slate: #1f2937;
+            --light-slate: #475569;
+        }
 
-    // Show message briefly then redirect
-    window.onload = function () {
-      setTimeout(function () {
-        // Redirect to Admin Login page
-        window.location.href = "adminlogin.html";
-      }, 1000); // 1 second delay
-    };
-  </script>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background: var(--light-cool-gray);
+        }
+
+        .logout-card {
+            background: var(--soft-peach);
+            border-radius: 2rem;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border: 2px solid var(--medium-rose-gold);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+        }
+
+        .logout-card h1 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2rem;
+            color: var(--dark-rose-gold);
+            margin-bottom: 1rem;
+        }
+
+        .logout-card p {
+            font-size: 1.2rem;
+            color: var(--dark-slate);
+        }
+
+        .checkmark {
+            font-size: 3rem;
+            color: var(--standard-gold);
+            margin-bottom: 1rem;
+        }
+    </style>
+
+    <script>
+        // Clear session/local storage
+        sessionStorage.clear();
+        localStorage.clear();
+
+        // Show message briefly then redirect
+        window.onload = function () {
+            setTimeout(function () {
+                window.location.href = "adminlogin.html";
+            }, 1500); // 1.5 second delay for better UX
+        };
+    </script>
 </head>
 <body>
-  <div class="message">✅ You have been logged out successfully.</div>
+    <div class="logout-card">
+        <div class="checkmark">✅</div>
+        <h1>Logged Out Successfully</h1>
+        <p>You will be redirected to the login page shortly.</p>
+    </div>
 </body>
 </html>

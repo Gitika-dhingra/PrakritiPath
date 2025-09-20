@@ -1,200 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reschedule Appointment</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(-45deg, #f3e5f5, #e1f5fe, #fff9c4, #e0f7fa, #fce4ec);
-      background-size: 600% 600%;
-      animation: pastelGradient 40s ease infinite;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reschedule Appointment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Colors from the provided table */
+            --light-rose-gold: #F3E5F5;
+            --medium-rose-gold: #D9A7C7;
+            --dark-rose-gold: #B76E79;
+            --light-tangerine: #FDBA74;
+            --deep-orange: #DD6B20;
+            --soft-peach: #FFF7ED;
+            --standard-gold: #D4AF37;
+            --light-gold: #E8C15E;
+            --light-cool-gray: #f3f4f6;
+            --light-gray: #e5e7eb;
+            --medium-gray: #d1d5db;
+            --dark-gray: #9ca3af;
+            --dark-slate: #1f2937;
+            --light-slate: #475569;
+        }
 
-    @keyframes pastelGradient {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(-45deg, var(--light-gray), var(--medium-gray), var(--dark-gray));
+            background-size: 600% 600%;
+            animation: liveGradient 25s ease infinite;
+        }
 
-    header {
-      background: linear-gradient(90deg, #0d3b66, #2a4d69, #d4af37);
-      color: #fff;
-      padding: 18px 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0px 5px 18px rgba(0,0,0,0.25);
-      font-family: 'Arial', sans-serif;
-      font-size: 24px;
-      position: relative;
-    }
+        @keyframes liveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    .header-title {
-      margin: 0;
-    }
+        header {
+            background: var(--light-slate);
+            color: var(--light-rose-gold);
+            padding: 18px 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 5px 18px rgba(0,0,0,0.25);
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 24px;
+            position: relative;
+            border-bottom: 5px solid var(--standard-gold);
+        }
 
-    .back-btn {
-      position: absolute;
-      left: 20px;
-      background: #d4af37;
-      color: #0d3b66;
-      padding: 8px 16px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-      font-size: 14px;
-    }
+        .header-title {
+            margin: 0;
+        }
 
-    .back-btn:hover {
-      background: #0d3b66;
-      color: #fff;
-    }
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            background: var(--standard-gold);
+            color: var(--dark-slate);
+            padding: 8px 16px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            font-size: 14px;
+        }
 
-    .reschedule-box {
-      background: #fff;
-      border: 2px solid #d4af37;
-      border-radius: 18px;
-      padding: 30px 40px;
-      width: 420px;
-      box-shadow: 0px 10px 28px rgba(0,0,0,0.18);
-      text-align: center;
-      margin: 60px auto 0 auto;
-    }
+        .back-btn:hover {
+            background: var(--light-gold);
+            color: var(--dark-slate);
+        }
 
-    .reschedule-box h1 {
-      font-family: 'Arial', sans-serif;
-      font-size: 22px;
-      margin-bottom: 20px;
-      color: #0d3b66;
-      border-bottom: 2px solid #d4af37;
-      padding-bottom: 10px;
-    }
+        .reschedule-box {
+            background: var(--soft-peach);
+            border: 2px solid var(--medium-rose-gold);
+            border-radius: 18px;
+            padding: 30px 40px;
+            width: 420px;
+            box-shadow: 0px 10px 28px rgba(0,0,0,0.18);
+            text-align: center;
+            margin: 60px auto 0 auto;
+        }
 
-    label {
-      display: block;
-      text-align: left;
-      margin: 12px 0 6px;
-      font-size: 15px;
-      font-weight: bold;
-      color: #0d3b66;
-    }
+        .reschedule-box h1 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--dark-rose-gold);
+            border-bottom: 2px solid var(--medium-rose-gold);
+            padding-bottom: 10px;
+        }
 
-    input, textarea, select {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-      font-family:'Arial', sans-serif;
-      background: #fafafa;
-    }
+        label {
+            display: block;
+            text-align: left;
+            margin: 12px 0 6px;
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--dark-slate);
+        }
 
-    textarea {
-      resize: none;
-      height: 90px;
-    }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--light-rose-gold);
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            background: var(--soft-peach);
+            color: var(--dark-slate);
+        }
 
-    button {
-      width: 100%;
-      background: #0d3b66;
-      color: #fff;
-      padding: 12px;
-      border: none;
-      border-radius: 25px;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+        textarea {
+            resize: none;
+            height: 90px;
+        }
 
-    button:hover {
-      background: #d4af37;
-      color: #0d3b66;
-    }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--dark-rose-gold);
+            box-shadow: 0 0 8px rgba(183, 110, 121, 0.5);
+        }
 
-    .back-link {
-      display: inline-block;
-      margin-top: 15px;
-      color: #0d3b66;
-      text-decoration: none;
-      font-weight: bold;
-    }
+        button {
+            width: 100%;
+            background: var(--dark-rose-gold);
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
 
-    .back-link:hover {
-      text-decoration: underline;
-    }
+        button:hover {
+            background: var(--standard-gold);
+            color: var(--dark-slate);
+        }
 
-    .message {
-      margin-top: 15px;
-      font-weight: bold;
-    }
-  </style>
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--dark-slate);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <a href="doctordashboard.html" class="back-btn">← Back</a>
-    <div class="header-title">Reschedule Appointment</div>
-  </header>
+    <header>
+        <a href="doctordashboard.html" class="back-btn">← Back</a>
+        <div class="header-title">Reschedule Appointment</div>
+    </header>
 
-  <div class="reschedule-box">
-    <form id="rescheduleForm">
-      <label for="consultationId">Consultation ID</label>
-      <input type="number" id="consultationId" placeholder="Enter consultation ID" required>
+    <div class="reschedule-box">
+        <form id="rescheduleForm">
+            <label for="consultationId">Consultation ID</label>
+            <input type="number" id="consultationId" placeholder="Enter consultation ID" required>
 
-      <label for="newDate">New Date</label>
-      <input type="date" id="newDate" required>
+            <label for="newDate">New Date</label>
+            <input type="date" id="newDate" required>
 
-      <label for="newTime">New Time</label>
-      <input type="time" id="newTime" required>
+            <label for="newTime">New Time</label>
+            <input type="time" id="newTime" required>
 
-      <label for="note">Doctor's Note (Optional)</label>
-      <textarea id="note" placeholder="Enter any remarks for the patient..."></textarea>
+            <label for="note">Doctor's Note (Optional)</label>
+            <textarea id="note" placeholder="Enter any remarks for the patient..."></textarea>
 
-      <button type="submit">Confirm Reschedule</button>
-    </form>
+            <button type="submit">Confirm Reschedule</button>
+        </form>
 
-    <p id="message" class="message"></p>
-    <a href="doctordashboard.html" class="back-link">⬅ Back to Dashboard</a>
-  </div>
+        <p id="message" class="message"></p>
+        <a href="doctordashboard.html" class="back-link">⬅ Back to Dashboard</a>
+    </div>
 
-  <script>
-    const form = document.getElementById('rescheduleForm');
-    const messageEl = document.getElementById('message');
+    <script>
+        const form = document.getElementById('rescheduleForm');
+        const messageEl = document.getElementById('message');
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-      const consultation_id = document.getElementById('consultationId').value;
-      const newDate = document.getElementById('newDate').value;
-      const newTime = document.getElementById('newTime').value;
-      const note = document.getElementById('note').value;
+            const consultation_id = document.getElementById('consultationId').value;
+            const newDate = document.getElementById('newDate').value;
+            const newTime = document.getElementById('newTime').value;
+            const note = document.getElementById('note').value;
 
-      try {
-        const res = await fetch('http://localhost:3000/doctor/reschedule', {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ consultation_id, newDate, newTime, note })
+            try {
+                const res = await fetch('http://localhost:3000/doctor/reschedule', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ consultation_id, newDate, newTime, note })
+                });
+
+                const data = await res.json();
+                messageEl.textContent = data.message;
+                messageEl.style.color = data.success ? 'green' : 'red';
+
+                if (data.success) {
+                    form.reset();
+                }
+            } catch (err) {
+                console.error(err);
+                messageEl.textContent = 'Error connecting to server.';
+                messageEl.style.color = 'red';
+            }
         });
-
-        const data = await res.json();
-        messageEl.textContent = data.message;
-        messageEl.style.color = data.success ? 'green' : 'red';
-
-        if (data.success) {
-          form.reset();
-        }
-      } catch (err) {
-        console.error(err);
-        messageEl.textContent = 'Error connecting to server.';
-        messageEl.style.color = 'red';
-      }
-    });
-  </script>
+    </script>
 </body>
 </html>

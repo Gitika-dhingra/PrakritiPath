@@ -1,211 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Medicine Payment - PrakritiPath</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(-45deg, #f3e5f5, #e1f5fe, #fff9c4, #e0f7fa, #fce4ec);
-      background-size: 600% 600%;
-      animation: pastelGradient 40s ease infinite;
-      color: #333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Payment - PrakritiPath</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Colors from the provided table */
+            --light-rose-gold: #F3E5F5;
+            --medium-rose-gold: #D9A7C7;
+            --dark-rose-gold: #B76E79;
+            --light-tangerine: #FDBA74;
+            --deep-orange: #DD6B20;
+            --soft-peach: #FFF7ED;
+            --standard-gold: #D4AF37;
+            --light-gold: #E8C15E;
+            --light-cool-gray: #f3f4f6;
+            --light-gray: #e5e7eb;
+            --medium-gray: #d1d5db;
+            --dark-gray: #9ca3af;
+            --dark-slate: #1f2937;
+            --light-slate: #475569;
+        }
 
-    @keyframes pastelGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(-45deg, var(--light-gray), var(--medium-gray), var(--dark-gray));
+            background-size: 600% 600%;
+            animation: liveGradient 25s ease infinite;
+            color: var(--dark-slate);
+        }
 
-    header {
-      background: linear-gradient(to right, #0d3b66, #145374);
-      color: white;
-      padding: 15px 40px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      border-bottom: 6px solid #d4af37;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+        @keyframes liveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    .back-btn {
-      position: absolute;
-      left: 40px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: #d4af37;
-      color: #0d3b66;
-      padding: 8px 16px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .back-btn:hover {
-      background: #0d3b66;
-      color: #fff;
-    }
+        header {
+            background: var(--light-slate);
+            color: var(--light-rose-gold);
+            padding: 15px 40px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border-bottom: 6px solid var(--standard-gold);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel Decorative', serif;
+        }
 
-    .container {
-      max-width: 900px;
-      margin: 40px auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
-      border: 3px solid #d4af37;
-    }
+        .back-btn {
+            position: absolute;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--standard-gold);
+            color: var(--dark-slate);
+            padding: 8px 16px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .back-btn:hover {
+            background: var(--light-gold);
+            color: var(--dark-slate);
+        }
 
-    h2 {
-      color: #0d3b66;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #d4af37;
-      padding-bottom: 5px;
-    }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: var(--soft-peach);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
+            border: 3px solid var(--medium-rose-gold);
+        }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 25px;
-    }
+        h2 {
+            color: var(--dark-rose-gold);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--medium-rose-gold);
+            padding-bottom: 5px;
+            font-family: 'Cinzel Decorative', serif;
+        }
 
-    table th, table td {
-      padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-      font-size: 15px;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
 
-    table th {
-      background: #f8f1dc;
-      color: #0d3b66;
-    }
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-rose-gold);
+            font-size: 15px;
+        }
 
-    .total {
-      text-align: right;
-      font-size: 18px;
-      font-weight: bold;
-      margin-top: 10px;
-      color: #145374;
-    }
+        table th {
+            background: var(--light-rose-gold);
+            color: var(--dark-slate);
+        }
 
-    .payment-options {
-      margin-top: 25px;
-    }
+        .total {
+            text-align: right;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: var(--dark-rose-gold);
+        }
 
-    label {
-      display: block;
-      margin: 10px 0 5px;
-      font-weight: 600;
-      color: #0d3b66;
-    }
+        .payment-options {
+            margin-top: 25px;
+        }
 
-    input, select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      margin-bottom: 15px;
-      font-size: 15px;
-    }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: 600;
+            color: var(--dark-slate);
+        }
 
-    button {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      background: #0d3b66;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    button:hover {
-      background: #145374;
-    }
-  </style>
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--medium-rose-gold);
+            margin-bottom: 15px;
+            font-size: 15px;
+            background: var(--soft-peach);
+            color: var(--dark-slate);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            background: var(--dark-rose-gold);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        button:hover {
+            background: var(--standard-gold);
+            color: var(--dark-slate);
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    Medicine Payment
-    <a href="Userdashboard.html" id="backButton" class="back-btn">← Back</a>
-  </header>
+    <header>
+        Medicine Payment
+        <a href="Userdashboard.html" id="backButton" class="back-btn">← Back</a>
+    </header>
 
-  <div class="container">
-    <h2>Order Summary</h2>
-    <table>
-      <tr>
-        <th>Medicine</th>
-        <th>Quantity</th>
-        <th>Price (₹)</th>
-      </tr>
-      <tr>
-        <td>Ashwagandha Tablets</td>
-        <td>1 bottle</td>
-        <td>₹350</td>
-      </tr>
-      <tr>
-        <td>Triphala Powder</td>
-        <td>2 packs</td>
-        <td>₹400</td>
-      </tr>
-      <tr>
-        <td>Chyawanprash</td>
-        <td>1 jar</td>
-        <td>₹300</td>
-      </tr>
-    </table>
+    <div class="container">
+        <h2>Order Summary</h2>
+        <table>
+            <tr>
+                <th>Medicine</th>
+                <th>Quantity</th>
+                <th>Price (₹)</th>
+            </tr>
+            <tr>
+                <td>Ashwagandha Tablets</td>
+                <td>1 bottle</td>
+                <td>₹350</td>
+            </tr>
+            <tr>
+                <td>Triphala Powder</td>
+                <td>2 packs</td>
+                <td>₹400</td>
+            </tr>
+            <tr>
+                <td>Chyawanprash</td>
+                <td>1 jar</td>
+                <td>₹300</td>
+            </tr>
+        </table>
 
-    <div class="total">Total Amount: ₹1050</div>
+        <div class="total">Total Amount: ₹1050</div>
 
-    <div class="payment-options">
-      <h2>Payment Details</h2>
+        <div class="payment-options">
+            <h2>Payment Details</h2>
 
-      <label for="payment-method">Select Payment Method</label>
-      <select id="payment-method">
-        <option>Credit/Debit Card</option>
-        <option>UPI</option>
-        <option>Net Banking</option>
-        <option>Cash on Delivery</option>
-      </select>
+            <label for="payment-method">Select Payment Method</label>
+            <select id="payment-method">
+                <option>Credit/Debit Card</option>
+                <option>UPI</option>
+                <option>Net Banking</option>
+                <option>Cash on Delivery</option>
+            </select>
 
-      <label for="card-number">Card Number</label>
-      <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
 
-      <label for="expiry">Expiry Date</label>
-      <input type="month" id="expiry">
+            <label for="expiry">Expiry Date</label>
+            <input type="month" id="expiry">
 
-      <label for="cvv">CVV</label>
-      <input type="password" id="cvv" placeholder="***">
+            <label for="cvv">CVV</label>
+            <input type="password" id="cvv" placeholder="*">
 
-      <button>Pay ₹1050</button>
+            <button>Pay ₹1050</button>
+        </div>
     </div>
-  </div>
 
 <script>
 // Simulating login status (replace with actual login logic)
 const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
 document.getElementById("backButton").addEventListener("click", function(e){
-  e.preventDefault();
-  if(isLoggedIn){
-    window.location.href = "userdashboard.html";
-  } else {
-    window.location.href = "userdashboard.html";
-  }
+    e.preventDefault();
+    if(isLoggedIn){
+        window.location.href = "userdashboard.html";
+    } else {
+        window.location.href = "userdashboard.html";
+    }
 });
 </script>
 

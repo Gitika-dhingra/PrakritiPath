@@ -1,150 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Login</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login - PrakritiPath</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Import Cinzel font -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    /* Gradient animation for background */
-    @keyframes pastelGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    body {
-      background: linear-gradient(-45deg, #f3e5f5, #e1f5fe, #fff9c4, #e0f7fa, #fce4ec);
-      background-size: 600% 600%;
-      animation: pastelGradient 40s ease infinite;
-      font-family: 'Arial', sans-serif;
-    }
-
-    .greek-card {
-      background: linear-gradient(135deg, #ffffffcc 25%, #f7f7f7cc 25%, #f7f7f7cc 50%, #ffffffcc 50%, #ffffffcc 75%, #f7f7f7cc 75%);
-      background-size: 20px 20px;
-      border-radius: 2rem;
-      padding: 2.5rem;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-      backdrop-filter: blur(6px);
-      border: 2px solid #1e3c72;
-    }
-
-    .primary-btn { background-color: #1e3c72; }
-    .primary-btn:hover { background-color: #3a5ba0; }
-
-    .greek-nav {
-      background-color: #1e3c72;
-      border-bottom: 4px solid #d4af37;
-      font-family: 'Cinzel', serif;
-    }
-  </style>
-</head>
-<body class="flex flex-col min-h-screen">
-
-  <!-- Navigation -->
-  <nav class="greek-nav backdrop-blur-md px-6 py-4 flex justify-between items-center shadow-lg sticky top-0 z-50">
-    <a href="../index.html" class="text-2xl font-extrabold text-white tracking-wide hover:scale-105 transition-transform">
-      PrakritiPath
-    </a>
-    <div>
-      <a href="signup.html" class="px-4 py-2 border border-[#d4af37] rounded-lg text-white hover:bg-[#d4af37] hover:text-[#1e3c72] transition-all font-medium shadow-md">
-        Sign Up
-      </a>
-    </div>
-  </nav>
-
-  <!-- Login Form -->
-  <div class="flex justify-center items-center flex-1">
-    <div class="greek-card w-full max-w-md">
-      <h2 class="text-3xl font-bold mb-6 text-[#1e3c72] text-center">User Login</h2>
-
-      <form id="loginForm" class="space-y-4">
-
-        <!-- Email -->
-        <div>
-          <label for="email" class="block text-gray-700 mb-1">Email</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
-        </div>
-
-        <!-- Password -->
-        <div class="relative">
-          <label for="password" class="block text-gray-700 mb-1">Password</label>
-          <input type="password" id="password" name="password" placeholder="Enter your password"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
-          <button type="button" onclick="togglePassword(event)" class="absolute right-3 top-9 text-gray-500 text-sm">
-            Show
-          </button>
-        </div>
-
-        <!-- Submit -->
-        <button type="submit"
-          class="w-full primary-btn text-white py-2 rounded-lg transition-colors font-semibold">
-          Login
-        </button>
-      </form>
-
-      <!-- Links -->
-      <p class="mt-4 text-center text-gray-500 text-sm">
-        Don’t have an account? <a href="signup.html" class="text-[#1e3c72] hover:underline">Sign Up</a>
-      </p>
-      <p class="mt-2 text-center text-gray-500 text-sm">
-        Are you a doctor? <a href="doctorlogin.html" class="text-[#1e3c72] font-semibold hover:underline">Login here</a>
-      </p>
-    </div>
-  </div>
-
-  <script>
-    function togglePassword(event) {
-      const passwordInput = document.getElementById('password');
-      const btn = event.currentTarget;
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        btn.textContent = 'Hide';
-      } else {
-        passwordInput.type = 'password';
-        btn.textContent = 'Show';
-      }
-    }
-
-    document.getElementById("loginForm").addEventListener("submit", async function(e) {
-      e.preventDefault();
-
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
-      try {
-        const res = await fetch("http://localhost:3000/user/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password })
-        });
-
-        const data = await res.json();
-
-        if (res.ok && data.success) {
-          // ✅ Store login info in localStorage
-          localStorage.setItem("isLoggedIn", "true");
-          localStorage.setItem("userId", data.user.id);
-          localStorage.setItem("userName", data.user.name);
-
-          alert(data.message || "Login successful!");
-          // redirect to dashboard
-          window.location.href = "../userdashboard.html";
-        } else {
-          alert(data.message || "Invalid credentials");
+    <style>
+        :root {
+            /* Color Palette */
+            --light-rose-gold: #F3E5F5;
+            --medium-rose-gold: #D9A7C7;
+            --dark-rose-gold: #B76E79;
+            --standard-gold: #D4AF37;
+            --light-gold: #E8C15E;
+            --soft-peach: #FFF7ED;
+            --light-cool-gray: #f3f4f6;
+            --medium-gray: #d1d5db;
+            --dark-slate: #1f2937;
+            --light-slate: #475569;
         }
-      } catch (error) {
-        console.error("Error:", error);
-        alert("Error connecting to server");
-      }
-    });
-  </script>
+
+        /* --- 1. Base & Layout --- */
+        body {
+            background: linear-gradient(-45deg, var(--light-cool-gray), var(--medium-gray));
+            background-size: 200% 200%;
+            animation: liveGradient 18s ease infinite;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--dark-slate);
+            margin: 0;
+        }
+
+        @keyframes liveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        /* --- 2. Navigation Bar --- */
+        .navbar {
+            background-color: var(--light-slate);
+            border-bottom: 4px solid var(--standard-gold);
+            font-family: 'Cinzel Decorative', serif;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .navbar a {
+            color: var(--light-rose-gold);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .navbar .brand-link {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .navbar .brand-link:hover {
+            transform: scale(1.03);
+            color: var(--light-gold);
+        }
+
+        .navbar .nav-link {
+            border: 2px solid var(--light-rose-gold);
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+        }
+        .navbar .nav-link:hover {
+            background-color: var(--light-rose-gold);
+            color: var(--dark-slate);
+        }
+
+        /* --- 3. Login Card --- */
+        .login-card {
+            background: var(--soft-peach);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border: 2px solid var(--medium-rose-gold);
+            max-width: 450px;
+            width: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+        }
+
+        .login-heading {
+            color: var(--dark-rose-gold);
+            font-family: 'Cinzel Decorative', serif;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- 4. Form & Button Styles --- */
+        .form-label {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+            color: var(--dark-slate);
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            background-color: var(--soft-peach);
+            color: var(--dark-slate);
+            border: 1px solid var(--medium-rose-gold);
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: var(--dark-rose-gold);
+            box-shadow: 0 0 10px rgba(183, 110, 121, 0.3);
+            background-color: white;
+        }
+        
+        .password-wrapper {
+            position: relative;
+        }
+
+        .toggle-btn {
+            position: absolute;
+            right: 0.75rem;
+            top: 2.1rem; /* Adjusted for label */
+            cursor: pointer;
+            color: var(--dark-rose-gold);
+            background: none;
+            border: none;
+            font-size: 0.875rem;
+        }
+
+        .primary-btn {
+            width: 100%;
+            background-color: var(--dark-rose-gold);
+            color: #fff;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+        }
+        .primary-btn:hover {
+            background-color: var(--standard-gold);
+            color: var(--dark-slate);
+            transform: translateY(-2px);
+        }
+        
+        .sub-text {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--light-slate);
+        }
+        .sub-text a {
+            color: var(--dark-rose-gold);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .sub-text a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="../index.html" class="brand-link">PrakritiPath</a>
+        <div>
+            <a href="signup.html" class="nav-link">Sign Up</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="login-card">
+            <h2 class="login-heading">User Login</h2>
+
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" class="input-field" required>
+                </div>
+
+                <div class="password-wrapper">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" class="input-field" required>
+                    <button type="button" onclick="togglePassword(event)" class="toggle-btn">Show</button>
+                </div>
+
+                <button type="submit" class="primary-btn">Login</button>
+            </form>
+
+            <p class="sub-text">
+                Don’t have an account? <a href="signup.html">Sign Up</a>
+            </p>
+            <p class="sub-text">
+                Are you a doctor? <a href="doctorlogin.html">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword(event) {
+            const passwordInput = document.getElementById('password');
+            const btn = event.currentTarget;
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                btn.textContent = 'Hide';
+            } else {
+                passwordInput.type = 'password';
+                btn.textContent = 'Show';
+            }
+        }
+
+        document.getElementById("loginForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            try {
+                const res = await fetch("http://localhost:3000/user/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    // Store login info in localStorage
+                    localStorage.setItem("isLoggedIn", "true");
+                    localStorage.setItem("userId", data.user.id);
+                    localStorage.setItem("userName", data.user.name);
+                    
+                    alert(data.message || "Login successful!");
+                    window.location.href = "../userdashboard.html";
+                } else {
+                    alert(data.message || "Invalid credentials");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Error connecting to server");
+            }
+        });
+    </script>
 
 </body>
 </html>
