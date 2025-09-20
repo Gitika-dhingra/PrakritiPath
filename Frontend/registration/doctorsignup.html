@@ -5,12 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Doctor Signup</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Google Font for Nav -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
-
   <style>
-    /* Background gradient animation */
     @keyframes pastelGradient {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -22,8 +18,6 @@
       animation: pastelGradient 40s ease infinite;
       font-family: 'Arial', sans-serif;
     }
-
-    /* Card styling */
     .greek-card {
       background: linear-gradient(135deg, #ffffffcc 25%, #f7f7f7cc 25%, #f7f7f7cc 50%, #ffffffcc 50%, #ffffffcc 75%, #f7f7f7cc 75%);
       background-size: 20px 20px;
@@ -31,106 +25,94 @@
       padding: 2.5rem;
       box-shadow: 0 15px 40px rgba(0,0,0,0.08);
       backdrop-filter: blur(6px);
-      border: 2px solid #1e3c72; /* Blue outline */
+      border: 2px solid #1e3c72;
     }
-
-    .primary-btn {
-      background-color: #1e3c72;
-    }
-    .primary-btn:hover {
-      background-color: #3a5ba0;
-    }
-
-    /* Greek-style nav bar */
+    .primary-btn { background-color: #1e3c72; }
+    .primary-btn:hover { background-color: #3a5ba0; }
     .greek-nav {
-      background-color: #1e3c72; /* Deep Greek Blue */
-      border-bottom: 4px solid #d4af37; /* Gold outline */
-      font-family: 'Cinzel', serif; /* Decorative font */
+      background-color: #1e3c72;
+      border-bottom: 4px solid #d4af37;
+      font-family: 'Cinzel', serif;
     }
   </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
-  <!-- Navigation -->
   <nav class="greek-nav backdrop-blur-md px-6 py-4 flex justify-between items-center shadow-lg sticky top-0 z-50">
-    <a href="../index.html" class="text-2xl font-extrabold text-white tracking-wide hover:scale-105 transition-transform">
-      PrakritiPath
-    </a>
+    <a href="../index.html" class="text-2xl font-extrabold text-white tracking-wide hover:scale-105 transition-transform">PrakritiPath</a>
     <div>
-      <a href="doctorlogin.html" class="px-4 py-2 border border-[#d4af37] rounded-lg text-white hover:bg-[#d4af37] hover:text-[#1e3c72] transition-all font-medium shadow-md">
-        Login
-      </a>
+      <a href="doctorlogin.html" class="px-4 py-2 border border-[#d4af37] rounded-lg text-white hover:bg-[#d4af37] hover:text-[#1e3c72] transition-all font-medium shadow-md">Login</a>
     </div>
   </nav>
 
-  <!-- Signup Form -->
   <div class="flex justify-center items-center flex-1">
     <div class="greek-card w-full max-w-lg">
       <h2 class="text-3xl font-bold mb-6 text-[#1e3c72] text-center">Doctor Signup</h2>
 
       <form id="doctorSignupForm" class="space-y-4">
-
-        <!-- Name -->
         <div>
           <label for="name" class="block text-gray-700 mb-1">Full Name</label>
-          <input type="text" id="name" name="name" placeholder="Enter your name"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
+          <input type="text" id="name" name="name" placeholder="Enter your name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
         </div>
-
-        <!-- Email -->
         <div>
           <label for="email" class="block text-gray-700 mb-1">Email</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
+          <input type="email" id="email" name="email" placeholder="Enter your email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
         </div>
-
-        <!-- Password -->
         <div>
           <label for="password" class="block text-gray-700 mb-1">Password</label>
-          <input type="password" id="password" name="password" placeholder="Enter your password"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
+          <input type="password" id="password" name="password" placeholder="Enter your password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
         </div>
-
-        <!-- Center/Hospital -->
         <div>
           <label for="center" class="block text-gray-700 mb-1">Center / Hospital</label>
-          <input type="text" id="center" name="center" placeholder="Enter your working center"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
+          <input type="text" id="center" name="center" placeholder="Enter your working center" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
         </div>
-
-        <!-- Specialization -->
         <div>
           <label for="specialization" class="block text-gray-700 mb-1">Specialization</label>
-          <input type="text" id="specialization" name="specialization" placeholder="Your specialization"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
+          <input type="text" id="specialization" name="specialization" placeholder="Your specialization" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1e3c72]" required>
         </div>
 
-        <!-- Submit -->
-        <button type="submit"
-          class="w-full primary-btn text-white py-2 rounded-lg transition-colors font-semibold">
-          Sign Up
-        </button>
-
+        <button type="submit" class="w-full primary-btn text-white py-2 rounded-lg transition-colors font-semibold">Sign Up</button>
       </form>
 
-      <!-- Message -->
       <div id="signupMessage" class="hidden mt-6 text-center">
         <p class="text-lg text-[#1e3c72] font-semibold">✅ Your information will get verified.</p>
-        <a href="../index.html"
-           class="mt-4 inline-block px-6 py-2 bg-[#1e3c72] text-white rounded-lg hover:bg-[#3a5ba0] transition-colors">
-          Redirect to Home Page
-        </a>
+        <a href="../index.html" class="mt-4 inline-block px-6 py-2 bg-[#1e3c72] text-white rounded-lg hover:bg-[#3a5ba0] transition-colors">Redirect to Home Page</a>
       </div>
+
+      <div id="errorMessage" class="hidden mt-4 text-center text-red-600 font-semibold"></div>
     </div>
   </div>
 
   <script>
-    document.getElementById("doctorSignupForm").addEventListener("submit", function(e) {
+    document.getElementById("doctorSignupForm").addEventListener("submit", async function(e) {
       e.preventDefault();
 
-      // Hide form, show message
-      document.getElementById("doctorSignupForm").classList.add("hidden");
-      document.getElementById("signupMessage").classList.remove("hidden");
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const center = document.getElementById("center").value;
+      const specialization = document.getElementById("specialization").value;
+
+      try {
+        const response = await fetch('http://localhost:3000/doctor/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password, center, specialization })
+        });
+        const data = await response.json();
+
+        if (data.success) {
+          document.getElementById("doctorSignupForm").classList.add("hidden");
+          document.getElementById("signupMessage").classList.remove("hidden");
+          document.getElementById("errorMessage").classList.add("hidden");
+        } else {
+          document.getElementById("errorMessage").textContent = data.message || 'Signup failed!';
+          document.getElementById("errorMessage").classList.remove("hidden");
+        }
+      } catch (err) {
+        document.getElementById("errorMessage").textContent = 'Server error!';
+        document.getElementById("errorMessage").classList.remove("hidden");
+      }
     });
   </script>
 

@@ -21,7 +21,7 @@
       background: linear-gradient(-45deg, #f3e5f5, #e1f5fe, #fff9c4, #e0f7fa, #fce4ec);
       background-size: 600% 600%;
       animation: pastelGradient 40s ease infinite;
-      font-family: 'Arial', sans-serif; /* Normal clean font */
+      font-family: 'Arial', sans-serif;
     }
 
     .greek-card {
@@ -31,17 +31,16 @@
       padding: 2.5rem;
       box-shadow: 0 15px 40px rgba(0,0,0,0.08);
       backdrop-filter: blur(6px);
-      border: 2px solid #1e3c72; /* Blue outline */
+      border: 2px solid #1e3c72;
     }
 
     .primary-btn { background-color: #1e3c72; }
     .primary-btn:hover { background-color: #3a5ba0; }
 
-    /* Greek-style nav bar */
     .greek-nav {
-      background-color: #1e3c72; /* Deep Greek Blue */
-      border-bottom: 4px solid #d4af37; /* Gold outline */
-      font-family: 'Cinzel', serif; /* Only nav in Cinzel */
+      background-color: #1e3c72;
+      border-bottom: 4px solid #d4af37;
+      font-family: 'Cinzel', serif;
     }
   </style>
 </head>
@@ -113,10 +112,37 @@
       }
     }
 
-    document.getElementById("loginForm").addEventListener("submit", function(e) {
+    document.getElementById("loginForm").addEventListener("submit", async function(e) {
       e.preventDefault();
-      // Redirect to user dashboard (one folder up from registration/)
-      window.location.href = "../userdashboard.html";
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const res = await fetch("http://localhost:3000/user/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          // ✅ Store login info in localStorage
+          localStorage.setItem("isLoggedIn", "true");
+          localStorage.setItem("userId", data.user.id);
+          localStorage.setItem("userName", data.user.name);
+
+          alert(data.message || "Login successful!");
+          // redirect to dashboard
+          window.location.href = "../userdashboard.html";
+        } else {
+          alert(data.message || "Invalid credentials");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Error connecting to server");
+      }
     });
   </script>
 
