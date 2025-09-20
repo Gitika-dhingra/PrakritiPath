@@ -129,18 +129,23 @@
     .back-link:hover {
       text-decoration: underline;
     }
+
+    .message {
+      margin-top: 15px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <header>
-    <a href="http://127.0.0.1:5500/Frontend/doctordashboard.html" class="back-btn">← Back</a>
+    <a href="doctordashboard.html" class="back-btn">← Back</a>
     <div class="header-title">Reschedule Appointment</div>
   </header>
 
   <div class="reschedule-box">
-    <form onsubmit="redirectDashboard(event)">
-      <label for="patientName">Patient Name</label>
-      <input type="text" id="patientName" placeholder="Enter patient name" required>
+    <form id="rescheduleForm">
+      <label for="consultationId">Consultation ID</label>
+      <input type="number" id="consultationId" placeholder="Enter consultation ID" required>
 
       <label for="newDate">New Date</label>
       <input type="date" id="newDate" required>
@@ -153,15 +158,43 @@
 
       <button type="submit">Confirm Reschedule</button>
     </form>
-    <a href="http://127.0.0.1:5500/Frontend/doctordashboard.html" class="back-link">⬅ Back to Dashboard</a>
+
+    <p id="message" class="message"></p>
+    <a href="doctordashboard.html" class="back-link">⬅ Back to Dashboard</a>
   </div>
 
   <script>
-    function redirectDashboard(event) {
-      event.preventDefault();
-      window.location.href = "http://127.0.0.1:5500/Frontend/doctordashboard.html";
-    }
+    const form = document.getElementById('rescheduleForm');
+    const messageEl = document.getElementById('message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const consultation_id = document.getElementById('consultationId').value;
+      const newDate = document.getElementById('newDate').value;
+      const newTime = document.getElementById('newTime').value;
+      const note = document.getElementById('note').value;
+
+      try {
+        const res = await fetch('http://localhost:3000/doctor/reschedule', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ consultation_id, newDate, newTime, note })
+        });
+
+        const data = await res.json();
+        messageEl.textContent = data.message;
+        messageEl.style.color = data.success ? 'green' : 'red';
+
+        if (data.success) {
+          form.reset();
+        }
+      } catch (err) {
+        console.error(err);
+        messageEl.textContent = 'Error connecting to server.';
+        messageEl.style.color = 'red';
+      }
+    });
   </script>
 </body>
 </html>
-

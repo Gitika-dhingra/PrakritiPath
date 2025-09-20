@@ -51,6 +51,14 @@
     .primary-btn:hover {
       background-color: #3a5ba0;
     }
+
+    /* Error message */
+    #errorMsg {
+      display: none;
+      color: red;
+      text-align: center;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
@@ -73,8 +81,9 @@
 
       <h2 class="text-3xl font-bold mb-6 text-[#1e3c72] text-center">Sign Up</h2>
 
-      <form action="#" method="POST" class="space-y-4">
+      <div id="errorMsg"></div>
 
+      <form id="signupForm" class="space-y-4">
         <!-- Name -->
         <div>
           <label for="name" class="block text-gray-700 mb-1">Full Name</label>
@@ -113,23 +122,6 @@
         <button type="submit" class="w-full primary-btn text-white py-2 rounded-lg font-semibold">
           Sign Up
         </button>
-
-        <!-- Social Login / Or -->
-        <div class="flex items-center justify-center my-4">
-          <span class="border-b w-1/5 border-gray-300"></span>
-          <span class="mx-2 text-gray-500">OR</span>
-          <span class="border-b w-1/5 border-gray-300"></span>
-        </div>
-
-        <div class="space-y-2">
-          <button type="button" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center gap-2">
-            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/google.svg" alt="Google" class="w-5 h-5">Sign Up with Google
-          </button>
-          <button type="button" class="w-full bg-blue-800 text-white py-2 rounded-lg hover:bg-blue-900 transition-colors flex items-center justify-center gap-2">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="Facebook" class="w-5 h-5 bg-white rounded-full p-0.5"> Sign Up with Facebook
-          </button>
-        </div>
-
       </form>
 
       <p class="mt-4 text-center text-gray-500 text-sm">
@@ -140,6 +132,7 @@
   </div>
 
   <script>
+    // Show/Hide password
     function togglePassword(event) {
       const input = document.getElementById('password');
       const btn = event.currentTarget;
@@ -152,6 +145,45 @@
       input.type = input.type === 'password' ? 'text' : 'password';
       btn.textContent = btn.textContent === 'Show' ? 'Hide' : 'Show';
     }
+
+    // Handle form submit
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const confirmPassword = document.getElementById('confirmPassword').value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+
+      if (password !== confirmPassword) {
+        errorMsg.style.display = 'block';
+        errorMsg.textContent = 'Passwords do not match!';
+        return;
+      }
+
+      try {
+        const res = await fetch('http://localhost:3000/user/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ name, email, password })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          alert('User registered successfully!');
+          window.location.href = 'userlogin.html'; // redirect to login page
+        } else {
+          errorMsg.style.display = 'block';
+          errorMsg.textContent = data.message || 'Error signing up';
+        }
+      } catch (err) {
+        errorMsg.style.display = 'block';
+        errorMsg.textContent = 'Error connecting to server';
+        console.error(err);
+      }
+    });
   </script>
 
 </body>

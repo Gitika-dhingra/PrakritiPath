@@ -33,7 +33,7 @@
       justify-content: center;
       box-shadow: 0 15px 40px rgba(0,0,0,0.08);
       backdrop-filter: blur(6px);
-      border: 2px solid #1e3c72; /* Blue outline */
+      border: 2px solid #1e3c72;
     }
 
     .primary-btn {
@@ -43,11 +43,10 @@
       background-color: #3a5ba0;
     }
 
-    /* Greek-style nav bar */
     .greek-nav {
-      background-color: #1e3c72; /* Deep Greek Blue */
-      border-bottom: 4px solid #d4af37; /* Gold outline */
-      font-family: 'Cinzel', serif; /* Decorative font */
+      background-color: #1e3c72;
+      border-bottom: 4px solid #d4af37;
+      font-family: 'Cinzel', serif;
     }
   </style>
 </head>
@@ -66,7 +65,6 @@
       <h2 class="text-3xl font-bold mb-6 text-[#1e3c72] text-center">Doctor Login</h2>
 
       <form id="doctorLoginForm" class="space-y-4">
-
         <!-- Email -->
         <div>
           <label for="email" class="block text-gray-700 mb-1">Email</label>
@@ -96,10 +94,31 @@
   </div>
 
   <script>
-    document.getElementById("doctorLoginForm").addEventListener("submit", function(e) {
+    document.getElementById("doctorLoginForm").addEventListener("submit", async function(e) {
       e.preventDefault();
-      // Redirect to doctordashboard
-      window.location.href = "../doctordashboard.html";
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const res = await fetch("http://localhost:3000/doctor/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          alert(data.message);
+          window.location.href = "../doctordashboard.html";
+        } else {
+          alert(data.message);
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Server error. Please try again later.");
+      }
     });
   </script>
 

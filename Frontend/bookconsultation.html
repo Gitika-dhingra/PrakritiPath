@@ -11,8 +11,6 @@
   --greek-gold:#d4af37;
   --greek-light:#f4f4f4;
 }
-
-/* Background */
 body{
   margin:0;
   font-family:'Arial', sans-serif;
@@ -25,8 +23,6 @@ body{
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
-/* Header */
 header{
   background:var(--greek-blue);
   color:white;
@@ -48,8 +44,6 @@ header a{
   transition:0.3s;
 }
 header a:hover{background:white;color:var(--greek-blue);}
-
-/* Form Section */
 .container{
   max-width:700px;
   margin:50px auto;
@@ -101,6 +95,13 @@ form button:hover{
   background:var(--greek-blue);
   color:white;
 }
+#message {
+  text-align:center;
+  font-weight:bold;
+  margin-top:15px;
+}
+#message.success { color: green; }
+#message.error { color: red; }
 </style>
 </head>
 <body>
@@ -112,13 +113,13 @@ form button:hover{
 
 <div class="container">
   <h2>Consultation Request</h2>
-  <form>
+  <form id="consultationForm">
     <label for="doctor">Select Doctor</label>
     <select id="doctor" name="doctor" required>
       <option value="">-- Choose Doctor --</option>
-      <option value="dr_deepu">Dr. Deepu John – Ayurvedic Therapy</option>
-      <option value="dr_ashikha">Dr. Ashikha Raj – Panchakarma</option>
-      <option value="dr_meera">Dr. Meera Iyer – Holistic Healing</option>
+      <option value="1">Dr. Deepu John – Ayurvedic Therapy</option>
+      <option value="2">Dr. Ashikha Raj – Panchakarma</option>
+      <option value="3">Dr. Meera Iyer – Holistic Healing</option>
     </select>
 
     <label for="date">Select Date</label>
@@ -132,19 +133,51 @@ form button:hover{
 
     <button type="submit">Book Appointment</button>
   </form>
+  <div id="message"></div>
 </div>
 
 <script>
-// Simulating login status (replace with actual login logic)
-const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-
-document.getElementById("backButton").addEventListener("click", function(e){
-  e.preventDefault();
-  if(isLoggedIn){
+document.addEventListener("DOMContentLoaded", function() {
+  // ---------------- BACK BUTTON ----------------
+  document.getElementById("backButton").addEventListener("click", function(e){
+    e.preventDefault();
     window.location.href = "userdashboard.html";
-  } else {
-    window.location.href = "index.html";
-  }
+  });
+
+  // ---------------- BOOK CONSULTATION ----------------
+  document.getElementById("consultationForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    // Hardcoded user ID or fetch from localStorage
+    const userId = localStorage.getItem("userId") ? parseInt(localStorage.getItem("userId")) : 1;
+    const doctor_id = parseInt(document.getElementById("doctor").value, 10);
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const reason = document.getElementById("reason").value;
+    const messageDiv = document.getElementById("message");
+
+    try {
+      const res = await fetch('http://localhost:3000/consultation/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: 1, doctor_id, date, time, reason })
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        messageDiv.textContent = "✅ Consultation booked successfully!";
+        messageDiv.className = "success";
+        document.getElementById("consultationForm").reset();
+      } else {
+        messageDiv.textContent = "❌ " + (data.message || "Failed to book consultation.");
+        messageDiv.className = "error";
+      }
+    } catch (err) {
+      console.error(err);
+      messageDiv.textContent = "❌ Server error. Try again later.";
+      messageDiv.className = "error";
+    }
+  });
 });
 </script>
 

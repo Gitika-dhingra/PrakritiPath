@@ -18,14 +18,10 @@
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
   }
-
-  /* Navigation Bar */
   nav {
     background-color: #0d3b66;
-    border-bottom: 5px solid #d4af37; /* golden line */
+    border-bottom: 5px solid #d4af37;
   }
-
-  /* Chat Container & Boxes */
   .chat-container {
     width: 100%;
     max-width: 3xl;
@@ -38,10 +34,9 @@
     overflow: hidden;
     border: 2px solid #0d3b66;
   }
-
   .chat-header {
-    background-color: #0d3b66; /* dark Greek blue */
-    color: #ffd700; /* golden text */
+    background-color: #0d3b66;
+    color: #ffd700;
     text-align: center;
     padding: 1rem;
     font-family:'Arial', sans-serif;
@@ -49,7 +44,6 @@
     font-weight: bold;
     border-bottom: 2px solid #d4af37;
   }
-
   .chat-box {
     flex: 1;
     padding: 1rem;
@@ -59,13 +53,36 @@
     flex-direction: column;
     gap: 0.75rem;
   }
+<<<<<<< HEAD
 
+=======
+  .chat-user {
+    background-color: #0d3b66;
+    color: #ffd700;
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    max-width: 60%;
+    align-self: flex-end;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .chat-bot {
+    background-color: #ffd700;
+    color: #0d3b66;
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    max-width: 60%;
+    align-self: flex-start;
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+>>>>>>> eb9db2f1e3fbdb9375bb1648a8177532ecd1fe1a
   .chat-input-container {
     display: flex;
     border-top: 2px solid #d4af37;
     background-color: #f1f1f1; /* same as box background */
   }
-
   .chat-input-container input {
     flex: 1;
     padding: 0.75rem 1rem;
@@ -79,7 +96,6 @@
   .chat-input-container input::placeholder {
     color: #555555;
   }
-
   .chat-input-container button {
     background-color: #0d3b66;
     color: #ffd700;
@@ -97,15 +113,15 @@
 </head>
 <body class="h-screen flex flex-col">
 
-  <!-- Navigation Bar -->
-  <nav class="flex justify-between items-center px-6 py-3">
-    <a href="userdashboard.html" class="text-white hover:text-blue-200 font-semibold flex items-center space-x-2">
-      <span class="text-xl">←</span>
-      <span>Back</span>
-    </a>
-    <h1 class="text-2xl font-bold font-[Cinzel] tracking-wide text-white">PrakritiPath</h1>
-  </nav>
+<nav class="flex justify-between items-center px-6 py-3">
+  <a href="userdashboard.html" class="text-white hover:text-blue-200 font-semibold flex items-center space-x-2">
+    <span class="text-xl">←</span>
+    <span>Back</span>
+  </a>
+  <h1 class="text-2xl font-bold font-[Cinzel] tracking-wide text-white">PrakritiPath</h1>
+</nav>
 
+<<<<<<< HEAD
   <!-- Chat Container -->
   <div class="flex-1 flex justify-center items-center p-4">
     <div class="chat-container">
@@ -126,30 +142,225 @@
       <div class="chat-input-container">
         <input id="userInput" type="text" placeholder="Type your message..." />
         <button onclick="sendMessage()">Send</button>
+=======
+<div class="flex-1 flex justify-center items-center p-4">
+  <div class="chat-container">
+    <div class="chat-header">🌿 PrakritiPath Chatbot</div>
+    <div id="chatBox" class="chat-box">
+      <div class="chat-bot">
+        Hello 🌿 How can I assist you today?
+>>>>>>> eb9db2f1e3fbdb9375bb1648a8177532ecd1fe1a
       </div>
     </div>
+    <div class="chat-input-container">
+      <input id="userInput" type="text" placeholder="Type your message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
   </div>
+</div>
 
-  <script>
-    function sendMessage() {
-      const input = document.getElementById("userInput");
-      const message = input.value.trim();
-      if (!message) return;
+<script>
+const knowledgeBase = [
+  {
+    trigger: /therapy|theropy|consult|consultation|appointment|book/i,
+    response: "🩺 Would you like to **consult a doctor** or just **book a therapy session**?"
+  },
+  { trigger: /hello|hi|hey/i, response: "🌺 Hello! Welcome to PrakritiPath. How are you feeling today?" },
+  { trigger: /good morning/i, response: "🌞 Good morning! Start your day with Ayurveda & positivity." },
+  { trigger: /good night/i, response: "🌙 Good night! Have restful sleep and sweet dreams." },
+  { trigger: /bye|goodbye|see you/i, response: "👋 Goodbye! Wishing you wellness and health." },
+  { trigger: /price|cost/i, response: "💰 Our Panchakarma packages begin at ₹22,780 for 14 nights." },
+  { trigger: /book|appointment/i, response: "📅 You can book appointments directly via the 'Book Now' section." },
+  { trigger: /doctor name|doctors/i, response: "👨‍⚕️ Our doctors: Dr. Sharma, Dr. Mehta, Dr. Kapoor, Dr. Singh, Dr. Verma." },
+  { trigger: /therapy types|therapies/i, response: "🌿 We offer Panchakarma, Abhyanga, Shirodhara, Nasya, Udvartana, and more." },
+  { trigger: /panchakarma/i, response: "Panchakarma is a detoxification therapy focusing on deep cleansing and rejuvenation." },
+  { trigger: /abhyanga/i, response: "Abhyanga is a full body oil massage that improves circulation and balances doshas." },
+  { trigger: /shirodhara/i, response: "Shirodhara involves pouring warm oil on the forehead to calm the mind and relieve stress." },
+  { trigger: /nasya/i, response: "Nasya therapy involves nasal administration of herbal oils for sinus and respiratory health." },
+  { trigger: /udvartana/i, response: "Udvartana is a herbal powder massage that aids in weight reduction and improves skin texture." },
+  { trigger: /success|reviews/i, response: "🌟 Our patients have experienced significant wellness improvements. Read testimonials on our website!" },
+  { trigger: /contact/i, response: "📞 Contact us at +91-9876543210 or email info@prakritipath.com." },
+  { trigger: /location|address/i, response: "📍 We are located at 123 Ayurveda Lane, Wellness City, India." },
+  { trigger: /treatment duration|package duration/i, response: "🕒 Typical Panchakarma treatments range from 7 to 28 days depending on the package." },
+  { trigger: /diet/i, response: "🥗 We provide customized Ayurvedic diet plans as part of our treatment packages." },
+  { trigger: /yoga/i, response: "🧘 Yoga and meditation sessions are included for holistic wellness." },
+  { trigger: /facial/i, response: "🌸 Ayurvedic facials help improve skin health and complexion." },
+  { trigger: /detox/i, response: "💧 Detox therapies remove toxins and rejuvenate the body naturally." },
+  { trigger: /massage/i, response: "💆 We provide various Ayurvedic massages like Abhyanga, Pinda Sweda, and more." },
+  { trigger: /consultation/i, response: "🩺 Consult with our Ayurvedic experts to plan your personalized therapy." },
+  { trigger: /package cost|cost of therapy/i, response: "💰 Packages range from ₹15,000 to ₹50,000 depending on therapy type and duration." },
+  { trigger: /herbs/i, response: "🌿 We use only authentic Ayurvedic herbs sourced from trusted suppliers." },
+  { trigger: /detox program/i, response: "🌱 Detox programs focus on Panchakarma and herbal therapies to rejuvenate the body." },
+  { trigger: /skin treatment/i, response: "✨ We provide therapies for skin health, glow, and pigmentation issues." },
+  { trigger: /stress relief/i, response: "😌 Our therapies like Shirodhara and Abhyanga are excellent for stress relief." },
+  { trigger: /pain relief/i, response: "💆 Specific massages and therapies help relieve chronic pain and improve mobility." },
+  { trigger: /wellness/i, response: "🌸 We focus on total wellness: physical, mental, and emotional balance." },
+  { trigger: /herbal oil/i, response: "🛢️ Herbal oils are used in all massages to enhance benefits and relaxation." },
+  { trigger: /booking|reserve/i, response: "📅 You can reserve your slot using our online booking form." },
+  { trigger: /opening hours|timing/i, response: "⏰ We are open Monday to Saturday from 8 AM to 8 PM." },
+  { trigger: /special offers/i, response: "🎁 Seasonal offers are available. Check the 'Offers' section on the website." },
+  { trigger: /faq/i, response: "❓ Visit our FAQ page for commonly asked questions and answers." },
+  { trigger: /payment methods/i, response: "💳 We accept credit/debit cards, UPI, and net banking." },
+  { trigger: /packages/i, response: "📦 Packages include Panchakarma, Detox, Yoga, and Customized wellness programs." },
+  { trigger: /rejuvenation/i, response: "🌿 Rejuvenation therapies include Panchakarma, Abhyanga, and Shirodhara." },
+  { trigger: /mental health/i, response: "🧘 Our therapies support mental wellness through meditation and Ayurvedic treatments." },
+  { trigger: /detoxify/i, response: "💧 Detoxifying therapies remove toxins and boost energy." },
+  { trigger: /wellbeing/i, response: "🌟 Our focus is holistic wellbeing—mind, body, and soul." },
+  { trigger: /holistic/i, response: "🌱 Holistic treatments combine Ayurveda, Yoga, diet, and lifestyle guidance." },
+  { trigger: /stress management/i, response: "😌 Shirodhara and guided meditation help with stress management." },
+  { trigger: /respiratory health/i, response: "🌬️ Nasya therapy helps improve sinus and respiratory health." },
+  { trigger: /sleep/i, response: "💤 Shirodhara and relaxing massages aid in better sleep." },
+  { trigger: /weight management/i, response: "⚖️ Udvartana and specialized diets assist in weight management." },
+  { trigger: /pain management/i, response: "💆 Tailored massages relieve muscular and joint pain." },
+  { trigger: /skin glow/i, response: "✨ Ayurvedic facials and herbal therapies enhance skin glow." },
+  { trigger: /detoxify body/i, response: "💧 Detox programs cleanse the body naturally and improve vitality." },
+  // 50 more additional triggers
+  { trigger: /ayurveda/i, response: "🌿 Ayurveda is an ancient science of life promoting balance and wellness." },
+  { trigger: /dosha/i, response: "⚖️ We assess your dosha type (Vata, Pitta, Kapha) for personalized therapies." },
+  { trigger: /herbal remedies/i, response: "🌱 We provide natural herbal remedies for various ailments." },
+  { trigger: /immune system/i, response: "🛡️ Panchakarma and diet therapies strengthen your immune system." },
+  { trigger: /arthritis/i, response: "💆 Ayurvedic therapies help in relieving joint pain and arthritis symptoms." },
+  { trigger: /digestion/i, response: "🍵 Ayurvedic treatments improve digestion and gut health." },
+  { trigger: /energy/i, response: "⚡ Rejuvenation therapies boost energy levels and vitality." },
+  { trigger: /liver detox/i, response: "💧 Panchakarma detox helps cleanse the liver naturally." },
+  { trigger: /detox herbs/i, response: "🌿 We use specific herbs like Triphala and Ashwagandha for detox." },
+  { trigger: /mental clarity/i, response: "🧘 Meditation and Shirodhara improve focus and mental clarity." },
+  { trigger: /respiratory/i, response: "🌬️ Nasya therapy supports respiratory wellness." },
+  { trigger: /blood pressure/i, response: "💓 Ayurvedic diet and therapies help maintain healthy blood pressure." },
+  { trigger: /cholesterol/i, response: "🥗 Specialized diet plans help manage cholesterol naturally." },
+  { trigger: /fatigue/i, response: "💤 Rejuvenation therapies help combat fatigue and stress." },
+  { trigger: /skin health/i, response: "✨ Herbal treatments improve skin health and complexion." },
+  { trigger: /immune boost/i, response: "🛡️ Ayurveda boosts immunity naturally with herbs and therapies." },
+  { trigger: /joint pain/i, response: "💆 Ayurvedic massages and therapies relieve joint discomfort." },
+  { trigger: /back pain/i, response: "💆 Tailored massages help with back pain relief." },
+  { trigger: /headache/i, response: "🌿 Herbal therapies and Shirodhara help reduce headaches." },
+  { trigger: /digestion problem/i, response: "🍵 Ayurvedic remedies improve digestion and reduce bloating." },
+  { trigger: /detox diet/i, response: "🥗 Special detox diets complement our Panchakarma therapies." },
+  { trigger: /lifestyle/i, response: "🏃 Ayurvedic guidance includes diet, exercise, and lifestyle improvements." },
+  { trigger: /stress/i, response: "😌 Stress management therapies include meditation and oil massages." },
+  { trigger: /anxiety/i, response: "🧘 Herbal remedies and Panchakarma therapies help with anxiety." },
+  { trigger: /depression/i, response: "🌿 Ayurveda supports mental health naturally." },
+  { trigger: /medicines?/i, response: "💊 We provide Ayurvedic medicines as part of our treatments. Please consult our doctor for the right prescription." },
+  { trigger: /blood sugar/i, response: "🍵 Ayurvedic diet and therapies help maintain healthy blood sugar levels." },
+  { trigger: /women health/i, response: "🌸 Specialized therapies for hormonal balance and women's wellness." },
+  { trigger: /men health/i, response: "💪 Therapies supporting men's health and vitality." },
+  { trigger: /skin rejuvenation/i, response: "✨ Ayurvedic facials and oils enhance skin rejuvenation." },
+  { trigger: /hair/i, response: "🌿 Ayurvedic hair treatments improve growth and reduce hair fall." },
+  { trigger: /head massage/i, response: "💆 Shirodhara and head massages relax and reduce stress." },
+  { trigger: /medicine no\.? 1/i, response: "🌿 Medicine No. 1: Ashwagandha capsules, 500mg, helps reduce stress and boost immunity." },
+  { trigger: /medicine no\.? 2/i, response: "🌱 Medicine No. 2: Triphala Churna, 5g daily, aids digestion and detoxification." },
+  { trigger: /medicine no\.? 3/i, response: "🌿 Medicine No. 3: Tulsi drops, 10ml twice a day, improves respiratory health." },
+  { trigger: /body detox/i, response: "💧 Full-body detox therapies cleanse and rejuvenate the body." },
+  { trigger: /spa/i, response: "💆‍♀️ Our spa offers holistic wellness treatments with Ayurvedic touch." },
+  { trigger: /mind/i, response: "🧘 Ayurveda supports mental, physical, and emotional balance." },
+  { trigger: /hello|hi|hey/i, response: "🌺 Hello! Welcome to PrakritiPath. How are you feeling today?" },
+  { trigger: /good morning/i, response: "🌞 Good morning! Start your day with positivity and wellness." },
+  { trigger: /good afternoon/i, response: "☀️ Good afternoon! Take a moment to relax and refresh." },
+  { trigger: /good evening/i, response: "🌆 Good evening! Hope your day was healthy and calm." },
+  { trigger: /good night/i, response: "🌙 Good night! Sleep well and rejuvenate for tomorrow." },
+  { trigger: /how are you/i, response: "🙂 I'm great! Here to guide you with wellness tips and Ayurveda." },
+  { trigger: /what's up|sup/i, response: "🌿 Just helping you stay healthy and balanced. How about you?" },
+  { trigger: /bye|goodbye|see you/i, response: "👋 Goodbye! Wishing you wellness and happiness." },
+  { trigger: /thank you|thanks/i, response: "🙏 You're welcome! Always happy to help." },
+  { trigger: /welcome/i, response: "😊 Welcome! How can I assist you today?" },
+  { trigger: /what is your name/i, response: "🌸 I am PrakritiPath Chatbot, your Ayurveda assistant." },
+  { trigger: /who are you/i, response: "🌿 I am here to guide you on Ayurveda, wellness, and Panchakarma therapies." },
+  { trigger: /what time is it/i, response: () => `🕒 Current time is ${new Date().toLocaleTimeString()}` },
+  { trigger: /current time|time|what is time/i, response: () => `🕒 It's now ${new Date().toLocaleTimeString()}` },
+  { trigger: /what date is it/i, response: () => `📅 Today is ${new Date().toLocaleDateString()}` },
+  { trigger: /today's date/i, response: () => `📅 The date today is ${new Date().toLocaleDateString()}` },
+  { trigger: /day of the week/i, response: () => `📆 Today is ${new Date().toLocaleDateString('en-US', { weekday: 'long' })}` },
+  { trigger: /month/i, response: () => `📅 The current month is ${new Date().toLocaleDateString('en-US', { month: 'long' })}` },
+  { trigger: /year/i, response: () => `📆 The year is ${new Date().getFullYear()}` },
+  { trigger: /schedule/i, response: "🗓️ You can follow a balanced daily routine with yoga, meditation, and diet." },
+  { trigger: /daily routine/i, response: "🌞 Morning yoga, healthy breakfast, work, evening meditation, and good sleep." },
+  { trigger: /morning routine/i, response: "☀️ Start your morning with yoga, deep breathing, and herbal tea." },
+  { trigger: /evening routine/i, response: "🌜 Relax with light stretching, meditation, and a healthy dinner." },
+  { trigger: /afternoon routine/i, response: "☀️ Take a small walk, drink water, and have a light lunch for energy." },
+  { trigger: /yoga/i, response: "🧘 Yoga improves flexibility, balance, and mental clarity." },
+  { trigger: /meditation/i, response: "🧘 Meditation calms the mind and reduces stress naturally." },
+  { trigger: /exercise/i, response: "🏃 Regular exercise keeps your body strong and healthy." },
+  { trigger: /diet plan/i, response: "🥗 Eat balanced meals with fresh vegetables, fruits, and herbs." },
+  { trigger: /healthy food/i, response: "🍎 Include seasonal fruits, whole grains, and herbal teas in your diet." },
+  { trigger: /water intake/i, response: "💧 Drink at least 8 glasses of water daily to stay hydrated." },
+  { trigger: /sleep/i, response: "💤 Aim for 7-8 hours of restful sleep every night." },
+  { trigger: /nap/i, response: "😴 Short naps of 20-30 minutes can refresh your mind and body." },
+  { trigger: /wake up/i, response: "🌅 Wake up early to start your day with energy and positivity." },
+  { trigger: /breakfast/i, response: "🍵 A healthy breakfast fuels your body for the day." },
+  { trigger: /lunch/i, response: "🥗 Eat a balanced lunch with proteins, carbs, and vegetables." },
+  { trigger: /dinner/i, response: "🍽️ Keep dinner light and early for better digestion." },
+  { trigger: /snack/i, response: "🍌 Healthy snacks like nuts, fruits, or herbal tea are recommended." },
+  { trigger: /herbs/i, response: "🌿 Herbs like Ashwagandha, Tulsi, and Triphala enhance wellness." },
+  { trigger: /ayurveda/i, response: "🌱 Ayurveda promotes holistic health through diet, herbs, and lifestyle." },
+  { trigger: /panchakarma/i, response: "💆 Panchakarma detoxifies and rejuvenates the body." },
+  { trigger: /abhyanga/i, response: "🛢️ Abhyanga is a full body oil massage to balance doshas." },
+  { trigger: /shirodhara/i, response: "🌿 Shirodhara relaxes the mind with warm oil poured on the forehead." },
+  { trigger: /nasya/i, response: "🌬️ Nasya improves respiratory health via herbal oils in the nose." },
+  { trigger: /udvartana/i, response: "✨ Udvartana is a herbal powder massage for skin and weight management." },
+  { trigger: /spa/i, response: "💆‍♀️ Our spa offers rejuvenating Ayurvedic therapies." },
+  { trigger: /massage/i, response: "💆 Massages improve circulation, relieve pain, and relax muscles." },
+  { trigger: /stress relief/i, response: "😌 Yoga, meditation, and massages help reduce stress." },
+  { trigger: /pain relief/i, response: "💆 Targeted therapies alleviate chronic pain and discomfort." },
+  { trigger: /energy/i, response: "⚡ Rejuvenation therapies boost energy and vitality." },
+  { trigger: /detox/i, response: "💧 Detox programs cleanse the body naturally." },
+  { trigger: /immunity/i, response: "🛡️ Strengthen immunity with diet, herbs, and Panchakarma therapies." },
+  { trigger: /health tips/i, response: "🌿 Stay hydrated, exercise, meditate, and follow a balanced diet." },
+  { trigger: /wellness/i, response: "🌸 Focus on physical, mental, and emotional wellness every day." },
+  { trigger: /holistic/i, response: "🌱 Combine Ayurveda, yoga, and lifestyle habits for full wellness." },
+  { trigger: /mental health/i, response: "🧘 Meditation, relaxation, and proper sleep support mental health." },
+  { trigger: /body detox/i, response: "💧 Panchakarma and detox diets cleanse and rejuvenate the body." },
+  { trigger: /skin care/i, response: "✨ Use natural herbs and therapies for healthy, glowing skin." },
+  { trigger: /hair care/i, response: "🌿 Herbal oils and treatments improve hair health and growth." },
+  { trigger: /facial/i, response: "🌸 Ayurvedic facials enhance skin texture and radiance." },
+  { trigger: /rehabilitation/i, response: "💪 Post-treatment rehab supports complete recovery." },
+  { trigger: /doctor/i, response: "👨‍⚕️ Consult our Ayurvedic doctors for personalized guidance." },
+  { trigger: /appointment/i, response: "📅 Book appointments easily through our online form." },
+  { trigger: /book|reserve/i, response: "📆 Reserve your therapy slot in advance for convenience." },
+  { trigger: /treatment duration/i, response: "🕒 Therapy durations range from 7 to 28 days based on package." },
+  { trigger: /package cost/i, response: "💰 Packages range from ₹15,000 to ₹50,000 depending on therapy type." },
+  { trigger: /price/i, response: "💵 Our therapy costs vary; please check the 'Packages' section online." },
+  { trigger: /payment methods/i, response: "💳 We accept cards, UPI, and net banking for convenience." },
+  { trigger: /contact/i, response: "📞 Contact us at +91-9876543210 or email info@prakritipath.com." },
+  { trigger: /address/i, response: "📍 Visit us at 123 Ayurveda Lane, Wellness City, India." },
+  { trigger: /location/i, response: "🗺️ We are centrally located for easy access to our wellness center." },
+  { trigger: /opening hours/i, response: "⏰ Open Monday to Saturday, 8 AM to 8 PM." },
+  { trigger: /timing/i, response: "🕒 Our center operates from 8 AM to 8 PM daily, except Sunday." },
+  { trigger: /special offers/i, response: "🎁 Check our website for seasonal wellness offers and discounts." },
+  { trigger: /faq/i, response: "❓ Visit the FAQ section on our website for common questions." },
+  { trigger: /cholesterol/i, response: "🥗 Manage cholesterol with diet, herbs, and therapies." },
+  { trigger: /blood pressure/i, response: "💓 Maintain healthy blood pressure through lifestyle and Ayurveda." },
+  { trigger: /blood sugar/i, response: "🍵 Keep blood sugar balanced with diet and therapies." },
+  { trigger: /arthritis/i, response: "💆 Ayurvedic treatments help relieve joint pain and arthritis." },
+  { trigger: /joint pain/i, response: "💪 Therapies like Abhyanga relieve muscular and joint discomfort." },
+  { trigger: /back pain/i, response: "💆 Targeted massages and exercises help back pain relief." },
+  { trigger: /headache/i, response: "🌿 Shirodhara and herbal remedies reduce headaches." },
+  { trigger: /digestion/i, response: "🍵 Improve digestion with herbal remedies and diet guidance." },
+  { trigger: /fatigue/i, response: "💤 Rejuvenation therapies restore energy and reduce fatigue." },
+  { trigger: /sleep problem/i, response: "🌙 Herbal remedies and relaxation techniques improve sleep." },
+  { trigger: /weight management/i, response: "⚖️ Follow diet, herbs, and therapies to maintain a healthy weight." },
+  { trigger: /skin glow/i, response: "✨ Herbal facials and therapies enhance natural skin glow." },
+  { trigger: /detoxify skin/i, response: "💧 Detox programs remove toxins and improve skin health." },
+  { trigger: /immune boost/i, response: "🛡️ Strengthen immunity naturally with Ayurveda and herbs." },
+  { trigger: /rehab/i, response: "💪 Post-therapy rehab plans ensure full recovery." },
+  { trigger: /relaxation/i, response: "😌 Guided massages and Shirodhara induce deep relaxation." },
+  { trigger: /recovery/i, response: "🌿 Post-therapy recovery plans improve health outcomes." },
+  { trigger: /fat/i, response: "⚖️ Udvartana and diet therapies help reduce excess fat." },
+  { trigger: /detoxify skin/i, response: "✨ Skin detox therapies remove impurities and improve glow." },
+  { trigger: /immune|immunity/i, response: "🛡️ Boost your immunity with our holistic Ayurvedic therapies." },
+  { trigger: /morning routine/i, response: "🌞 Start your day with yoga, meditation, and a balanced Ayurvedic diet." },
+  { trigger: /evening routine/i, response: "🌜 Relax with Shirodhara, massage, and herbal tea in the evening." },
+  { trigger: /rehabilitation/i, response: "💪 Post-treatment rehab ensures complete wellness and recovery." },
+  { trigger: /holistic care/i, response: "🌱 We provide holistic care combining Ayurveda, diet, yoga, and therapies." }
+];
 
-      addMessage(message, "user");
+function sendMessage() {
+  const input = document.getElementById("userInput");
+  const message = input.value.trim();
+  if (!message) return;
 
-      setTimeout(() => {
-        let reply = "🌸 I'm here to guide you with Ayurveda & Panchakarma care.";
-        if (message.toLowerCase().includes("price")) {
-          reply = "💰 Our Panchakarma packages begin at ₹22,780 for 14 nights.";
-        } else if (message.toLowerCase().includes("book")) {
-          reply = "📅 Please proceed to the 'Book Now' section for reservations.";
-        } else if (message.toLowerCase().includes("hello")) {
-          reply = "🌺 Welcome to PrakritiPath! How are you feeling today?";
-        }
-        addMessage(reply, "bot");
-      }, 700);
+  addMessage(message, "user");
 
+<<<<<<< HEAD
       input.value = "";
     }
 
@@ -161,12 +372,36 @@
         msg.className = "bg-[#0d3b66] text-white px-4 py-3 rounded-xl max-w-xs shadow-md ml-auto font-semibold";
       } else {
         msg.className = "bg-yellow-400 text-blue-900 px-4 py-3 rounded-xl max-w-xs shadow-md font-[Cinzel]";
+=======
+  setTimeout(() => {
+    let reply = "🌸 I'm here to guide you with Ayurveda & Panchakarma care.";
+    for (let item of knowledgeBase) {
+      if (item.trigger.test(message)) {
+        reply = item.response;
+        break;
+>>>>>>> eb9db2f1e3fbdb9375bb1648a8177532ecd1fe1a
       }
-
-      msg.innerText = text;
-      chatBox.appendChild(msg);
-      chatBox.scrollTop = chatBox.scrollHeight;
     }
-  </script>
-</body>  
+    addMessage(reply, "bot");
+  }, 700);
+
+  input.value = "";
+}
+
+function addMessage(text, sender) {
+  const chatBox = document.getElementById("chatBox");
+  const msg = document.createElement("div");
+
+  if (sender === "user") {
+    msg.className = "bg-pink-300 text-white px-4 py-3 rounded-xl max-w-xs shadow-md ml-auto font-semibold";
+  } else {
+    msg.className = "bg-purple-300 text-white px-4 py-3 rounded-xl max-w-xs shadow-md font-[Cinzel]";
+  }
+
+  msg.innerText = text;
+  chatBox.appendChild(msg);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+</script>
+</body>
 </html>
