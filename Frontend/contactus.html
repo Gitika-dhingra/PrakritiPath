@@ -40,9 +40,9 @@
       padding: 0.5rem 1rem;
       border-radius: 9999px; /* full round */
       border: 2px solid #d4af37;
-      color: #ffffff; /* changed to white */
+      color: #ffffff; 
       font-weight: 600;
-      background-color: #ffd70033; /* subtle golden background */
+      background-color: #ffd70033; 
       transition: all 0.3s ease;
     }
     .nav-links a:hover {
@@ -50,9 +50,9 @@
       color: #0d3b66;
     }
 
-    /* Contact box styling to match chatbot */
+    /* Contact box styling */
     .contact-box {
-      background: #ffffff; /* elegant white */
+      background: #ffffff; 
       border: 2px solid #0d3b66;
       border-radius: 1.5rem;
       box-shadow: 0 12px 28px rgba(0,0,0,0.15);
@@ -116,7 +116,7 @@
       <p class="text-center text-gray-600 mb-8">Have questions or need assistance? Please fill out the form below and our team will respond promptly.</p>
 
       <!-- Form -->
-      <form action="#" method="POST" class="space-y-5">
+      <form id="contactForm" class="space-y-5">
         <!-- Name -->
         <div>
           <label for="name" class="block text-gray-700 mb-1">Your Name</label>
@@ -156,6 +156,43 @@
     © 2025 PrakritiPath. All rights reserved.
   </footer>
 
+  <!-- Dynamic JS to connect to backend -->
+  <script>
+    const API_URL = "http://192.168.223.103:3000"; // replace with your backend IP
+
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!name || !email || !message) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_URL}/contact`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, message })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          alert('Message sent successfully!');
+          e.target.reset(); // clear the form
+        } else {
+          alert(data.message || 'Error sending message.');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Error connecting to server.');
+      }
+    });
+  </script>
+
 </body>
 </html>
-
