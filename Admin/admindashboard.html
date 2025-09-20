@@ -99,7 +99,7 @@ header a:hover{background:white;color:var(--greek-blue);}
   padding:20px;
   border-radius:16px;
   margin-bottom:30px;
-  border:3px solid var(--greek-blue);
+  border:3px solid var(--greek-gold);
   box-shadow:0 8px 20px rgba(0,0,0,0.08);
   display:none; /* hidden by default */
 }
@@ -135,7 +135,7 @@ table th{
   background:white;
   padding:30px;
   border-radius:16px;
-  border:3px solid var(--greek-blue);
+  border:3px solid var(--greek-gold);
   box-shadow:0 8px 20px rgba(0,0,0,0.1);
   text-align:center;
 }
@@ -217,12 +217,14 @@ table th{
     <a onclick="showSection('patients')">Patients</a>
     <a onclick="showSection('doctors')">Doctors</a>
     <a onclick="showSection('users')">Users</a>
+<<<<<<< HEAD
+    <a href="../labreports.html">Lab Reports</a>
+=======
     <a href="../Frontend/labreports.html">Lab Reports</a>
+>>>>>>> eb9db2f1e3fbdb9375bb1648a8177532ecd1fe1a
     <a onclick="showSection('settings')">Settings</a>
   </div>
   
- 
-
   <!-- Main Content -->
   <div class="main">
     <!-- Welcome screen -->
@@ -232,15 +234,15 @@ table th{
       <div class="stats">
         <div class="stat-card">
           <h3>Total Patients</h3>
-          <p>245</p>
+          <p id="totalPatients">0</p>
         </div>
         <div class="stat-card">
           <h3>Total Doctors</h3>
-          <p>36</p>
+          <p id="totalDoctors">0</p>
         </div>
         <div class="stat-card">
           <h3>Total Users</h3>
-          <p>1,420</p>
+          <p id="totalUsers">0</p>
         </div>
       </div>
     </div>
@@ -249,49 +251,30 @@ table th{
     <div class="table-container" id="patients">
       <h2>Patients</h2>
       <table>
-        <tr><th>Name</th><th>Age</th><th>Contact</th><th>Actions</th></tr>
-        <tr><td>Rohan Mehta</td><td>34</td><td>+91-9876543210</td>
-          <td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
-        <tr><td>Ananya Sharma</td><td>28</td><td>+91-9123456789</td>
-          <td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
+        <thead>
+          <tr><th>Name</th><th>Age</th><th>Contact</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="patientsTableBody">
+          <!-- Rows populated dynamically -->
+        </tbody>
       </table>
     </div>
 
-    <!-- Doctors Table -->
+    <!-- Other tables (Doctors, Users, Lab Reports, Settings) remain unchanged -->
     <div class="table-container" id="doctors">
       <h2>Doctors</h2>
       <table>
         <tr><th>Name</th><th>Specialization</th><th>Contact</th><th>Actions</th></tr>
-        <tr><td>Dr. Deepu John</td><td>Ayurvedic Therapy</td><td>+91-9812345678</td>
-          <td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
-        <tr><td>Dr. Ashikha Raj</td><td>Panchakarma</td><td>+91-9988776655</td>
-          <td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
       </table>
     </div>
 
-    <!-- Users Table -->
     <div class="table-container" id="users">
       <h2>Users</h2>
       <table>
         <tr><th>Username</th><th>Email</th><th>Status</th><th>Actions</th></tr>
-        <tr><td>sudiksha_v</td><td>sudiksha@example.com</td><td>Active</td>
-          <td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
-        <tr><td>rahul_k</td><td>rahul@example.com</td><td>Inactive</td>
-          <td class="actions"><button class="edit-btn">Edit</button><button class="delete-btn">Delete</button></td></tr>
       </table>
     </div>
 
-    <!-- Lab Reports Table -->
-    <div class="table-container" id="reports">
-      <h2>Lab Reports</h2>
-      <table>
-        <tr><th>Patient</th><th>Report Type</th><th>Date</th><th>Status</th></tr>
-        <tr><td>Rohan Mehta</td><td>Blood Test</td><td>10-Sep-2025</td><td>Completed</td></tr>
-        <tr><td>Ananya Sharma</td><td>Allergy Test</td><td>12-Sep-2025</td><td>Pending</td></tr>
-      </table>
-    </div>
-
-    <!-- Settings -->
     <div class="table-container" id="settings">
       <h2>Settings</h2>
       <form class="settings-form">
@@ -320,13 +303,58 @@ table th{
 
 <script>
 function showSection(sectionId){
-  // Hide welcome screen
   document.getElementById("welcome").style.display="none";
-  // Hide all tables
   document.querySelectorAll(".table-container").forEach(el=>el.style.display="none");
-  // Show selected
   document.getElementById(sectionId).style.display="block";
 }
+
+// Load Home stats from backend
+async function loadStats(){
+  try {
+    const res = await fetch("http://localhost:5000/api/admin/stats"); // replace with backend API
+    const stats = await res.json();
+    document.getElementById("totalPatients").textContent = stats.totalPatients;
+    document.getElementById("totalDoctors").textContent = stats.totalDoctors;
+    document.getElementById("totalUsers").textContent = stats.totalUsers;
+  } catch(err){
+    console.error("Error loading stats:", err);
+  }
+}
+
+// Load Patients dynamically
+async function loadPatients() {
+  try {
+    const res = await fetch("http://localhost:5000/api/admin/patients"); // replace with backend API
+    const data = await res.json();
+
+    const tbody = document.getElementById("patientsTableBody");
+    tbody.innerHTML = "";
+
+    data.forEach(patient => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${patient.name}</td>
+        <td>${patient.age}</td>
+        <td>${patient.contact}</td>
+        <td class="actions">
+          <button class="edit-btn" onclick="editPatient(${patient.id})">Edit</button>
+          <button class="delete-btn" onclick="deletePatient(${patient.id})">Delete</button>
+        </td>
+      `;
+      tbody.appendChild(row);
+    });
+  } catch (err) {
+    console.error("Error loading patients:", err);
+    document.getElementById("patientsTableBody").innerHTML = `<tr><td colspan="4">Unable to load data</td></tr>`;
+  }
+}
+
+function editPatient(id){ console.log("Edit patient ID:", id); }
+function deletePatient(id){ console.log("Delete patient ID:", id); }
+
+// Initial load
+loadStats();
+loadPatients();
 </script>
 
 </body>

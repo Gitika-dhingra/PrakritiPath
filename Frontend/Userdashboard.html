@@ -1,228 +1,367 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PrakritiPath Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-/* Smooth Gradient Background (same as previous pages) */
-body {  
-  background: linear-gradient(-45deg, #f3e5f5, #e1f5fe, #fff9c4, #e0f7fa, #fce4ec); 
-  background-size: 600% 600%;
-  animation: pastelGradient 40s ease infinite;
-}
-@keyframes pastelGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrakritiPath Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --dark-bg: #475569;      
+            --light-text: #F3F4F6;    
+            --rose-gold-dark: #B76E79;    
+            --rose-gold-mid: #D9A7C7;   
+            --rose-gold-light: #F3E5F5;   
+            --sunset-dark: #DD6B20;     
+            --sunset-light: #FDBA74;    
+            --golden-primary: #D4AF37; 
+            --golden-hover: #E8C15E;   
+            --hover-bg-color: #FFF7ED; 
+            --primary-text-color: #1f2937; 
+            --main-bg-color: #f3f4f6;      
+        }
 
-/* Greek-style Border Enhancement */
-.greek-border {
-  border: 3px solid yellow; /* yellow border */
-  border-radius: 18px;
-  background: white; 
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-  position: relative;
-}
-.greek-border::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 2px dashed rgba(0,0,0,0.08);
-  border-radius: 18px;
-  pointer-events: none;
-}
+        body {
+            background-color: var(--main-bg-color);
+            overflow: hidden;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            color: var(--primary-text-color);
+        }
+        .wave-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .wave {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 88.7'%3E%3Cpath d='M800 56.9c-155.5 0-204.9-50-405.5-49.9-200 0-250 49.9-394.5 49.9v31.8h800v-.2-31.6z'/%3E%3C/svg%3E");
+            position: absolute; width: 200%; height: 100%; background-repeat: repeat-x; background-size: contain; background-position: center; animation: wave-animation 40s linear infinite;
+        }
+        #wave1 { bottom: 5vh; opacity: 0.3; fill: #e5e7eb; }
+        #wave2 { bottom: 2vh; opacity: 0.4; animation-duration: 35s; animation-direction: reverse; fill: #d1d5db; }
+        #wave3 { bottom: -1vh; opacity: 0.5; animation-duration: 30s; fill: #9ca3af; }
+        @keyframes wave-animation { 0% { transform: translateX(0); } 50% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
 
-/* Card Hover Effect */
-.card-hover:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
-  transition: all 0.3s ease;
-}
+        .themed-border {
+            position: relative;
+            border-radius: 18px;
+            padding: 2px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .themed-border::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(115deg, var(--rose-gold-light), var(--rose-gold-mid), var(--rose-gold-dark), var(--rose-gold-light));
+            background-size: 300% 100%;
+            background-position: 0% 50%;
+            border-radius: 16px;
+            z-index: 0;
+            transition: background 0.6s ease;
+        }
 
-/* Circle Dates */
-.date-circle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  font-weight: bold;
-  transition: transform 0.3s ease, background 0.3s ease;
-}
-.date-circle:hover {
-  transform: scale(1.1);
-  background: rgba(69,123,157,0.1);
-}
+        .card-content {
+            position: relative;
+            background: var(--dark-bg);
+            color: var(--light-text);
+            border-radius: 16px;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0.6s ease, color 0.6s ease;
+            z-index: 1; 
+        }
+        
+        .card-content .card-header-bg {
+            background-color: rgba(0,0,0,0.2);
+            color: white;
+            transition: background-color 0.6s ease, color 0.6s ease;
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            border-radius: 14px 14px 0 0;
+        }
+        
+        .card-content p, .card-content a { color: var(--light-text); transition: color 0.6s ease; }
+        .card-content strong { color: white; transition: color 0.6s ease; }
 
-/* Enhanced Buttons */
-.btn {
-  background: linear-gradient(135deg, #2c5282, #2b6cb0);
-  color: white;
-  font-weight: 600;
-  padding: 0.6rem 1.2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  transition: all 0.3s ease;
-  border: 2px solid yellow; /* yellow border */
-}
-.btn:hover {
-  background: linear-gradient(135deg, #2b6cb0, #2c5282);
-  transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-}
-</style>
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+        }
+
+        .card-hover:hover::before {
+            background: linear-gradient(115deg, var(--sunset-light), var(--sunset-dark), var(--sunset-light));
+        }
+        
+        .card-hover:hover .card-content {
+            background-color: var(--hover-bg-color);
+            color: var(--primary-text-color);
+        }
+        .card-hover:hover .card-content .card-header-bg {
+            background-color: var(--dark-bg);
+            color: white;
+        }
+        .card-hover:hover .card-content p, 
+        .card-hover:hover .card-content a {
+            color: var(--dark-bg);
+        }
+        .card-hover:hover .card-content strong {
+            color: var(--primary-text-color);
+        }
+
+        header { border-bottom-color: var(--rose-gold-mid); }
+        .date-cell { 
+            position: relative;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            transition: all 0.2s ease-in-out; 
+            cursor: pointer; 
+        }
+        .date-cell.today { background-color: var(--rose-gold-mid); color: var(--primary-text-color); font-weight: 700; }
+        .date-cell.selected { transform: scale(1.1); box-shadow: 0 0 0 3px var(--sunset-dark); }
+        .date-cell:not(.today):hover { background-color: rgba(217, 167, 199, 0.15); }
+
+        .date-cell.visited {
+            border: 2px solid #22c55e;
+            font-weight: 600;
+            color: #15803d;
+        }
+
+        .date-dot {
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+        }
+
+        .btn-primary { 
+            background-color: var(--golden-primary); 
+            color: var(--primary-text-color);
+            font-weight: 600; 
+            padding: 0.6rem 1.2rem; 
+            border-radius: 10px; 
+            transition: all 0.3s ease; 
+        }
+        .btn-primary:hover { 
+            background-color: var(--golden-hover); 
+            transform: translateY(-2px); 
+        }
+        .btn-secondary { 
+            background-color: transparent; 
+            border: 2px solid var(--golden-primary);
+            color: var(--golden-primary); 
+        }
+        .btn-secondary:hover { 
+            background-color: var(--golden-primary); 
+            color: var(--primary-text-color); 
+        }
+        
+        .chatbot-icon { 
+            background-color: var(--rose-gold-mid); 
+            color: var(--dark-bg); 
+        }
+        .chatbot-icon:hover { 
+            background-color: var(--sunset-dark); 
+            color: white; 
+        }
+
+        footer { background-color: var(--dark-bg); color: var(--light-text); }
+    </style>
 </head>
-<body class="min-h-screen font-sans">
+<body class="min-h-screen">
 
-<!-- Navbar -->
-<header class="flex justify-between items-center bg-[#2c5282] text-white shadow-md px-8 py-4 rounded-b-xl border-b-4 border-yellow-400">
-  <h1 class="text-2xl font-bold">PrakritiPath</h1>
-  <div class="flex gap-4">
-    <a href="bookconsultation.html" class="btn">Book Consultation</a>
-    <a href="registration/logout.html" class="btn">Logout</a>
-  </div>
-</header>
-
-<!-- Top Container -->
-<div class="flex flex-col md:flex-row gap-6 p-6">
-
-  <!-- Calendar Panel -->
-  <div class="md:flex-1 greek-border p-6 card-hover">
-    <div class="flex justify-between items-center mb-4">
-      <button id="prevMonth" class="btn px-3 py-1">&lt;</button>
-      <h3 id="monthYear" class="text-[#2c5282] font-semibold text-lg">September 2025</h3>
-      <button id="nextMonth" class="btn px-3 py-1">&gt;</button>
-    </div>
-    <div class="grid grid-cols-7 gap-2 text-center font-medium text-gray-700" id="calendar"></div>
-  </div>
-
-  <!-- Next Appointment -->
-  <div class="md:flex-1">
-    <div class="greek-border overflow-hidden card-hover h-full">
-      <div class="bg-[#2c5282] text-white px-4 py-2 font-semibold text-sm">Next Appointment</div>
-      <div class="p-4 text-gray-700 space-y-2">
-        <p><strong>Doctor:</strong> Dr. Deepu John</p>
-        <p><strong>Date & Time:</strong> 22 Sep 2025, 10:00 AM</p>
-        <p><strong>Department:</strong> General Medicine</p>
-        <p><strong>Location:</strong> Room 204, City Hospital</p>
-        <p><strong>Purpose:</strong> Routine Check-up & Lab Report Review</p>
-        <p class="text-sm text-gray-500">Please arrive 15 minutes early and carry previous reports.</p>
-      </div>
-    </div>
-  </div>
+<div class="wave-container">
+    <div class="wave" id="wave1"></div>
+    <div class="wave" id="wave2"></div>
+    <div class="wave" id="wave3"></div>
 </div>
 
-<!-- Bottom Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 pb-6 items-stretch" id="backendGrid"></div>
+<div class="relative z-10 h-screen overflow-y-auto">
 
-<!-- Footer -->
-<footer class="bg-[#2c5282] text-white text-center py-4 mt-6 border-t-4 border-yellow-400">
-  <p class="text-sm">© 2025 PrakritiPath. All Rights Reserved.</p>
-  <div class="flex justify-center gap-6 mt-2">
-    <a href="dashboard.html" class="hover:underline">Dashboard</a>
-    <a href="about.html" class="hover:underline">About</a>
-    <a href="contact.html" class="hover:underline">Contact</a>
-  </div>
-</footer>
+    <header class="flex justify-between items-center bg-white/70 backdrop-blur-md shadow-sm px-6 py-3 sticky top-0 border-b-4">
+        <h1 class="text-3xl font-bold" style="font-family: 'Cinzel', serif;">PrakritiPath</h1>
+        <nav class="flex items-center gap-4">
+            <a href="bookconsultation.html" class="btn-primary">Book Consultation</a>
+            <a href="registration/logout.html" class="btn-primary btn-secondary">Logout</a>
+        </nav>
+    </header>
 
-<!-- Chatbot Icon -->
-<a href="chatbot.html" class="fixed bottom-6 right-6 bg-gradient-to-br from-[#2c5282] to-[#2b6cb0] text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:scale-110 transition transform">💬</a>
+    <main class="p-6">
+        <section class="flex flex-col lg:flex-row gap-6 mb-6">
+            <div class="lg:flex-1 themed-border card-hover">
+                <div class="card-content p-5">
+                    <div class="flex justify-between items-center mb-4">
+                        <button id="prevMonth" aria-label="Previous Month" class="p-2 rounded-full hover:bg-gray-200 transition text-gray-800">&lt;</button>
+                        <h3 id="monthYear" class="font-semibold text-xl">September 2025</h3>
+                        <button id="nextMonth" aria-label="Next Month" class="p-2 rounded-full hover:bg-gray-200 transition text-gray-800">&gt;</button>
+                    </div>
+                    <div id="calendar" class="grid grid-cols-7 gap-1 text-center font-medium"></div>
+                </div>
+            </div>
+
+            <div class="lg:w-1/3 themed-border card-hover">
+                 <div class="card-content">
+                    <div class="card-header-bg">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        <span>Next Appointment</span>
+                    </div>
+                    <div class="p-4 space-y-2 text-sm">
+                        <p><strong>Doctor:</strong> Dr. Deepu John</p>
+                        <p><strong>Date & Time:</strong> 22 Sep 2025, 10:00 AM</p>
+                        <p class="text-xs mt-2">Please arrive 15 minutes early and carry previous reports.</p>
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+        <section id="dashboardGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></section>
+    </main>
+
+    <footer class="text-center py-4 mt-6">
+        <p class="text-sm opacity-80">© 2025 PrakritiPath. All Rights Reserved.</p>
+    </footer>
+
+</div>
+
+<a href="chatbot.html" class="chatbot-icon fixed bottom-6 right-6 w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-xl hover:scale-110 transition-transform z-20">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+</a>
+
 
 <script>
-// Calendar JS
-const calendarEl = document.getElementById('calendar');
-const monthYearEl = document.getElementById('monthYear');
-let today = new Date();
-let currentMonth = today.getMonth();
-let currentYear = today.getFullYear();
+    document.addEventListener('DOMContentLoaded', () => {
 
-const appointments = [
-  {date: new Date(2025,8,20), status:'missed'},
-  {date: new Date(2025,8,22), status:'visited'},
-  {date: new Date(2025,8,23), status:'upcoming'}
-];
+    const config = {
+        elements: {
+            calendar: document.getElementById('calendar'),
+            monthYear: document.getElementById('monthYear'),
+            prevMonthBtn: document.getElementById('prevMonth'),
+            nextMonthBtn: document.getElementById('nextMonth'),
+            dashboardGrid: document.getElementById('dashboardGrid'),
+        },
+        monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        dayNames: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        appointments: [
+            { date: new Date(2025, 8, 15), status: 'visited' }, 
+            { date: new Date(2025, 8, 20), status: 'missed' },
+            { date: new Date(2025, 8, 22), status: 'visited' },
+            { date: new Date(2025, 8, 23), status: 'upcoming' },
+        ],
+        dashboardItems: [
+            { title: 'Health Updates', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>', content: ['Blood Pressure: 120/80', 'Weight: 65 kg'] },
+            { title: 'Reminders', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>', content: ['Take morning medicine', 'Yoga session at 7 AM'] },
+            { title: 'Lab Reports', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4l2 2h4a2 2 0 012 2v12a4 4 0 01-4 4H7z" /></svg>', content: ['Recent blood tests, urine tests, etc.', '<a href="labreports.html" class="btn-primary text-xs mt-2 inline-block">View Reports</a>'] },
+            { title: 'Order Medicines', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>', content: ['Order prescribed medicines online.', '<a href="paymentgateway.html" class="btn-primary text-xs mt-2 inline-block">Proceed to Payment</a>'] },
+            { title: 'Nutrition Plan', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-12v4m-2-2h4m5 4v4m-2-2h4M17 3v4m-2-2h4M5 11h1.5a1.5 1.5 0 000-3H5v3zm0 3h1.5a1.5 1.5 0 000-3H5v3zm0 3h1.5a1.5 1.5 0 000-3H5v3zm5.5-3H12a1.5 1.5 0 000-3h-1.5v3zm0 3h1.5a1.5 1.5 0 000-3h-1.5v3zm0 3h1.5a1.5 1.5 0 000-3h-1.5v3zm5.5-3H19a1.5 1.5 0 000-3h-1.5v3zm0 3h1.5a1.5 1.5 0 000-3h-1.5v3zm0 3h1.5a1.5 1.5 0 000-3h-1.5v3z" /></svg>', content: ['Breakfast: Oats', 'Lunch: Salad', 'Dinner: Soup'] },
+            { title: 'Messages', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>', content: ['Message from Dr. Deepu', 'Message from receptionist'] }
+        ]
+    };
 
-function renderCalendar(month, year){
-  calendarEl.innerHTML = '';
-  const daysOfWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  daysOfWeek.forEach(d => {
-    const div = document.createElement('div');
-    div.className = 'font-semibold text-[#2c5282]';
-    div.textContent = d;
-    calendarEl.appendChild(div);
-  });
+    const state = {
+        today: new Date('2025-09-21T00:00:00'),
+        currentMonth: 8, 
+        currentYear: 2025,
+    };
 
-  const firstDay = new Date(year, month,1).getDay();
-  const daysInMonth = new Date(year, month+1,0).getDate();
+    function renderDashboardGrid() {
+        const grid = config.elements.dashboardGrid;
+        grid.innerHTML = '';
+        config.dashboardItems.forEach(item => {
+            const cardWrapper = document.createElement('div');
+            cardWrapper.className = 'themed-border card-hover h-full';
+            let contentHTML = item.content.map(c => `<p class="text-sm">${c}</p>`).join('');
 
-  for(let i=0;i<firstDay;i++) calendarEl.appendChild(document.createElement('div'));
-
-  for(let day=1;day<=daysInMonth;day++){
-    const div=document.createElement('div');
-    div.className='relative py-6 rounded-lg transition text-gray-800 flex flex-col items-center justify-center';
-    div.innerHTML=`<span>${day}</span>`;
-
-    if(day===today.getDate() && month===today.getMonth() && year===today.getFullYear()){
-      div.classList.add('bg-[#2c5282]','text-white','font-bold','rounded-lg');
+            cardWrapper.innerHTML = `
+                <div class="card-content">
+                    <div class="card-header-bg">
+                        ${item.icon}
+                        <span>${item.title}</span>
+                    </div>
+                    <div class="p-4 space-y-2 flex-grow">
+                        ${contentHTML}
+                    </div>
+                </div>
+            `;
+            grid.appendChild(cardWrapper);
+        });
     }
 
-    appointments.forEach(app=>{
-      if(app.date.getDate()===day && app.date.getMonth()===month && app.date.getFullYear()===year){
-        let borderColor='', label='';
-        if(app.status==='visited'){ borderColor='border-green-600'; label='Visited'; }
-        if(app.status==='missed'){ borderColor='border-red-500'; label='Missed'; }
-        if(app.status==='upcoming'){ borderColor='border-yellow-500'; label='Appointment'; }
+    const calendarFunctions = {
+        renderCalendar: () => {
+            const { calendar, monthYear } = config.elements;
+            const { currentMonth, currentYear } = state;
+            const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            calendar.innerHTML = '';
+            config.dayNames.forEach(day => {
+                const dayEl = document.createElement('div');
+                // <<< UPDATED: Made day names more visible
+                dayEl.className = 'font-bold text-sm text-center text-slate-700 py-2';
+                dayEl.textContent = day;
+                calendar.appendChild(dayEl);
+            });
+            for (let i = 0; i < firstDayOfMonth; i++) calendar.appendChild(document.createElement('div'));
+            for (let day = 1; day <= daysInMonth; day++) calendar.appendChild(calendarFunctions.createDateCell(day, currentMonth, currentYear));
+            monthYear.textContent = `${config.monthNames[currentMonth]} ${currentYear}`;
+        },
+        createDateCell: (day, month, year) => {
+            const cell = document.createElement('div');
+            cell.className = 'flex flex-col items-center justify-center p-1';
+            
+            const dateEl = document.createElement('span');
+            dateEl.className = 'date-cell'; 
+            dateEl.textContent = day;
+            
+            const appointment = config.appointments.find(app => new Date(app.date).toDateString() === new Date(year, month, day).toDateString());
+            
+            if (appointment) {
+                if (appointment.status === 'visited') {
+                    dateEl.classList.add('visited');
+                } else {
+                    const indicator = document.createElement('span');
+                    indicator.className = 'date-dot ' + { missed: 'bg-red-500', upcoming: 'bg-yellow-500' }[appointment.status];
+                    cell.appendChild(indicator); 
+                }
+            }
 
-        div.innerHTML=`<span class="date-circle border-2 ${borderColor}">${day}</span>
-        <span class="text-xs mt-1 text-gray-600">${label}</span>`;
-      }
-    });
+            cell.appendChild(dateEl); 
+            
+            if (day === state.today.getDate() && month === state.today.getMonth() && year === state.today.getFullYear()) {
+                dateEl.classList.add('today');
+            }
 
-    calendarEl.appendChild(div);
-  }
-
-  const monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"];
-  monthYearEl.textContent=`${monthNames[month]} ${year}`;
-}
-
-document.getElementById('prevMonth').addEventListener('click',()=>{
-  currentMonth--; if(currentMonth<0){currentMonth=11; currentYear--;}
-  renderCalendar(currentMonth,currentYear);
-});
-document.getElementById('nextMonth').addEventListener('click',()=>{
-  currentMonth++; if(currentMonth>11){currentMonth=0; currentYear++;}
-  renderCalendar(currentMonth,currentYear);
-});
-renderCalendar(currentMonth,currentYear);
-
-// Backend items
-const backendItems=[
-  {title:'Health Updates',content:['Blood Pressure: 120/80','Weight: 65 kg','Next Checkup: 30 Sep 2025']},
-  {title:'Reminders',content:['Take morning medicine','Yoga session at 7 AM','Drink 2L water']},
-  {title:'Lab Reports',content:[
-    'Recent blood tests, urine tests, etc.',
-    '<a href="labreports.html" class="btn mt-2 inline-block">View Lab Report</a>'
-  ]},
-  {title:'Order Medicines',content:[
-    'Order prescribed medicines online',
-    '<a href="paymentgateway.html" class="btn mt-2 inline-block">Proceed to Payment</a>'
-  ]},
-  {title:'Nutrition Plan',content:['Breakfast: Oats','Lunch: Salad','Dinner: Soup']},
-  {title:'Messages',content:['Message from Dr. Deepu','Message from receptionist']}
-];
-
-const grid=document.getElementById('backendGrid');
-backendItems.forEach(item=>{
-  const div=document.createElement('div');
-  div.className=`greek-border card-hover flex flex-col h-full`;
-  div.innerHTML=`<div class="bg-[#2c5282] text-white px-4 py-2 font-semibold">${item.title}</div>
-  <div class="flex-1">${item.content.map(c=>`<p class="px-4 py-2 text-gray-700">${c}</p>`).join('')}</div>`;
-  grid.appendChild(div);
+            dateEl.addEventListener('click', () => { 
+                const prev = config.elements.calendar.querySelector('.selected');
+                if (prev) prev.classList.remove('selected');
+                dateEl.classList.add('selected');
+            });
+            return cell;
+        },
+        changeMonth: (offset) => {
+            state.currentMonth += offset;
+            if (state.currentMonth < 0) { state.currentMonth = 11; state.currentYear--; }
+            else if (state.currentMonth > 11) { state.currentMonth = 0; state.currentYear++; }
+            calendarFunctions.renderCalendar();
+        },
+        init: () => {
+            config.elements.prevMonthBtn.addEventListener('click', () => calendarFunctions.changeMonth(-1));
+            config.elements.nextMonthBtn.addEventListener('click', () => calendarFunctions.changeMonth(1));
+            calendarFunctions.renderCalendar();
+            renderDashboardGrid();
+        }
+    };
+    calendarFunctions.init();
 });
 </script>
 </body>

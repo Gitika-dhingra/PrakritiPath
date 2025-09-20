@@ -39,7 +39,7 @@
     color: #ffd700;
     text-align: center;
     padding: 1rem;
-    font-family:'Arial', sans-serif ;
+    font-family:'Arial', sans-serif;
     font-size: 1.25rem;
     font-weight: bold;
     border-bottom: 2px solid #d4af37;
@@ -53,6 +53,9 @@
     flex-direction: column;
     gap: 0.75rem;
   }
+<<<<<<< HEAD
+
+=======
   .chat-user {
     background-color: #0d3b66;
     color: #ffd700;
@@ -74,9 +77,11 @@
     font-weight: 600;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
+>>>>>>> eb9db2f1e3fbdb9375bb1648a8177532ecd1fe1a
   .chat-input-container {
     display: flex;
     border-top: 2px solid #d4af37;
+    background-color: #f1f1f1; /* same as box background */
   }
   .chat-input-container input {
     flex: 1;
@@ -84,6 +89,12 @@
     border: none;
     outline: none;
     font-size: 1rem;
+    background-color: #f1f1f1; /* same as box background */
+    color: #000000; /* text visible */
+  }
+
+  .chat-input-container input::placeholder {
+    color: #555555;
   }
   .chat-input-container button {
     background-color: #0d3b66;
@@ -110,12 +121,35 @@
   <h1 class="text-2xl font-bold font-[Cinzel] tracking-wide text-white">PrakritiPath</h1>
 </nav>
 
+<<<<<<< HEAD
+  <!-- Chat Container -->
+  <div class="flex-1 flex justify-center items-center p-4">
+    <div class="chat-container">
+      
+      <!-- Chat Header -->
+      <div class="chat-header">
+        🌿 PrakritiPath Chatbot
+      </div>
+      
+      <!-- Chat Box -->
+      <div id="chatBox" class="chat-box">
+        <div class="chat-bot bg-yellow-400 text-blue-900 px-4 py-3 rounded-xl max-w-xs shadow-md font-[Cinzel]">
+          Hello 🌿 How can I assist you today?
+        </div>
+      </div>
+      
+      <!-- Chat Input -->
+      <div class="chat-input-container">
+        <input id="userInput" type="text" placeholder="Type your message..." />
+        <button onclick="sendMessage()">Send</button>
+=======
 <div class="flex-1 flex justify-center items-center p-4">
   <div class="chat-container">
     <div class="chat-header">🌿 PrakritiPath Chatbot</div>
     <div id="chatBox" class="chat-box">
       <div class="chat-bot">
         Hello 🌿 How can I assist you today?
+>>>>>>> eb9db2f1e3fbdb9375bb1648a8177532ecd1fe1a
       </div>
     </div>
     <div class="chat-input-container">
@@ -326,12 +360,26 @@ function sendMessage() {
 
   addMessage(message, "user");
 
+<<<<<<< HEAD
+      input.value = "";
+    }
+
+    function addMessage(text, sender) {
+      const chatBox = document.getElementById("chatBox");
+      const msg = document.createElement("div");
+
+      if (sender === "user") {
+        msg.className = "bg-[#0d3b66] text-white px-4 py-3 rounded-xl max-w-xs shadow-md ml-auto font-semibold";
+      } else {
+        msg.className = "bg-yellow-400 text-blue-900 px-4 py-3 rounded-xl max-w-xs shadow-md font-[Cinzel]";
+=======
   setTimeout(() => {
     let reply = "🌸 I'm here to guide you with Ayurveda & Panchakarma care.";
     for (let item of knowledgeBase) {
       if (item.trigger.test(message)) {
         reply = item.response;
         break;
+>>>>>>> eb9db2f1e3fbdb9375bb1648a8177532ecd1fe1a
       }
     }
     addMessage(reply, "bot");
