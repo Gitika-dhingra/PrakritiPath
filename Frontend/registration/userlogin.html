@@ -245,7 +245,7 @@
             const password = document.getElementById("password").value;
 
             try {
-                const res = await fetch("http://localhost:3000/user/login", {
+                const res = await fetch("http://192.168.223.103:3000/user/login", { // <-- CHANGE MADE HERE
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ email, password })

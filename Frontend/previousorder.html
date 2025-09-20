@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previous Orders - PrakritiPath</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --light-rose-gold: #F3E5F5;
+            --medium-rose-gold: #D9A7C7;
+            --dark-rose-gold: #B76E79;
+            --standard-gold: #D4AF37;
+            --light-gold: #E8C15E;
+            --soft-peach: #FFF7ED;
+            --light-cool-gray: #f3f4f6;
+            --light-gray: #e5e7eb;
+            --medium-gray: #d1d5db;
+            --dark-gray: #9ca3af;
+            --dark-slate: #1f2937;
+            --light-slate: #475569;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(-45deg, var(--light-gray), var(--medium-gray), var(--dark-gray));
+            background-size: 600% 600%;
+            animation: liveGradient 25s ease infinite;
+            color: var(--dark-slate);
+        }
+
+        @keyframes liveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background: var(--light-slate);
+            color: var(--light-rose-gold);
+            padding: 15px 40px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border-bottom: 6px solid var(--standard-gold);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel Decorative', serif;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--standard-gold);
+            color: var(--dark-slate);
+            padding: 8px 16px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .back-btn:hover {
+            background: var(--light-gold);
+            color: var(--dark-slate);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: var(--soft-peach);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
+            border: 3px solid var(--medium-rose-gold);
+        }
+
+        h2 {
+            color: var(--dark-rose-gold);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--medium-rose-gold);
+            padding-bottom: 5px;
+            font-family: 'Cinzel Decorative', serif;
+        }
+        
+        .order-card {
+            background: var(--light-rose-gold);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .order-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .order-details h3 {
+            color: var(--dark-slate);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .order-items {
+            list-style-type: disc;
+            padding-left: 20px;
+            color: var(--dark-slate);
+            margin-bottom: 15px;
+        }
+
+        .reorder-btn {
+            background: var(--dark-rose-gold);
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .reorder-btn:hover {
+            background: var(--standard-gold);
+            color: var(--dark-slate);
+            transform: scale(1.05);
+        }
+
+        .address-section, .payment-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--medium-rose-gold);
+        }
+
+        .address-form label, .payment-section label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: 600;
+            color: var(--dark-slate);
+        }
+
+        .address-form input, .address-form textarea, .payment-section select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--medium-rose-gold);
+            margin-bottom: 15px;
+            font-size: 15px;
+            background: var(--soft-peach);
+            color: var(--dark-slate);
+            box-sizing: border-box;
+        }
+
+        .address-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .address-buttons button {
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .confirm-address-btn {
+            background: var(--dark-rose-gold);
+            color: white;
+            border: none;
+        }
+        .confirm-address-btn:hover {
+            background: var(--standard-gold);
+            color: var(--dark-slate);
+        }
+        .change-address-btn {
+            background: none;
+            border: 1px solid var(--dark-rose-gold);
+            color: var(--dark-rose-gold);
+        }
+        .change-address-btn:hover {
+            background: var(--light-rose-gold);
+            color: var(--dark-slate);
+        }
+
+        .proceed-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            background: var(--dark-rose-gold);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-top: 10px;
+        }
+        .proceed-btn:hover {
+            background: var(--standard-gold);
+            color: var(--dark-slate);
+        }
+        .proceed-btn:disabled {
+            background: var(--medium-gray);
+            cursor: not-allowed;
+            color: var(--dark-slate);
+            box-shadow: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        Previous Orders
+        <a href="paymentgateway.html" id="backButton" class="back-btn">← Back</a>
+    </header>
+
+    <div class="container">
+        <h2>Your Order History</h2>
+
+        <div id="order-history">
+            <div class="order-card" data-order-id="12345">
+                <div class="order-details">
+                    <h3>Order #12345</h3>
+                    <button class="reorder-btn" onclick="reorder('12345')">Reorder</button>
+                </div>
+                <p><strong>Date:</strong> 25 Oct 2025</p>
+                <p><strong>Total:</strong> ₹1050</p>
+                <ul class="order-items">
+                    <li>Ashwagandha Tablets x 1</li>
+                    <li>Triphala Powder x 2</li>
+                    <li>Chyawanprash x 1</li>
+                </ul>
+            </div>
+            
+            <div class="order-card" data-order-id="12346">
+                <div class="order-details">
+                    <h3>Order #12346</h3>
+                    <button class="reorder-btn" onclick="reorder('12346')">Reorder</button>
+                </div>
+                <p><strong>Date:</strong> 15 Sep 2025</p>
+                <p><strong>Total:</strong> ₹350</p>
+                <ul class="order-items">
+                    <li>Ashwagandha Tablets x 1</li>
+                </ul>
+            </div>
+            </div>
+
+        <div class="address-section">
+            <h2>Delivery Address</h2>
+            <div id="address-info">
+                <p><strong>Name:</strong> John Doe</p>
+                <p><strong>Address:</strong> 123 Main Street, Anytown, 12345</p>
+                <p><strong>Contact:</strong> 9876543210</p>
+            </div>
+            <div class="address-buttons">
+                <button class="confirm-address-btn">Confirm Address</button>
+                <button class="change-address-btn" style="display:none;">Change Address</button>
+            </div>
+            
+            <form id="address-form" style="display:none; margin-top:15px;">
+                <label for="newFullName">Full Name</label>
+                <input type="text" id="newFullName" value="John Doe" required>
+                <label for="newAddress">Address</label>
+                <textarea id="newAddress" rows="3" required>123 Main Street, Anytown, 12345</textarea>
+                <label for="newContact">Contact</label>
+                <input type="tel" id="newContact" value="9876543210" required>
+            </form>
+        </div>
+        
+        <div class="payment-section">
+            <h2>Payment Details</h2>
+            <form id="payment-form">
+                <label for="payment-method">Select Payment Mode</label>
+                <select id="payment-method">
+                    <option>Credit/Debit Card</option>
+                    <option>UPI</option>
+                    <option>Net Banking</option>
+                    <option>Cash on Delivery</option>
+                </select>
+                <button id="proceed-btn" class="proceed-btn" disabled>Proceed to Payment</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const addressForm = document.getElementById('address-form');
+        const addressInfo = document.getElementById('address-info');
+        const confirmBtn = document.querySelector('.confirm-address-btn');
+        const changeBtn = document.querySelector('.change-address-btn');
+        const proceedBtn = document.getElementById('proceed-btn');
+
+        // This function shows the address form for editing.
+        function showAddressForm() {
+            addressForm.style.display = 'block';
+            addressInfo.style.display = 'none';
+            proceedBtn.disabled = true;
+            confirmBtn.style.display = 'inline-block';
+            changeBtn.style.display = 'none';
+        }
+
+        // This function hides the form and shows the confirmed address info.
+        function hideAddressForm() {
+            // In a real app, you would save the form data here.
+            addressForm.style.display = 'none';
+            addressInfo.style.display = 'block';
+            proceedBtn.disabled = false;
+            confirmBtn.style.display = 'none';
+            changeBtn.style.display = 'inline-block';
+        }
+
+        // The reorder function is attached to the window to be accessible by onclick.
+        window.reorder = function(orderId) {
+            // CORRECTED: Added backticks (`) to the alert string.
+            alert(`Reordering order #${orderId}. Please confirm your address and payment details.`);
+            
+            // This logic allows the user to confirm their address after reordering.
+            // It resets the address section to its initial 'confirm' state.
+            hideAddressForm();
+        };
+        
+        // Event listener for the "Proceed to Payment" button.
+        proceedBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Processing your payment...');
+            // In a real application, this would trigger the final payment process.
+        });
+        
+        // Event listener for the "Confirm Address" button.
+        confirmBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            hideAddressForm();
+        });
+        
+        // Event listener for the "Change Address" button.
+        changeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showAddressForm();
+        });
+        
+        // Set the initial state on page load. User must confirm address first.
+        showAddressForm();
+
+    });
+    </script>
+</body>
+</html>

@@ -220,6 +220,26 @@
                 </div>
 
                 <div>
+                    <label for="age" class="form-label">Age</label>
+                    <input type="number" id="age" name="age" placeholder="Enter your age" class="input-field" required>
+                </div>
+
+                <div>
+                    <label for="contact" class="form-label">Contact</label>
+                    <input type="tel" id="contact" name="contact" placeholder="Enter your contact number" class="input-field" required>
+                </div>
+
+                <div>
+                    <label for="gender" class="form-label">Gender</label>
+                    <select id="gender" name="gender" class="input-field" required>
+                        <option value="">-- Select Gender --</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div>
                     <label for="email" class="form-label">Email</label>
                     <input type="email" id="email" name="email" placeholder="Enter your email" class="input-field" required>
                 </div>
@@ -263,6 +283,9 @@
         document.getElementById('signupForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const name = document.getElementById('name').value.trim();
+            const age = document.getElementById('age').value.trim();
+            const contact = document.getElementById('contact').value.trim();
+            const gender = document.getElementById('gender').value.trim();
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
             const confirmPassword = document.getElementById('confirmPassword').value.trim();
@@ -280,7 +303,7 @@
                 const res = await fetch('http://localhost:3000/user/signup', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email, password })
+                    body: JSON.stringify({ name, age, contact, gender, email, password })
                 });
 
                 const data = await res.json();

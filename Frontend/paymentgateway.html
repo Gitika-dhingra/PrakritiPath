@@ -94,6 +94,12 @@
             padding-bottom: 5px;
             font-family: 'Cinzel Decorative', serif;
         }
+        
+        h3 {
+            color: var(--dark-slate);
+            margin-bottom: 10px;
+            font-family: 'Cinzel Decorative', serif;
+        }
 
         table {
             width: 100%;
@@ -112,6 +118,14 @@
             background: var(--light-rose-gold);
             color: var(--dark-slate);
         }
+        
+        .quantity-input {
+            width: 60px;
+            padding: 4px;
+            text-align: center;
+            border: 1px solid var(--medium-rose-gold);
+            border-radius: 5px;
+        }
 
         .total {
             text-align: right;
@@ -121,8 +135,10 @@
             color: var(--dark-rose-gold);
         }
 
-        .payment-options {
+        .payment-options, .address-form, .reorder-section {
             margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--medium-rose-gold);
         }
 
         label {
@@ -132,7 +148,7 @@
             color: var(--dark-slate);
         }
 
-        input, select {
+        input, select, textarea {
             width: 100%;
             padding: 10px;
             border-radius: 8px;
@@ -141,24 +157,50 @@
             font-size: 15px;
             background: var(--soft-peach);
             color: var(--dark-slate);
+            box-sizing: border-box; /* Ensures padding doesn't affect width */
         }
 
-        button {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
+        .reorder-section button, .previous-orders-btn {
             background: var(--dark-rose-gold);
             color: white;
             font-weight: bold;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
             cursor: pointer;
             transition: 0.3s;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            width: auto;
         }
-        button:hover {
+
+        .reorder-section button:hover, .previous-orders-btn:hover {
             background: var(--standard-gold);
             color: var(--dark-slate);
+            transform: scale(1.05);
+        }
+        
+        .previous-orders-btn-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        button.primary-btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            border-radius: 10px;
+        }
+
+        .reorder-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--light-rose-gold);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
     </style>
 </head>
@@ -170,67 +212,130 @@
     </header>
 
     <div class="container">
-        <h2>Order Summary</h2>
-        <table>
-            <tr>
-                <th>Medicine</th>
-                <th>Quantity</th>
-                <th>Price (₹)</th>
-            </tr>
-            <tr>
-                <td>Ashwagandha Tablets</td>
-                <td>1 bottle</td>
-                <td>₹350</td>
-            </tr>
-            <tr>
-                <td>Triphala Powder</td>
-                <td>2 packs</td>
-                <td>₹400</td>
-            </tr>
-            <tr>
-                <td>Chyawanprash</td>
-                <td>1 jar</td>
-                <td>₹300</td>
-            </tr>
-        </table>
 
-        <div class="total">Total Amount: ₹1050</div>
+        <div class="previous-orders-btn-container">
+            <button class="previous-orders-btn" onclick="showPreviousOrders()">View Previous Orders</button>
+        </div>
+
+        <div class="order-section">
+            <h2>Select Medicines</h2>
+            <form id="orderForm">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Medicine</th>
+                            <th>Price (₹)</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody id="medicineList">
+                        <tr data-price="350">
+                            <td>Ashwagandha Tablets</td>
+                            <td>₹350</td>
+                            <td><input type="number" value="0" min="0" class="quantity-input" onchange="updateTotal()"></td>
+                        </tr>
+                        <tr data-price="400">
+                            <td>Triphala Powder</td>
+                            <td>₹400</td>
+                            <td><input type="number" value="0" min="0" class="quantity-input" onchange="updateTotal()"></td>
+                        </tr>
+                        <tr data-price="300">
+                            <td>Chyawanprash</td>
+                            <td>₹300</td>
+                            <td><input type="number" value="0" min="0" class="quantity-input" onchange="updateTotal()"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <div class="total">Total Amount: ₹<span id="totalAmount">0</span></div>
+        </div>
+
+        <div class="address-form">
+            <h2>Delivery Address</h2>
+            <form id="addressForm">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" placeholder="Enter your full name" required>
+                
+                <label for="address">Address</label>
+                <textarea id="address" rows="3" placeholder="Enter your full address" required></textarea>
+                
+                <label for="pincode">Pincode</label>
+                <input type="text" id="pincode" placeholder="Enter pincode" required>
+            </form>
+        </div>
 
         <div class="payment-options">
             <h2>Payment Details</h2>
+            <form id="paymentForm">
+                <label for="payment-method">Select Payment Method</label>
+                <select id="payment-method">
+                    <option>Credit/Debit Card</option>
+                    <option>UPI</option>
+                    <option>Net Banking</option>
+                    <option>Cash on Delivery</option>
+                </select>
 
-            <label for="payment-method">Select Payment Method</label>
-            <select id="payment-method">
-                <option>Credit/Debit Card</option>
-                <option>UPI</option>
-                <option>Net Banking</option>
-                <option>Cash on Delivery</option>
-            </select>
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
 
-            <label for="card-number">Card Number</label>
-            <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
+                <label for="expiry">Expiry Date</label>
+                <input type="month" id="expiry">
 
-            <label for="expiry">Expiry Date</label>
-            <input type="month" id="expiry">
+                <label for="cvv">CVV</label>
+                <input type="password" id="cvv" placeholder="***">
 
-            <label for="cvv">CVV</label>
-            <input type="password" id="cvv" placeholder="*">
-
-            <button>Pay ₹1050</button>
+                <button id="payButton" class="primary-btn reorder-section button">Pay ₹0</button>
+            </form>
         </div>
     </div>
 
 <script>
-// Simulating login status (replace with actual login logic)
-const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+// All JavaScript is wrapped in DOMContentLoaded to ensure the page is loaded first.
+document.addEventListener('DOMContentLoaded', () => {
+    const medicineList = document.getElementById('medicineList');
+    const totalAmountSpan = document.getElementById('totalAmount');
+    const payButton = document.getElementById('payButton');
 
-document.getElementById("backButton").addEventListener("click", function(e){
-    e.preventDefault();
-    if(isLoggedIn){
-        window.location.href = "userdashboard.html";
-    } else {
-        window.location.href = "userdashboard.html";
+    // This function calculates the total price based on item quantities.
+    // It's defined on the global 'window' object so the 'onchange' attributes in the HTML can find it.
+    window.updateTotal = function() {
+        let total = 0;
+        const items = medicineList.querySelectorAll('tr');
+        items.forEach(item => {
+            const price = parseFloat(item.dataset.price);
+            const quantity = parseInt(item.querySelector('.quantity-input').value, 10);
+            if (!isNaN(price) && !isNaN(quantity) && quantity > 0) {
+                total += price * quantity;
+            }
+        });
+        totalAmountSpan.textContent = total;
+        // CORRECTED LINE: Uses backticks (`) for the template literal.
+        payButton.textContent = `Pay ₹${total}`;
     }
+
+    // Placeholder function for the "View Previous Orders" button.
+    // It's also assigned to the 'window' object for the 'onclick' attribute.
+    window.showPreviousOrders = function() {
+        alert("Redirecting to your order history...");
+        // In a real application, you would redirect to a dedicated order history page.
+        // For example: window.location.href = "orderhistory.html";
+    }
+
+    // Event listener for the back button.
+    document.getElementById("backButton").addEventListener("click", function(e){
+        e.preventDefault();
+        window.location.href = "userdashboard.html"; // Make sure this page exists in your project.
+    });
+
+    // Event listener for the payment form submission.
+    document.getElementById("paymentForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        alert('Payment processing...');
+        // In a real application, you would handle payment processing here.
+    });
+    
+    // Call updateTotal once on page load to initialize the total.
+    updateTotal();
 });
 </script>
 
