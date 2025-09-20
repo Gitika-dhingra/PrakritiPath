@@ -21,7 +21,7 @@ body {
 
 /* Greek-style Border Enhancement */
 .greek-border {
-  border: 3px solid yellow; /* yellow border */
+  border: 3px solid #d4af37; /* golden border */
   border-radius: 18px;
   background: white; 
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
@@ -39,7 +39,7 @@ body {
 /* Card Hover Effect */
 .card-hover:hover {
   transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.036);
   transition: all 0.3s ease;
 }
 
@@ -68,7 +68,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   transition: all 0.3s ease;
-  border: 2px solid yellow; /* yellow border */
+  border: 2px solid #d4af37; /* golden border */
 }
 .btn:hover {
   background: linear-gradient(135deg, #2b6cb0, #2c5282);
@@ -80,7 +80,7 @@ body {
 <body class="min-h-screen font-sans">
 
 <!-- Navbar -->
-<header class="flex justify-between items-center bg-[#2c5282] text-white shadow-md px-8 py-4 rounded-b-xl border-b-4 border-yellow-400">
+<header class="flex justify-between items-center bg-[#2c5282] text-white shadow-md px-8 py-4 rounded-b-xl border-b-4 border-[#d4af37]">
   <h1 class="text-2xl font-bold">PrakritiPath</h1>
   <div class="flex gap-4">
     <a href="bookconsultation.html" class="btn">Book Consultation</a>
@@ -121,7 +121,7 @@ body {
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 pb-6 items-stretch" id="backendGrid"></div>
 
 <!-- Footer -->
-<footer class="bg-[#2c5282] text-white text-center py-4 mt-6 border-t-4 border-yellow-400">
+<footer class="bg-[#2c5282] text-white text-center py-4 mt-6 border-t-4 border-[#d4af37]">
   <p class="text-sm">© 2025 PrakritiPath. All Rights Reserved.</p>
   <div class="flex justify-center gap-6 mt-2">
     <a href="dashboard.html" class="hover:underline">Dashboard</a>
@@ -167,8 +167,9 @@ function renderCalendar(month, year){
     div.className='relative py-6 rounded-lg transition text-gray-800 flex flex-col items-center justify-center';
     div.innerHTML=`<span>${day}</span>`;
 
+    // ✅ Light highlight for today's date
     if(day===today.getDate() && month===today.getMonth() && year===today.getFullYear()){
-      div.classList.add('bg-[#2c5282]','text-white','font-bold','rounded-lg');
+      div.classList.add('bg-yellow-100','text-[#2c5282]','font-bold','rounded-lg','border','border-[#d4af37]');
     }
 
     appointments.forEach(app=>{
@@ -176,7 +177,7 @@ function renderCalendar(month, year){
         let borderColor='', label='';
         if(app.status==='visited'){ borderColor='border-green-600'; label='Visited'; }
         if(app.status==='missed'){ borderColor='border-red-500'; label='Missed'; }
-        if(app.status==='upcoming'){ borderColor='border-yellow-500'; label='Appointment'; }
+        if(app.status==='upcoming'){ borderColor='border-[#d4af37]'; label='Appointment'; }
 
         div.innerHTML=`<span class="date-circle border-2 ${borderColor}">${day}</span>
         <span class="text-xs mt-1 text-gray-600">${label}</span>`;

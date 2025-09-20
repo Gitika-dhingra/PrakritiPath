@@ -28,9 +28,9 @@
   /* Chat Container & Boxes */
   .chat-container {
     width: 100%;
-    max-width: 3xl; /* matched width */
-    height: 80vh; /* matched height */
-    background: #ffffff; /* elegant white */
+    max-width: 3xl;
+    height: 80vh;
+    background: #ffffff;
     border-radius: 1.5rem;
     box-shadow: 0 12px 28px rgba(0,0,0,0.15);
     display: flex;
@@ -44,48 +44,26 @@
     color: #ffd700; /* golden text */
     text-align: center;
     padding: 1rem;
-    font-family:'Arial', sans-serif ;
+    font-family:'Arial', sans-serif;
     font-size: 1.25rem;
     font-weight: bold;
-    border-bottom: 2px solid #d4af37; /* golden line */
+    border-bottom: 2px solid #d4af37;
   }
 
   .chat-box {
     flex: 1;
     padding: 1rem;
     overflow-y: auto;
-    background-color: #f1f1f1; /* soft elegant contrast */
+    background-color: #f1f1f1;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
   }
 
-  .chat-user {
-    background-color: #0d3b66; /* deep blue */
-    color: #ffd700; /* golden text */
-    padding: 0.75rem 1rem;
-    border-radius: 1rem;
-    max-width: 60%;
-    align-self: flex-end;
-    font-weight: 600;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-
-  .chat-bot {
-    background-color: #ffd700; /* golden */
-    color: #0d3b66; /* Greek blue text */
-    padding: 0.75rem 1rem;
-    border-radius: 1rem;
-    max-width: 60%;
-    align-self: flex-start;
-    font-family: 'Arial', sans-serif;
-    font-weight: 600;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-
   .chat-input-container {
     display: flex;
     border-top: 2px solid #d4af37;
+    background-color: #f1f1f1; /* same as box background */
   }
 
   .chat-input-container input {
@@ -94,6 +72,12 @@
     border: none;
     outline: none;
     font-size: 1rem;
+    background-color: #f1f1f1; /* same as box background */
+    color: #000000; /* text visible */
+  }
+
+  .chat-input-container input::placeholder {
+    color: #555555;
   }
 
   .chat-input-container button {
@@ -133,7 +117,7 @@
       
       <!-- Chat Box -->
       <div id="chatBox" class="chat-box">
-        <div class="chat-bot">
+        <div class="chat-bot bg-yellow-400 text-blue-900 px-4 py-3 rounded-xl max-w-xs shadow-md font-[Cinzel]">
           Hello 🌿 How can I assist you today?
         </div>
       </div>
@@ -174,9 +158,9 @@
       const msg = document.createElement("div");
 
       if (sender === "user") {
-        msg.className = "bg-pink-300 text-white px-4 py-3 rounded-xl max-w-xs shadow-md ml-auto font-semibold";
+        msg.className = "bg-[#0d3b66] text-white px-4 py-3 rounded-xl max-w-xs shadow-md ml-auto font-semibold";
       } else {
-        msg.className = "bg-purple-300 text-white px-4 py-3 rounded-xl max-w-xs shadow-md font-[Cinzel]";
+        msg.className = "bg-yellow-400 text-blue-900 px-4 py-3 rounded-xl max-w-xs shadow-md font-[Cinzel]";
       }
 
       msg.innerText = text;
