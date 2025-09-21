@@ -189,6 +189,8 @@
     </div>
 
     <script>
+        const API_BASE_URL = "https://bac-1ntv.onrender.com"; // Your live Render URL
+
         function togglePassword(event) {
             const input = document.getElementById('password');
             const btn = event.currentTarget;
@@ -202,9 +204,48 @@
             btn.textContent = btn.textContent === 'Show' ? 'Hide' : 'Show';
         }
 
-        document.getElementById("adminSignupForm").addEventListener("submit", function(e) {
+        document.getElementById("adminSignupForm").addEventListener("submit", async function(e) {
             e.preventDefault();
-            window.location.href = "admindashboard.html";
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // 1. Client-side validation: Check if passwords match
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please try again.");
+                return; // Stop the function
+            }
+            
+            // This is the backend endpoint for admin/doctor signup
+            // Make sure this route exists in your server.js file!
+            const signupEndpoint = `${API_BASE_URL}/doctor/signup`;
+
+            try {
+                const response = await fetch(signupEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    // The doctor/admin route needs these extra fields, so we send null or empty values
+                    body: JSON.stringify({ name, email, password, center: "", specialization: "" }),
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert("Registration successful! Please log in.");
+                    // 2. Redirect to the login page on success
+                    window.location.href = "adminlogin.html";
+                } else {
+                    // 3. Show error message from the server
+                    alert("Registration Failed: " + result.message);
+                }
+            } catch (error) {
+                console.error('Error during registration:', error);
+                alert('An error occurred. Please try again.');
+            }
         });
     </script>
 

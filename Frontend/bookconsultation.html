@@ -151,7 +151,7 @@ form button:hover {
 
 <header>
     <h1>PrakritiPath</h1>
-    <a href="#" id="backButton">Back</a>
+    <a href="#" id="backButton">Back to Dashboard</a>
 </header>
 
 <div class="container">
@@ -180,44 +180,64 @@ form button:hover {
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("backButton").addEventListener("click", function(e) {
-        e.preventDefault();
-        window.location.href = "userdashboard.html";
-    });
+    const API_BASE_URL = "https://bac-1ntv-onrender.com/"; // Your live Render URL
 
-    document.getElementById("consultationForm").addEventListener("submit", async function(e) {
-        e.preventDefault();
-        const userId = localStorage.getItem("userId") ? parseInt(localStorage.getItem("userId")) : 1;
-        const doctor_id = parseInt(document.getElementById("doctor").value, 10);
-        const date = document.getElementById("date").value;
-        const time = document.getElementById("time").value;
-        const reason = document.getElementById("reason").value;
-        const messageDiv = document.getElementById("message");
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("backButton").addEventListener("click", function(e) {
+            e.preventDefault();
+            window.location.href = "userdashboard.html";
+        });
 
-        try {
-            const res = await fetch('http://localhost:3000/consultation/book', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ user_id: userId, doctor_id, date, time, reason })
-            });
+        document.getElementById("consultationForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            
+            // --- Get Authentication Info ---
+            const token = localStorage.getItem("authToken");
+            const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-            const data = await res.json();
-            if (data.success) {
-                messageDiv.textContent = "✅ Consultation booked successfully!";
-                messageDiv.className = "success";
-                document.getElementById("consultationForm").reset();
-            } else {
-                messageDiv.textContent = "❌ " + (data.message || "Failed to book consultation.");
+            if (!token || !loggedInUser) {
+                alert("You must be logged in to book a consultation.");
+                window.location.href = "userlogin.html";
+                return;
+            }
+
+            // --- Get Form Data ---
+            const user_id = loggedInUser.id;
+            const doctor_id = parseInt(document.getElementById("doctor").value, 10);
+            const date = document.getElementById("date").value;
+            const time = document.getElementById("time").value;
+            const reason = document.getElementById("reason").value;
+            const messageDiv = document.getElementById("message");
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/consultation/book`, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        // 🚀 Include the security token in the request
+                        'Authorization': `Bearer ${token}` 
+                    },
+                    body: JSON.stringify({ user_id, doctor_id, date, time, reason })
+                });
+
+                const data = await res.json();
+                
+                // Handle both successful and unauthorized responses
+                if (res.ok && data.success) {
+                    messageDiv.textContent = "✅ Consultation booked successfully!";
+                    messageDiv.className = "success";
+                    document.getElementById("consultationForm").reset();
+                } else {
+                    messageDiv.textContent = "❌ " + (data.message || "Failed to book consultation.");
+                    messageDiv.className = "error";
+                }
+            } catch (err) {
+                console.error(err);
+                messageDiv.textContent = "❌ Server error. Try again later.";
                 messageDiv.className = "error";
             }
-        } catch (err) {
-            console.error(err);
-            messageDiv.textContent = "❌ Server error. Try again later.";
-            messageDiv.className = "error";
-        }
+        });
     });
-});
 </script>
 
 </body>

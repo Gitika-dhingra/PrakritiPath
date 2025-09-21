@@ -137,6 +137,12 @@
             color: var(--dark-slate);
             transform: scale(1.05);
         }
+        .reorder-btn:disabled {
+            background: var(--medium-gray);
+            cursor: not-allowed;
+            color: var(--dark-slate);
+            box-shadow: none;
+        }
 
         .address-section, .payment-section {
             margin-top: 30px;
@@ -226,63 +232,40 @@
 
     <header>
         Previous Orders
-        <a href="paymentgateway.html" id="backButton" class="back-btn">← Back</a>
+        <a href="/userdashboard.html" id="backButton" class="back-btn">← Back</a>
     </header>
 
     <div class="container">
         <h2>Your Order History</h2>
 
         <div id="order-history">
-            <div class="order-card" data-order-id="12345">
-                <div class="order-details">
-                    <h3>Order #12345</h3>
-                    <button class="reorder-btn" onclick="reorder('12345')">Reorder</button>
-                </div>
-                <p><strong>Date:</strong> 25 Oct 2025</p>
-                <p><strong>Total:</strong> ₹1050</p>
-                <ul class="order-items">
-                    <li>Ashwagandha Tablets x 1</li>
-                    <li>Triphala Powder x 2</li>
-                    <li>Chyawanprash x 1</li>
-                </ul>
-            </div>
-            
-            <div class="order-card" data-order-id="12346">
-                <div class="order-details">
-                    <h3>Order #12346</h3>
-                    <button class="reorder-btn" onclick="reorder('12346')">Reorder</button>
-                </div>
-                <p><strong>Date:</strong> 15 Sep 2025</p>
-                <p><strong>Total:</strong> ₹350</p>
-                <ul class="order-items">
-                    <li>Ashwagandha Tablets x 1</li>
-                </ul>
-            </div>
-            </div>
+            <p>Loading your order history...</p>
+        </div>
 
         <div class="address-section">
             <h2>Delivery Address</h2>
             <div id="address-info">
-                <p><strong>Name:</strong> John Doe</p>
-                <p><strong>Address:</strong> 123 Main Street, Anytown, 12345</p>
-                <p><strong>Contact:</strong> 9876543210</p>
+                <p><strong>Name:</strong> <span id="delivery-name">Loading...</span></p>
+                <p><strong>Address:</strong> <span id="delivery-address">Loading...</span></p>
+                <p><strong>Contact:</strong> <span id="delivery-contact">Loading...</span></p>
             </div>
             <div class="address-buttons">
-                <button class="confirm-address-btn">Confirm Address</button>
+                <button class="confirm-address-btn" style="display:none;">Confirm Address</button>
                 <button class="change-address-btn" style="display:none;">Change Address</button>
             </div>
             
             <form id="address-form" style="display:none; margin-top:15px;">
                 <label for="newFullName">Full Name</label>
-                <input type="text" id="newFullName" value="John Doe" required>
+                <input type="text" id="newFullName" required>
                 <label for="newAddress">Address</label>
-                <textarea id="newAddress" rows="3" required>123 Main Street, Anytown, 12345</textarea>
+                <textarea id="newAddress" rows="3" required></textarea>
                 <label for="newContact">Contact</label>
-                <input type="tel" id="newContact" value="9876543210" required>
+                <input type="tel" id="newContact" required>
+                <button id="save-address-btn" class="confirm-address-btn" style="width:100%; margin-top:10px;">Save Address</button>
             </form>
         </div>
         
-        <div class="payment-section">
+        <div class="payment-section" style="display:none;">
             <h2>Payment Details</h2>
             <form id="payment-form">
                 <label for="payment-method">Select Payment Mode</label>
@@ -298,64 +281,216 @@
     </div>
     
     <script>
+    const API_BASE_URL = 'https://bac-1ntv.onrender.com';
+
     document.addEventListener('DOMContentLoaded', () => {
         const addressForm = document.getElementById('address-form');
         const addressInfo = document.getElementById('address-info');
         const confirmBtn = document.querySelector('.confirm-address-btn');
         const changeBtn = document.querySelector('.change-address-btn');
         const proceedBtn = document.getElementById('proceed-btn');
+        const saveAddressBtn = document.getElementById('save-address-btn');
+        const paymentSection = document.querySelector('.payment-section');
 
-        // This function shows the address form for editing.
+        let currentOrderData = null;
+        let isAddressConfirmed = false;
+
+        // A utility function to get user data from localStorage
+        function getUserIdAndToken() {
+            const token = localStorage.getItem("authToken");
+            const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+            if (!token || !user) {
+                alert("Session expired. Please log in again.");
+                window.location.href = '/login.html'; // Redirect to login page
+                return null;
+            }
+            return {
+                userId: user.id,
+                token: token,
+                user: user
+            };
+        }
+
+        // Display user's saved address on page load
+        function displayAddress(user) {
+            document.getElementById('delivery-name').textContent = user.name || 'N/A';
+            document.getElementById('delivery-address').textContent = user.address || 'No address saved.';
+            document.getElementById('delivery-contact').textContent = user.contact || 'N/A';
+
+            document.getElementById('newFullName').value = user.name || '';
+            document.getElementById('newAddress').value = user.address || '';
+            document.getElementById('newContact').value = user.contact || '';
+        }
+
+        // Show the address form
         function showAddressForm() {
             addressForm.style.display = 'block';
             addressInfo.style.display = 'none';
             proceedBtn.disabled = true;
             confirmBtn.style.display = 'inline-block';
             changeBtn.style.display = 'none';
+            paymentSection.style.display = 'none';
+            isAddressConfirmed = false;
         }
 
-        // This function hides the form and shows the confirmed address info.
+        // Hide the form and show the confirmed address
         function hideAddressForm() {
-            // In a real app, you would save the form data here.
             addressForm.style.display = 'none';
             addressInfo.style.display = 'block';
             proceedBtn.disabled = false;
             confirmBtn.style.display = 'none';
             changeBtn.style.display = 'inline-block';
+            paymentSection.style.display = 'block';
+            isAddressConfirmed = true;
         }
+        
+        // Asynchronous function to fetch and display previous orders
+        async function fetchOrders() {
+            const auth = getUserIdAndToken();
+            if (!auth) return;
+            
+            try {
+                // Assuming a new backend route for fetching orders
+                const response = await fetch(`${API_BASE_URL}/user/${auth.userId}/orders`, {
+                    headers: {
+                        'Authorization': `Bearer ${auth.token}`
+                    }
+                });
 
-        // The reorder function is attached to the window to be accessible by onclick.
+                if (!response.ok) {
+                    throw new Error('Failed to fetch orders');
+                }
+
+                const orders = await response.json();
+                const orderHistoryContainer = document.getElementById('order-history');
+                orderHistoryContainer.innerHTML = ''; // Clear loading text
+
+                if (orders.length === 0) {
+                    orderHistoryContainer.innerHTML = '<p>You have no previous orders.</p>';
+                    return;
+                }
+
+                orders.forEach(order => {
+                    const orderCard = document.createElement('div');
+                    orderCard.className = 'order-card';
+                    orderCard.setAttribute('data-order-id', order.id);
+
+                    const itemsList = order.items.map(item => `<li>${item.name} x ${item.quantity}</li>`).join('');
+
+                    orderCard.innerHTML = `
+                        <div class="order-details">
+                            <h3>Order #${order.id}</h3>
+                            <button class="reorder-btn" onclick="window.reorder('${order.id}')">Reorder</button>
+                        </div>
+                        <p><strong>Date:</strong> ${new Date(order.date).toLocaleDateString()}</p>
+                        <p><strong>Total:</strong> ₹${order.total}</p>
+                        <ul class="order-items">${itemsList}</ul>
+                    `;
+                    orderHistoryContainer.appendChild(orderCard);
+                });
+            } catch (error) {
+                console.error("Error fetching orders:", error);
+                document.getElementById('order-history').innerHTML = '<p>Error loading orders. Please try again.</p>';
+            }
+        }
+        
+        // Reorder function
         window.reorder = function(orderId) {
-            // CORRECTED: Added backticks (`) to the alert string.
             alert(`Reordering order #${orderId}. Please confirm your address and payment details.`);
             
-            // This logic allows the user to confirm their address after reordering.
-            // It resets the address section to its initial 'confirm' state.
-            hideAddressForm();
+            const orderCard = document.querySelector(`.order-card[data-order-id='${orderId}']`);
+            if (!orderCard) return;
+            
+            const orderItemsList = orderCard.querySelectorAll('.order-items li');
+            const orderTotal = parseFloat(orderCard.querySelector('p:nth-of-type(2)').textContent.replace('Total: ₹', ''));
+            
+            const items = Array.from(orderItemsList).map(item => {
+                const [name, quantity] = item.textContent.split(' x ');
+                return { name: name.trim(), quantity: parseInt(quantity) };
+            });
+
+            currentOrderData = {
+                items,
+                total: orderTotal
+            };
+
+            showAddressForm();
         };
         
-        // Event listener for the "Proceed to Payment" button.
-        proceedBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Processing your payment...');
-            // In a real application, this would trigger the final payment process.
-        });
-        
-        // Event listener for the "Confirm Address" button.
-        confirmBtn.addEventListener('click', (e) => {
+        // Place a new order with the backend
+        async function placeOrder() {
+            const auth = getUserIdAndToken();
+            if (!auth || !currentOrderData || !isAddressConfirmed) return;
+
+            const deliveryAddress = document.getElementById('newAddress').value;
+            const total = currentOrderData.total;
+            const items = currentOrderData.items;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/order`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${auth.token}`
+                    },
+                    body: JSON.stringify({
+                        userId: auth.userId,
+                        items: items,
+                        deliveryAddress: deliveryAddress,
+                        total: total
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert("Order placed successfully! Redirecting to confirmation page.");
+                    window.location.href = "/order-confirmation.html";
+                } else {
+                    alert(`Failed to place order: ${result.message}`);
+                }
+            } catch (error) {
+                console.error("Error placing order:", error);
+                alert("An error occurred. Please try again later.");
+            }
+        }
+
+        // Event listeners
+        saveAddressBtn.addEventListener('click', (e) => {
             e.preventDefault();
             hideAddressForm();
+            // You would also save the new address to the user's profile on the backend here.
         });
         
-        // Event listener for the "Change Address" button.
         changeBtn.addEventListener('click', (e) => {
             e.preventDefault();
             showAddressForm();
         });
         
-        // Set the initial state on page load. User must confirm address first.
-        showAddressForm();
+        proceedBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (isAddressConfirmed) {
+                placeOrder();
+            } else {
+                alert("Please confirm your delivery address first.");
+            }
+        });
 
+        // Initial setup on page load
+        const auth = getUserIdAndToken();
+        if (auth) {
+            displayAddress(auth.user);
+            fetchOrders();
+            // If the user already has an address, initially show the info and payment section
+            if (auth.user.address) {
+                hideAddressForm();
+            } else {
+                showAddressForm();
+            }
+        } else {
+            // User not logged in, show login/signup links or a message
+        }
     });
     </script>
 </body>

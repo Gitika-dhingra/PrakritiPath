@@ -184,6 +184,8 @@
     </div>
 
     <script>
+        const API_BASE_URL = "https://bac-1ntv.onrender.com"; // Your live Render URL
+
         document.getElementById("doctorSignupForm").addEventListener("submit", async function(e) {
             e.preventDefault();
 
@@ -194,7 +196,8 @@
             const specialization = document.getElementById("specialization").value;
 
             try {
-                const response = await fetch('http://localhost:3000/doctor/signup', {
+                // Point the fetch request to your live Render URL
+                const response = await fetch(`${API_BASE_URL}/doctor/signup`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, email, password, center, specialization })

@@ -155,7 +155,7 @@
 
     <div class="therapy-box">
         <h1>Choose Your Therapy</h1>
-        <form onsubmit="bookTherapy(event)">
+        <form id="therapyForm">
             <label for="therapy">Select a therapy from the list below:</label>
             <select id="therapy" required>
                 <option value="">-- Choose a therapy --</option>
@@ -171,41 +171,55 @@
     </div>
 
     <script>
-        const apiUrl = "http://192.168.223.103:3000"; // Replace with your backend IP and port
+        const API_BASE_URL = "https://bac-1ntv.onrender.com";
 
-        function bookTherapy(event) {
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Check for authentication
+            const token = localStorage.getItem("authToken");
+            if (!token) {
+                alert("You must be logged in to select a therapy.");
+                window.location.href = "userlogin.html";
+            }
+        });
+
+        document.getElementById("therapyForm").addEventListener("submit", async function(event) {
             event.preventDefault();
-            const therapy = document.getElementById("therapy").value;
             
-            if (therapy) {
-                // In a real app, you might get a userId from localStorage
-                // const userId = localStorage.getItem('userId');
-                
-                // Corrected syntax using backticks (`) for template literals
-                fetch(`${apiUrl}/book-therapy`, {
+            const therapy = document.getElementById("therapy").value;
+            const token = localStorage.getItem("authToken");
+            const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+            if (!therapy) {
+                alert("Please select a therapy.");
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/book-therapy`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        // 2. Add the security token to the request
+                        'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify({ therapy: therapy /*, userId: userId */ })
-                })
-                .then(res => {
-                    if (!res.ok) {
-                        // Handle server errors (like 404, 500)
-                        return res.json().then(err => { throw new Error(err.message || 'Server error') });
-                    }
-                    return res.json();
-                })
-                .then(data => {
-                    alert("You have successfully selected: " + therapy);
-                    window.location.href = "userdashboard.html";
-                })
-                .catch(err => {
-                    console.error('Fetch Error:', err);
-                    alert("Failed to update therapy. Please try again. Error: " + err.message);
+                    // 3. Send the therapy and user ID to the backend
+                    body: JSON.stringify({ therapy: therapy, userId: user.id })
                 });
+
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error(err.message || 'Server error');
+                }
+
+                const data = await response.json();
+                alert("You have successfully selected: " + therapy);
+                window.location.href = "userdashboard.html";
+
+            } catch (err) {
+                console.error('Fetch Error:', err);
+                alert("Failed to update therapy. Please try again. Error: " + err.message);
             }
-        }
+        });
     </script>
 </body>
 </html>

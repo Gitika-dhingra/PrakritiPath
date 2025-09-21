@@ -11,15 +11,12 @@
             --light-rose-gold: #F3E5F5;
             --medium-rose-gold: #D9A7C7;
             --dark-rose-gold: #B76E79;
-            --light-tangerine: #FDBA74;
-            --deep-orange: #DD6B20;
-            --soft-peach: #FFF7ED;
             --standard-gold: #D4AF37;
             --light-gold: #E8C15E;
+            --soft-peach: #FFF7ED;
             --light-cool-gray: #f3f4f6;
             --light-gray: #e5e7eb;
             --medium-gray: #d1d5db;
-            --dark-gray: #9ca3af;
             --dark-slate: #1f2937;
             --light-slate: #475569;
         }
@@ -45,7 +42,7 @@
             color: var(--light-rose-gold);
             padding: 15px 40px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             font-size: 22px;
             font-weight: bold;
@@ -56,8 +53,6 @@
         }
         
         .back-btn {
-            position: absolute;
-            left: 20px;
             background: var(--standard-gold);
             color: var(--dark-slate);
             padding: 6px 14px;
@@ -69,12 +64,9 @@
         }
         .back-btn:hover {
             background: var(--light-gold);
-            color: var(--dark-slate);
         }
 
-        .logout {
-            position: absolute;
-            right: 40px;
+        .logout-btn {
             background: var(--standard-gold);
             color: var(--dark-slate);
             padding: 8px 16px;
@@ -82,10 +74,14 @@
             text-decoration: none;
             font-weight: bold;
             transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
         }
-        .logout:hover {
+        .logout-btn:hover {
             background: var(--light-gold);
-            color: var(--dark-slate);
+            transform: scale(1.05);
         }
 
         .container {
@@ -144,51 +140,89 @@
 
     <header>
         <a href="userdashboard.html" class="back-btn">⬅ Back</a>
-        Patient Lab Reports
-        <a href="index.html" class="logout">Logout</a>
+        <span>Patient Lab Reports</span>
+        <button class="logout-btn" onclick="logout()">Logout</button>
     </header>
 
-    <div class="container">
-        <div class="report-box">
-            <h2>Blood Test Report</h2>
-            <div class="report-details">
-                <p><strong>Date:</strong> 12 Sept 2025</p>
-                <p><strong>Doctor:</strong> Dr. Mehta</p>
-                <p><strong>Summary:</strong> Hemoglobin and RBC count normal. Vitamin D slightly low.</p>
-            </div>
-            <a href="#" class="download-btn">Download PDF</a>
-        </div>
-
-        <div class="report-box">
-            <h2>X-Ray Report</h2>
-            <div class="report-details">
-                <p><strong>Date:</strong> 8 Sept 2025</p>
-                <p><strong>Doctor:</strong> Dr. Sharma</p>
-                <p><strong>Summary:</strong> Chest X-Ray normal. No major abnormalities detected.</p>
-            </div>
-            <a href="#" class="download-btn">Download PDF</a>
-        </div>
-
-        <div class="report-box">
-            <h2>Ayurvedic Diagnosis Report</h2>
-            <div class="report-details">
-                <p><strong>Date:</strong> 5 Sept 2025</p>
-                <p><strong>Doctor:</strong> Dr. Raghavan</p>
-                <p><strong>Summary:</strong> Patient shows mild Vata imbalance. Recommended Panchakarma therapy and herbal medicines.</p>
-            </div>
-            <a href="#" class="download-btn">Download PDF</a>
-        </div>
-
-        <div class="report-box">
-            <h2>Pathology Report</h2>
-            <div class="report-details">
-                <p><strong>Date:</strong> 1 Sept 2025</p>
-                <p><strong>Doctor:</strong> Dr. Kapoor</p>
-                <p><strong>Summary:</strong> Liver function and kidney function tests within normal range.</p>
-            </div>
-            <a href="#" class="download-btn">Download PDF</a>
-        </div>
+    <div class="container" id="reportsContainer">
+        <p>Loading reports...</p>
     </div>
+
+<script>
+    const API_BASE_URL = "https://bac-1ntv.onrender.com";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        // 1. Check for authentication
+        const token = localStorage.getItem("authToken");
+        const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+        if (!token || !user) {
+            alert("You must be logged in to view reports.");
+            window.location.href = "userlogin.html";
+            return;
+        }
+
+        // 2. Load reports for the logged-in user
+        loadReports(user.id, token);
+    });
+
+    async function loadReports(userId, token) {
+        const container = document.getElementById("reportsContainer");
+        try {
+            // 3. Make a secure call to the backend
+            const response = await fetch(`${API_BASE_URL}/user/${userId}/reports`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) throw new Error("Failed to fetch reports");
+
+            const reports = await response.json();
+
+            if (!reports || reports.length === 0) {
+                container.innerHTML = "<p>No lab reports found.</p>";
+                return;
+            }
+
+            // 4. Clear the container and dynamically build the HTML
+            container.innerHTML = '';
+            reports.forEach(report => {
+                const reportBox = document.createElement('div');
+                reportBox.className = 'report-box';
+                reportBox.innerHTML = `
+                    <h2>${report.title}</h2>
+                    <div class="report-details">
+                        <p><strong>Date:</strong> ${new Date(report.date).toLocaleDateString()}</p>
+                        <p><strong>Doctor:</strong> ${report.doctor}</p>
+                        <p><strong>Summary:</strong> ${report.summary}</p>
+                    </div>
+                    <a href="${report.pdfUrl}" class="download-btn" target="_blank">Download PDF</a>
+                `;
+                container.appendChild(reportBox);
+            });
+
+        } catch (error) {
+            console.error("Error loading reports:", error);
+            container.innerHTML = "<p style='color:red;'>Could not load reports. Please try again.</p>";
+        }
+    }
+
+    async function logout() {
+        const token = localStorage.getItem("authToken");
+        try {
+            await fetch(`${API_BASE_URL}/admin/logout`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+        } catch (error) {
+            console.error("Logout failed:", error);
+        } finally {
+            localStorage.clear();
+            window.location.href = "userlogin.html";
+        }
+    }
+</script>
 
 </body>
 </html>

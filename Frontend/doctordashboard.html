@@ -1,363 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            /* Colors from the provided table */
-            --light-rose-gold: #F3E5F5;
-            --medium-rose-gold: #D9A7C7;
-            --dark-rose-gold: #B76E79;
-            --light-tangerine: #FDBA74;
-            --deep-orange: #DD6B20;
-            --soft-peach: #FFF7ED;
-            --standard-gold: #D4AF37;
-            --light-gold: #E8C15E;
-            --light-cool-gray: #f3f4f6;
-            --light-gray: #e5e7eb;
-            --medium-gray: #d1d5db;
-            --dark-gray: #9ca3af;
-            --dark-slate: #1f2937;
-            --light-slate: #475569;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doctor Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+    :root {
+        /* Colors from the provided table */
+        --light-rose-gold: #F3E5F5;
+        --medium-rose-gold: #D9A7C7;
+        --dark-rose-gold: #B76E79;
+        --light-tangerine: #FDBA74;
+        --deep-orange: #DD6B20;
+        --soft-peach: #FFF7ED;
+        --standard-gold: #D4AF37;
+        --light-gold: #E8C15E;
+        --light-cool-gray: #f3f4f6;
+        --light-gray: #e5e7eb;
+        --medium-gray: #d1d5db;
+        --dark-gray: #9ca3af;
+        --dark-slate: #1f2937;
+        --light-slate: #475569;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(-45deg, var(--light-gray), var(--medium-gray), var(--dark-gray));
-            background-size: 300% 300%;
-            animation: liveGradient 15s ease infinite;
-            color: var(--dark-slate);
-        }
+    body {
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(-45deg, var(--light-gray), var(--medium-gray), var(--dark-gray));
+        background-size: 300% 300%;
+        animation: liveGradient 15s ease infinite;
+        color: var(--dark-slate);
+    }
 
-        @keyframes liveGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    @keyframes liveGradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
 
-        header {
-            background: var(--light-slate);
-            color: var(--light-rose-gold);
-            padding: 18px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0px 5px 18px rgba(0,0,0,0.25);
-            border-bottom: 5px solid var(--standard-gold);
-        }
+    header {
+        background: var(--light-slate);
+        color: var(--light-rose-gold);
+        padding: 18px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0px 5px 18px rgba(0,0,0,0.25);
+        border-bottom: 5px solid var(--standard-gold);
+    }
 
-        header h1 {
-            margin: 0;
-            font-size: 26px;
-            font-family: 'Cinzel Decorative', serif;
-            letter-spacing: 1px;
-        }
+    header h1 {
+        margin: 0;
+        font-size: 26px;
+        font-family: 'Cinzel Decorative', serif;
+        letter-spacing: 1px;
+    }
 
-        header button {
-            background: var(--standard-gold);
-            border: 2px solid var(--standard-gold);
-            padding: 10px 20px;
-            border-radius: 25px;
-            color: var(--dark-slate);
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s, transform 0.2s;
-        }
+    header button {
+        background: var(--standard-gold);
+        border: 2px solid var(--standard-gold);
+        padding: 10px 20px;
+        border-radius: 25px;
+        color: var(--dark-slate);
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s, transform 0.2s;
+    }
 
-        header button:hover {
-            background: var(--light-gold);
-            color: var(--dark-slate);
-            transform: scale(1.05);
-        }
+    header button:hover {
+        background: var(--light-gold);
+        color: var(--dark-slate);
+        transform: scale(1.05);
+    }
 
-        .dashboard {
-            padding: 40px;
-        }
+    .dashboard {
+        padding: 40px;
+    }
 
-        .patient-card {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 40px;
-        }
+    .patient-card {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
+        margin-bottom: 40px;
+    }
 
-        .box {
-            background: var(--soft-peach);
-            padding: 22px;
-            border-radius: 18px;
-            border: 2px solid var(--medium-rose-gold);
-            box-shadow: 0px 12px 28px rgba(0,0,0,0.15);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+    .box {
+        background: var(--soft-peach);
+        padding: 22px;
+        border-radius: 18px;
+        border: 2px solid var(--medium-rose-gold);
+        box-shadow: 0px 12px 28px rgba(0,0,0,0.15);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-        .box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0px 16px 40px rgba(0,0,0,0.25);
-        }
+    .box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 16px 40px rgba(0,0,0,0.25);
+    }
 
-        .box::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 7px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--dark-rose-gold), var(--medium-rose-gold));
-            border-radius: 12px 0 0 12px;
-        }
+    .box::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 7px;
+        height: 100%;
+        background: linear-gradient(180deg, var(--dark-rose-gold), var(--medium-rose-gold));
+        border-radius: 12px 0 0 12px;
+    }
 
-        .box h2 {
-            font-size: 20px;
-            margin-bottom: 14px;
-            color: var(--dark-rose-gold);
-            font-family: 'Cinzel Decorative', serif;
-            border-bottom: 2px solid var(--medium-rose-gold);
-            padding-bottom: 6px;
-        }
+    .box h2 {
+        font-size: 20px;
+        margin-bottom: 14px;
+        color: var(--dark-rose-gold);
+        font-family: 'Cinzel Decorative', serif;
+        border-bottom: 2px solid var(--medium-rose-gold);
+        padding-bottom: 6px;
+    }
 
-        .box p {
-            font-size: 15px;
-            margin: 8px 0;
-            color: var(--dark-slate);
-            line-height: 1.6;
-        }
+    .box p {
+        font-size: 15px;
+        margin: 8px 0;
+        color: var(--dark-slate);
+        line-height: 1.6;
+    }
 
-        .reschedule-btn {
-            margin-top: 12px;
-            background: var(--standard-gold);
-            color: var(--dark-slate);
-            border: none;
-            padding: 10px 16px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: 0.3s, transform 0.2s;
-            text-decoration: none;
-            display: inline-block;
-        }
+    .reschedule-btn {
+        margin-top: 12px;
+        background: var(--standard-gold);
+        color: var(--dark-slate);
+        border: none;
+        padding: 10px 16px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: 0.3s, transform 0.2s;
+        text-decoration: none;
+        display: inline-block;
+    }
 
-        .reschedule-btn:hover {
-            background: var(--light-gold);
-            transform: scale(1.05);
-        }
+    .reschedule-btn:hover {
+        background: var(--light-gold);
+        transform: scale(1.05);
+    }
 
-        textarea {
-            width: 100%;
-            height: 95px;
-            margin-top: 12px;
-            border-radius: 12px;
-            border: 2px solid var(--medium-rose-gold);
-            padding: 12px;
-            font-size: 14px;
-            resize: none;
-            font-family: 'Inter', sans-serif;
-            background: var(--soft-peach);
-            color: var(--dark-slate);
-            transition: 0.3s, box-shadow 0.3s;
-        }
+    textarea {
+        width: 100%;
+        height: 95px;
+        margin-top: 12px;
+        border-radius: 12px;
+        border: 2px solid var(--medium-rose-gold);
+        padding: 12px;
+        font-size: 14px;
+        resize: none;
+        font-family: 'Inter', sans-serif;
+        background: var(--soft-peach);
+        color: var(--dark-slate);
+        transition: 0.3s, box-shadow 0.3s;
+    }
 
-        textarea:focus {
-            box-shadow: 0 0 12px var(--dark-rose-gold);
-            outline: none;
-            border-color: var(--dark-rose-gold);
-        }
+    textarea:focus {
+        box-shadow: 0 0 12px var(--dark-rose-gold);
+        outline: none;
+        border-color: var(--dark-rose-gold);
+    }
 
-        .send-btn {
-            margin-top: 10px;
-            background: var(--dark-rose-gold);
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            transition: 0.3s, transform 0.2s;
-        }
+    .send-btn {
+        margin-top: 10px;
+        background: var(--dark-rose-gold);
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        transition: 0.3s, transform 0.2s;
+    }
 
-        .send-btn:hover {
-            background: var(--standard-gold);
-            color: var(--dark-slate);
-            transform: scale(1.05);
-        }
-
-        select, input[type="date"], input[type="time"] {
-            margin-top: 10px;
-            width: 100%;
-            padding: 10px;
-            border-radius: 12px;
-            border: 2px solid var(--medium-rose-gold);
-            font-size: 14px;
-            font-family: 'Inter', sans-serif;
-            background: var(--soft-peach);
-            color: var(--dark-slate);
-            transition: 0.3s, box-shadow 0.3s;
-        }
-
-        select:focus, input:focus {
-            box-shadow: 0 0 12px var(--dark-rose-gold);
-            outline: none;
-            border-color: var(--dark-rose-gold);
-        }
-
-    </style>
+    .send-btn:hover {
+        background: var(--standard-gold);
+        color: var(--dark-slate);
+        transform: scale(1.05);
+    }
+</style>
 </head>
 <body>
     <header>
-        <h1>Doctor Dashboard</h1>
+        <h1 id="doctorName">Doctor Dashboard</h1>
         <button onclick="logout()">Logout</button>
     </header>
 
-    <div class="dashboard">
-        <div class="patient-card">
-            <div class="box">
-                <h2>Patient 1</h2>
-                <p><strong>Name:</strong> Rohan Sharma</p>
-                <p><strong>Age:</strong> 32</p>
-                <p><strong>Gender:</strong> Male</p>
-            </div>
-
-            <div class="box">
-                <h2>Appointment</h2>
-                <p><strong>Date:</strong> 20 Sept 2025</p>
-                <p><strong>Time:</strong> 4:30 PM</p>
-                <p><strong>Status:</strong> Confirmed</p>
-                <p><strong>Previous Appointment:</strong> 10 Sept 2025</p>
-                <label>Status Update:</label>
-                <select id="status1">
-                    <option value="">--Select--</option>
-                    <option value="Visited">Visited</option>
-                    <option value="Missed">Missed</option>
-                </select>
-                <label>Next Appointment:</label>
-                <input type="date" id="nextDate1">
-                <input type="time" id="nextTime1">
-                <button class="send-btn" onclick="updateAppointment(1)">Update</button>
-                <a href="reschuling.html" class="reschedule-btn">Reschedule</a>
-            </div>
-
-            <div class="box">
-                <h2>Clinical Notes & Observations</h2>
-                <p><strong>Symptoms:</strong> Patient reports frequent headaches, mild fever, and fatigue for the past 4 days.</p>
-                <textarea id="remarks1" placeholder="Doctor's Remarks..."></textarea>
-                <button class="send-btn" onclick="sendRemarks(1)">Send</button>
-            </div>
+    <div class="dashboard" id="dashboardContainer">
         </div>
-
-        <div class="patient-card">
-            <div class="box">
-                <h2>Patient 2</h2>
-                <p><strong>Name:</strong> Vijay Singh</p>
-                <p><strong>Age:</strong> 20</p>
-                <p><strong>Gender:</strong> Male</p>
-            </div>
-
-            <div class="box">
-                <h2>Appointment</h2>
-                <p><strong>Date:</strong> 1 Oct 2025</p>
-                <p><strong>Time:</strong> 1:00 PM</p>
-                <p><strong>Status:</strong> Pending</p>
-                <p><strong>Previous Appointment:</strong> 15 Sept 2025</p>
-                <label>Status Update:</label>
-                <select id="status2">
-                    <option value="">--Select--</option>
-                    <option value="Visited">Visited</option>
-                    <option value="Missed">Missed</option>
-                </select>
-                <label>Next Appointment:</label>
-                <input type="date" id="nextDate2">
-                <input type="time" id="nextTime2">
-                <button class="send-btn" onclick="updateAppointment(2)">Update</button>
-                <a href="reschuling.html" class="reschedule-btn">Reschedule</a>
-            </div>
-
-            <div class="box">
-                <h2>Clinical Notes & Observations</h2>
-                <p><strong>Symptoms:</strong> Reports stomach pain and nausea after meals, ongoing for 1 week.</p>
-                <textarea id="remarks2" placeholder="Doctor's Remarks..."></textarea>
-                <button class="send-btn" onclick="sendRemarks(2)">Send</button>
-            </div>
-        </div>
-
-        <div class="patient-card">
-            <div class="box">
-                <h2>Patient 3</h2>
-                <p><strong>Name:</strong> Ruchika Verma</p>
-                <p><strong>Age:</strong> 40</p>
-                <p><strong>Gender:</strong> Female</p>
-            </div>
-
-            <div class="box">
-                <h2>Appointment</h2>
-                <p><strong>Date:</strong> 20 Sept 2025</p>
-                <p><strong>Time:</strong> 2:00 PM</p>
-                <p><strong>Status:</strong> Confirmed</p>
-                <p><strong>Previous Appointment:</strong> 2 Sept 2025</p>
-                <label>Status Update:</label>
-                <select id="status3">
-                    <option value="">--Select--</option>
-                    <option value="Visited">Visited</option>
-                    <option value="Missed">Missed</option>
-                </select>
-                <label>Next Appointment:</label>
-                <input type="date" id="nextDate3">
-                <input type="time" id="nextTime3">
-                <button class="send-btn" onclick="updateAppointment(3)">Update</button>
-                <a href="reschuling.html" class="reschedule-btn">Reschedule</a>
-            </div>
-
-            <div class="box">
-                <h2>Clinical Notes & Observations</h2>
-                <p><strong>Symptoms:</strong> Persistent cough, chest congestion, and mild shortness of breath for 2 weeks.</p>
-                <textarea id="remarks3" placeholder="Doctor's Remarks..."></textarea>
-                <button class="send-btn" onclick="sendRemarks(3)">Send</button>
-            </div>
-        </div>
-
-    </div>
 
     <script>
-        function logout() {
-            alert("Logging out...");
-            window.location.href = "index.html"; 
-        }
+        const API_BASE_URL = "https://bac-1ntv.onrender.com";
 
-        function sendRemarks(patientId) {
-            // Corrected syntax using backticks (`) for template literals
-            const remarks = document.getElementById(`remarks${patientId}`).value;
-            if (!remarks.trim()) {
-                alert("Please enter remarks before sending.");
-                return;
-            }
-            localStorage.setItem(`patient${patientId}_remarks`, remarks);
-            alert(`Remarks for Patient ${patientId} sent to User Dashboard!`);
-        }
+        // --- 1. Authentication and Data Loading ---
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem("authToken");
+            const doctor = JSON.parse(localStorage.getItem("loggedInUser"));
 
-        function updateAppointment(patientId) {
-            // Corrected syntax using backticks (`) for template literals
-            const status = document.getElementById(`status${patientId}`).value;
-            const nextDate = document.getElementById(`nextDate${patientId}`).value;
-            const nextTime = document.getElementById(`nextTime${patientId}`).value;
-
-            if (!status) {
-                alert("Please select status update.");
+            if (!token || !doctor) {
+                alert("You must be logged in to view this page.");
+                window.location.href = "doctorlogin.html";
                 return;
             }
 
-            localStorage.setItem(`patient${patientId}_status`, status);
-            if (nextDate && nextTime) {
-                localStorage.setItem(`patient${patientId}_nextAppointment`, `${nextDate} at ${nextTime}`);
-            }
+            document.getElementById("doctorName").textContent = `Dr. ${doctor.name}'s Dashboard`;
+            loadAppointments(doctor.id, token);
+        });
 
-            alert(`Appointment update for Patient ${patientId} saved!`);
+        async function loadAppointments(doctorId, token) {
+            const container = document.getElementById("dashboardContainer");
+            try {
+                const response = await fetch(`${API_BASE_URL}/doctor/appointments/${doctorId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch appointments");
+                }
+
+                const appointments = await response.json();
+
+                if (appointments.length === 0) {
+                    container.innerHTML = "<p>You have no upcoming appointments.</p>";
+                    return;
+                }
+
+                // Clear hardcoded content and build dynamically
+                container.innerHTML = '';
+                appointments.forEach(appt => {
+                    const cardHtml = createAppointmentCard(appt);
+                    container.innerHTML += cardHtml;
+                });
+
+            } catch (error) {
+                console.error("Error loading appointments:", error);
+                container.innerHTML = "<p style='color:red;'>Could not load appointments. Please try again later.</p>";
+            }
+        }
+
+        // --- 2. Dynamic HTML Generation ---
+        function createAppointmentCard(appt) {
+            // Safely format date and time
+            const appointmentDate = new Date(appt.date).toLocaleDateString('en-GB');
+            const appointmentTime = new Date(`1970-01-01T${appt.time}`).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+            return `
+                <div class="patient-card">
+                    <div class="box">
+                        <h2>Patient Details</h2>
+                        <p><strong>Name:</strong> ${appt.patient_name}</p>
+                        <p><strong>Contact:</strong> ${appt.patient_contact || 'N/A'}</p>
+                        <p><strong>Gender:</strong> ${appt.patient_gender || 'N/A'}</p>
+                    </div>
+
+                    <div class="box">
+                        <h2>Appointment</h2>
+                        <p><strong>Date:</strong> ${appointmentDate}</p>
+                        <p><strong>Time:</strong> ${appointmentTime}</p>
+                        <p><strong>Reason:</strong> ${appt.reason}</p>
+                        <a href="rescheduling.html?id=${appt.id}" class="reschedule-btn">Reschedule</a>
+                    </div>
+
+                    <div class="box">
+                        <h2>Clinical Notes & Observations</h2>
+                        <textarea id="remarks-${appt.id}" placeholder="Doctor's Remarks..."></textarea>
+                        <button class="send-btn" onclick="sendRemarks(${appt.id})">Send Remarks</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- 3. Actions ---
+        async function sendRemarks(appointmentId) {
+            alert(`Sending remarks for appointment ${appointmentId}... (This is a placeholder)`);
+            // In a real app, this would be another authenticated fetch call to the backend.
+        }
+
+        async function logout() {
+            const token = localStorage.getItem("authToken");
+            try {
+                await fetch(`${API_BASE_URL}/admin/logout`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+            } catch (error) {
+                console.error("Logout failed:", error);
+            } finally {
+                localStorage.clear();
+                window.location.href = "doctorlogin.html";
+            }
         }
     </script>
 </body>

@@ -24,7 +24,7 @@
     --dark-slate: #1f2937;
     --light-slate: #475569;
 }
- 
+
 /* Live Background Animation */
 body {
     background: linear-gradient(-45deg, var(--light-gray), var(--medium-gray), var(--dark-gray));
@@ -41,7 +41,7 @@ body {
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
- 
+
 /* Navigation Bar */
 nav {
     background-color: var(--light-slate);
@@ -70,7 +70,7 @@ nav a.text-2xl {
     background-color: var(--standard-gold);
     color: var(--dark-slate);
 }
- 
+
 /* Contact Box */
 .contact-box {
     background: var(--soft-peach);
@@ -81,7 +81,7 @@ nav a.text-2xl {
     transition: transform 0.3s;
 }
 .contact-box:hover { transform: scale(1.02); }
- 
+
 .contact-box h2 {
     color: var(--dark-rose-gold);
     text-align: center;
@@ -89,7 +89,7 @@ nav a.text-2xl {
     font-weight: bold;
     font-family: 'Cinzel', serif;
 }
- 
+
 .contact-box button {
     background: var(--dark-rose-gold);
     color: white;
@@ -108,7 +108,7 @@ nav a.text-2xl {
     color: var(--dark-slate);
     transform: scale(1.05);
 }
- 
+
 /* Inputs & textarea */
 input, textarea {
     border: 2px solid var(--light-rose-gold);
@@ -125,7 +125,7 @@ input:focus, textarea:focus {
     box-shadow: 0 0 12px var(--medium-rose-gold);
     border-color: var(--dark-rose-gold);
 }
- 
+
 /* Footer Contact */
 .footer-contact a {
     display: inline-block;
@@ -143,7 +143,7 @@ input:focus, textarea:focus {
     color: var(--dark-slate);
     transform: scale(1.05);
 }
- 
+
 /* Footer */
 footer {
     background: var(--light-slate);
@@ -154,11 +154,21 @@ footer {
     border-top: 1px solid var(--medium-rose-gold);
     margin-top: auto;
 }
+
+#formMessage {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    display: none; /* Hidden by default */
+}
+#formMessage.success { background-color: #d1fae5; color: #065f46; }
+#formMessage.error { background-color: #fee2e2; color: #991b1b; }
 </style>
 </head>
 <body class="min-h-screen flex flex-col">
- 
-<!-- Navigation -->
+
 <nav>
     <a href="index.html" class="text-2xl font-bold tracking-wide">PrakritiPath</a>
     <div class="hidden md:flex space-x-4 nav-links">
@@ -167,34 +177,33 @@ footer {
         <a href="contact.html">Contact</a>
     </div>
 </nav>
- 
-<!-- Contact Section -->
+
 <div class="flex justify-center items-center flex-1 px-4 py-10">
     <div class="contact-box w-full max-w-2xl">
         <h2 class="mb-2">Contact Us</h2>
         <p class="text-center text-gray-700 mb-8">Have questions or need assistance? Fill out the form below and our team will respond promptly.</p>
- 
-        <!-- Form -->
-        <form action="#" method="POST" class="space-y-5">
+
+        <form id="contactForm" class="space-y-5">
             <div>
                 <label for="name" class="block text-gray-700 mb-1">Your Name</label>
                 <input type="text" id="name" name="name" placeholder="Enter your name" required>
             </div>
- 
+
             <div>
                 <label for="email" class="block text-gray-700 mb-1">Your Email</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required>
             </div>
- 
+
             <div>
                 <label for="message" class="block text-gray-700 mb-1">Message</label>
                 <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
             </div>
- 
+
             <button type="submit">Send Message</button>
         </form>
- 
-        <!-- Contact Details -->
+
+        <div id="formMessage"></div>
+
         <div class="mt-10 text-center space-y-2 footer-contact">
             <p class="text-gray-700 mb-2">You can also reach us at:</p>
             <a href="mailto:support@prakritipath.com">support@prakritipath.com</a>
@@ -202,11 +211,47 @@ footer {
         </div>
     </div>
 </div>
- 
-<!-- Footer -->
+
 <footer>
     © 2025 PrakritiPath. All rights reserved.
 </footer>
- 
+
+<script>
+    const API_BASE_URL = "https://bac-1ntv.onrender.com"; // Your live Render URL
+
+    document.getElementById("contactForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+        const formMessage = document.getElementById("formMessage");
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/contact`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, message })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                formMessage.textContent = "✅ Thank you! Your message has been sent.";
+                formMessage.className = "success";
+                document.getElementById("contactForm").reset();
+            } else {
+                formMessage.textContent = "❌ " + (result.message || "Failed to send message.");
+                formMessage.className = "error";
+            }
+        } catch (error) {
+            console.error("Contact form error:", error);
+            formMessage.textContent = "❌ Server error. Please try again later.";
+            formMessage.className = "error";
+        }
+        formMessage.style.display = 'block';
+    });
+</script>
+
 </body>
 </html>

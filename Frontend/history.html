@@ -78,6 +78,8 @@
             text-decoration: none;
             font-weight: bold;
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
         .logout-btn:hover {
             background: var(--light-gold);
@@ -115,167 +117,110 @@
         .history-details p {
             margin-bottom: 0.5rem;
         }
-
-        /* --- 4. Chat History --- */
-        .chat-container {
-            max-height: 400px;
-            overflow-y: auto;
-            padding-right: 10px; /* For scrollbar */
-        }
-        
-        .chat-box {
-            border-radius: 0.75rem;
-            padding: 0.75rem 1rem;
-            margin: 0.75rem 0;
-            font-size: 0.875rem; /* 14px */
-            position: relative;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-
-        .chat-patient {
-            background: var(--light-rose-gold);
-            border-left: 4px solid var(--dark-rose-gold);
-            color: var(--dark-slate);
-        }
-
-        .chat-bot {
-            background: var(--light-slate);
-            border-left: 4px solid var(--standard-gold);
-            color: var(--light-rose-gold);
-        }
-
-        .timestamp {
-            font-size: 0.75rem; /* 12px */
-            color: var(--dark-gray);
-            text-align: right;
-            margin-top: 0.25rem;
-            display: block;
-        }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">PrakritiPath</div>
-        <div class="header-title">Patient History</div>
-        <a href="index.html" class="logout-btn">Logout</a>
+        <div class="header-title">My Patient History</div>
+        <button class="logout-btn" onclick="logout()">Logout</button>
     </header>
 
     <div class="container">
         <div class="box">
-            <h2>Consultations</h2>
+            <h2>My Consultations</h2>
             <div class="history-details" id="consultations">
                 <p>Loading consultations...</p>
             </div>
         </div>
 
         <div class="box">
-            <h2>Prescriptions</h2>
+            <h2>My Prescriptions</h2>
             <div class="history-details" id="prescriptions">
                 <p>Loading prescriptions...</p>
-            </div>
-        </div>
-
-        <div class="box">
-            <h2>Therapies</h2>
-            <div class="history-details" id="therapies">
-                <p>Loading therapies...</p>
-            </div>
-        </div>
-
-        <div class="box">
-            <h2>Chatbot Interaction History</h2>
-            <div class="chat-container" id="chatHistory">
-                <p>Loading chat history...</p>
             </div>
         </div>
     </div>
 
 <script>
-    const patientId = 1; // In a real app, this would be dynamic (e.g., from URL or localStorage)
+    const API_BASE_URL = "https://bac-1ntv.onrender.com";
 
-    /**
-     * Reusable function to populate a list from an array of strings.
-     * @param {string} containerId - The ID of the container element.
-     * @param {Array} dataArray - The array of data to display.
-     * @param {string} emptyMessage - Message to show if the array is empty.
-     * @param {function} formatter - A function to format each item into a string.
-     */
-    function populateList(containerId, dataArray, emptyMessage, formatter) {
-        const container = document.getElementById(containerId);
-        container.innerHTML = ""; // Clear loading message
-        if (dataArray.length === 0) {
-            container.textContent = emptyMessage;
-        } else {
-            dataArray.forEach(item => {
-                const p = document.createElement("p");
-                p.innerHTML = formatter(item); // Use innerHTML for potential bolding, etc.
-                container.appendChild(p);
-            });
-        }
-    }
-
-    // Load Medical History
-    async function loadMedicalHistory() {
-        try {
-            // Corrected syntax using backticks (`) for template literals
-            const res = await fetch(`http://localhost:5000/api/patients/${patientId}/history`);
-            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-            const data = await res.json();
-
-            // Populate each section using the reusable function
-            populateList("consultations", data.consultations, "No consultations found.", 
-                c => `<strong>${new Date(c.date).toLocaleDateString()}:</strong> ${c.details}`
-            );
-            populateList("prescriptions", data.prescriptions, "No prescriptions found.", 
-                p => `- ${p}`
-            );
-            populateList("therapies", data.therapies, "No therapies found.", 
-                t => `- ${t}`
-            );
-        } catch(err) {
-            console.error("Error loading medical history:", err);
-            document.getElementById("consultations").textContent = "Unable to load consultations.";
-            document.getElementById("prescriptions").textContent = "Unable to load prescriptions.";
-            document.getElementById("therapies").textContent = "Unable to load therapies.";
-        }
-    }
-
-    // Load Chatbot History
-    async function loadChatHistory() {
-        try {
-            // Corrected syntax using backticks (`) for template literals
-            const res = await fetch(`http://localhost:5000/api/patients/${patientId}/chathistory`);
-            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-            const chats = await res.json();
-
-            const container = document.getElementById("chatHistory");
-            container.innerHTML = ""; // Clear loading message
-            
-            if (chats.length === 0) {
-                container.textContent = "No chat history found.";
-                return;
-            }
-
-            chats.forEach(chat => {
-                const div = document.createElement("div");
-                // Use template literals for class names too
-                div.className = `chat-box ${chat.sender === 'patient' ? 'chat-patient' : 'chat-bot'}`;
-                // Use template literals for innerHTML
-                div.innerHTML = `<p>${chat.message}</p><div class="timestamp">${new Date(chat.timestamp).toLocaleString()}</div>`;
-                container.appendChild(div);
-            });
-        } catch(err) {
-            console.error("Error loading chat history:", err);
-            document.getElementById("chatHistory").textContent = "Unable to load chat history.";
-        }
-    }
-
-    // Initial load when the page is ready
     document.addEventListener('DOMContentLoaded', () => {
-        loadMedicalHistory();
-        loadChatHistory();
+        // 1. Check for authentication
+        const token = localStorage.getItem("authToken");
+        const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+        if (!token || !user) {
+            alert("You must be logged in to view your history.");
+            window.location.href = "userlogin.html";
+            return;
+        }
+
+        // 2. Load the history data for the logged-in user
+        loadHistory(user.id, token);
     });
+
+    async function loadHistory(userId, token) {
+        try {
+            // 3. Make a secure call to the backend
+            const response = await fetch(`${API_BASE_URL}/user/${userId}/history`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (!response.ok) throw new Error("Failed to fetch history");
+
+            const data = await response.json();
+            
+            populateConsultations(data.consultations);
+            populateSimpleList("prescriptions", data.prescriptions, "No prescriptions found.");
+
+        } catch (error) {
+            console.error("Error loading history:", error);
+            document.getElementById("consultations").innerHTML = "<p style='color:red;'>Could not load history.</p>";
+            document.getElementById("prescriptions").innerHTML = "<p style='color:red;'>Could not load history.</p>";
+        }
+    }
+
+    function populateConsultations(consultations) {
+        const container = document.getElementById("consultations");
+        if (!consultations || consultations.length === 0) {
+            container.innerHTML = "<p>No past consultations found.</p>";
+            return;
+        }
+        container.innerHTML = consultations.map(c => `
+            <p>
+                <strong>Date:</strong> ${new Date(c.date).toLocaleDateString()}<br>
+                <strong>Time:</strong> ${new Date(`1970-01-01T${c.time}`).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}<br>
+                <strong>Reason:</strong> ${c.reason}
+            </p>
+        `).join('<hr style="border-top: 1px solid var(--light-rose-gold); margin: 1rem 0;">');
+    }
+    
+    function populateSimpleList(containerId, dataArray, emptyMessage) {
+        const container = document.getElementById(containerId);
+         if (!dataArray || dataArray.length === 0) {
+            container.innerHTML = `<p>${emptyMessage}</p>`;
+            return;
+        }
+        container.innerHTML = dataArray.map(item => `<p>- ${item}</p>`).join('');
+    }
+
+    async function logout() {
+        const token = localStorage.getItem("authToken");
+        try {
+            await fetch(`${API_BASE_URL}/admin/logout`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+        } catch (error) {
+            console.error("Logout failed:", error);
+        } finally {
+            localStorage.clear();
+            window.location.href = "userlogin.html";
+        }
+    }
 </script>
 
 </body>

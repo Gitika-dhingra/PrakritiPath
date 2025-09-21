@@ -7,30 +7,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Colors from the provided table */
+            /* Color Palette */
             --light-rose-gold: #F3E5F5;
             --medium-rose-gold: #D9A7C7;
             --dark-rose-gold: #B76E79;
-            --light-tangerine: #FDBA74;
-            --deep-orange: #DD6B20;
-            --soft-peach: #FFF7ED;
             --standard-gold: #D4AF37;
             --light-gold: #E8C15E;
+            --soft-peach: #FFF7ED;
             --light-cool-gray: #f3f4f6;
             --light-gray: #e5e7eb;
             --medium-gray: #d1d5db;
-            --dark-gray: #9ca3af;
             --dark-slate: #1f2937;
             --light-slate: #475569;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(-45deg, var(--light-gray), var(--medium-gray), var(--dark-gray));
+            background: linear-gradient(-45deg, var(--light-gray), var(--medium-gray));
             background-size: 600% 600%;
             animation: liveGradient 25s ease infinite;
+            font-family: 'Inter', sans-serif; 
+            margin: 0;
+            padding: 0;
             color: var(--dark-slate);
         }
 
@@ -55,26 +52,21 @@
             justify-content: center;
             font-family: 'Cinzel Decorative', serif;
         }
-
+        
         .back-btn {
             position: absolute;
-            left: 40px;
-            top: 50%;
-            transform: translateY(-50%);
+            left: 20px;
             background: var(--standard-gold);
             color: var(--dark-slate);
-            padding: 8px 16px;
-            border-radius: 25px;
+            padding: 6px 14px;
+            border-radius: 20px;
             text-decoration: none;
             font-weight: bold;
             transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 14px;
         }
         .back-btn:hover {
             background: var(--light-gold);
-            color: var(--dark-slate);
         }
 
         .container {
@@ -92,12 +84,6 @@
             margin-bottom: 20px;
             border-bottom: 2px solid var(--medium-rose-gold);
             padding-bottom: 5px;
-            font-family: 'Cinzel Decorative', serif;
-        }
-        
-        h3 {
-            color: var(--dark-slate);
-            margin-bottom: 10px;
             font-family: 'Cinzel Decorative', serif;
         }
 
@@ -135,7 +121,7 @@
             color: var(--dark-rose-gold);
         }
 
-        .payment-options, .address-form, .reorder-section {
+        .payment-options, .address-form {
             margin-top: 25px;
             padding-top: 20px;
             border-top: 1px solid var(--medium-rose-gold);
@@ -160,93 +146,46 @@
             box-sizing: border-box; /* Ensures padding doesn't affect width */
         }
 
-        .reorder-section button, .previous-orders-btn {
-            background: var(--dark-rose-gold);
-            color: white;
-            font-weight: bold;
-            padding: 10px 16px;
-            border: none;
-            border-radius: 25px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            width: auto;
-        }
-
-        .reorder-section button:hover, .previous-orders-btn:hover {
-            background: var(--standard-gold);
-            color: var(--dark-slate);
-            transform: scale(1.05);
-        }
-        
-        .previous-orders-btn-container {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
         button.primary-btn {
             width: 100%;
+            background: var(--dark-rose-gold);
+            color: white;
             padding: 14px;
             font-size: 16px;
             border-radius: 10px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
         }
-
-        .reorder-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--light-rose-gold);
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        button.primary-btn:hover {
+            background: var(--standard-gold);
+            color: var(--dark-slate);
         }
     </style>
 </head>
 <body>
 
     <header>
+        <a href="userdashboard.html" class="back-btn">← Back</a>
         Medicine Payment
-        <a href="Userdashboard.html" id="backButton" class="back-btn">← Back</a>
     </header>
 
     <div class="container">
-
-        <div class="previous-orders-btn-container">
-            <button class="previous-orders-btn" onclick="showPreviousOrders()">View Previous Orders</button>
-        </div>
-
         <div class="order-section">
             <h2>Select Medicines</h2>
-            <form id="orderForm">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Medicine</th>
-                            <th>Price (₹)</th>
-                            <th>Quantity</th>
-                        </tr>
-                    </thead>
-                    <tbody id="medicineList">
-                        <tr data-price="350">
-                            <td>Ashwagandha Tablets</td>
-                            <td>₹350</td>
-                            <td><input type="number" value="0" min="0" class="quantity-input" onchange="updateTotal()"></td>
-                        </tr>
-                        <tr data-price="400">
-                            <td>Triphala Powder</td>
-                            <td>₹400</td>
-                            <td><input type="number" value="0" min="0" class="quantity-input" onchange="updateTotal()"></td>
-                        </tr>
-                        <tr data-price="300">
-                            <td>Chyawanprash</td>
-                            <td>₹300</td>
-                            <td><input type="number" value="0" min="0" class="quantity-input" onchange="updateTotal()"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Medicine</th>
+                        <th>Price (₹)</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody id="medicineList">
+                    <tr><td colspan="3">Loading medicines...</td></tr>
+                </tbody>
+            </table>
             <div class="total">Total Amount: ₹<span id="totalAmount">0</span></div>
         </div>
 
@@ -266,77 +205,137 @@
 
         <div class="payment-options">
             <h2>Payment Details</h2>
-            <form id="paymentForm">
-                <label for="payment-method">Select Payment Method</label>
-                <select id="payment-method">
-                    <option>Credit/Debit Card</option>
-                    <option>UPI</option>
-                    <option>Net Banking</option>
-                    <option>Cash on Delivery</option>
-                </select>
-
-                <label for="card-number">Card Number</label>
-                <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
-
-                <label for="expiry">Expiry Date</label>
-                <input type="month" id="expiry">
-
-                <label for="cvv">CVV</label>
-                <input type="password" id="cvv" placeholder="***">
-
-                <button id="payButton" class="primary-btn reorder-section button">Pay ₹0</button>
-            </form>
+            <button id="payButton" class="primary-btn">Pay ₹0</button>
         </div>
     </div>
 
 <script>
-// All JavaScript is wrapped in DOMContentLoaded to ensure the page is loaded first.
-document.addEventListener('DOMContentLoaded', () => {
-    const medicineList = document.getElementById('medicineList');
-    const totalAmountSpan = document.getElementById('totalAmount');
-    const payButton = document.getElementById('payButton');
+    const API_BASE_URL = "https://bac-1ntv.onrender.com";
 
-    // This function calculates the total price based on item quantities.
-    // It's defined on the global 'window' object so the 'onchange' attributes in the HTML can find it.
-    window.updateTotal = function() {
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Check for authentication
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+            alert("You must be logged in to order medicine.");
+            window.location.href = "userlogin.html";
+            return;
+        }
+
+        // 2. Load the list of available medicines from the backend
+        loadMedicines(token);
+
+        // 3. Add event listener to the pay button
+        document.getElementById("payButton").addEventListener("click", placeOrder);
+    });
+
+    async function loadMedicines(token) {
+        const medicineList = document.getElementById('medicineList');
+        try {
+            const response = await fetch(`${API_BASE_URL}/medicines`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (!response.ok) throw new Error("Failed to fetch medicines");
+
+            const medicines = await response.json();
+            medicineList.innerHTML = ''; // Clear loading message
+
+            medicines.forEach(med => {
+                const row = document.createElement('tr');
+                row.dataset.price = med.price;
+                row.dataset.id = med.id;
+                row.dataset.name = med.name;
+                row.innerHTML = `
+                    <td>${med.name}</td>
+                    <td>₹${med.price}</td>
+                    <td><input type="number" value="0" min="0" class="quantity-input" onchange="updateTotal()"></td>
+                `;
+                medicineList.appendChild(row);
+            });
+        } catch (error) {
+            console.error(error);
+            medicineList.innerHTML = `<tr><td colspan="3" style="color:red;">Could not load medicines.</td></tr>`;
+        }
+    }
+
+    function updateTotal() {
         let total = 0;
-        const items = medicineList.querySelectorAll('tr');
+        const items = document.getElementById('medicineList').querySelectorAll('tr');
         items.forEach(item => {
             const price = parseFloat(item.dataset.price);
             const quantity = parseInt(item.querySelector('.quantity-input').value, 10);
-            if (!isNaN(price) && !isNaN(quantity) && quantity > 0) {
+            if (quantity > 0) {
                 total += price * quantity;
             }
         });
-        totalAmountSpan.textContent = total;
-        // CORRECTED LINE: Uses backticks (`) for the template literal.
-        payButton.textContent = `Pay ₹${total}`;
+        document.getElementById('totalAmount').textContent = total;
+        document.getElementById('payButton').textContent = `Pay ₹${total}`;
     }
 
-    // Placeholder function for the "View Previous Orders" button.
-    // It's also assigned to the 'window' object for the 'onclick' attribute.
-    window.showPreviousOrders = function() {
-        alert("Redirecting to your order history...");
-        // In a real application, you would redirect to a dedicated order history page.
-        // For example: window.location.href = "orderhistory.html";
+    async function placeOrder() {
+        const token = localStorage.getItem("authToken");
+        const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+        // Collect order items
+        const orderItems = [];
+        document.getElementById('medicineList').querySelectorAll('tr').forEach(item => {
+            const quantity = parseInt(item.querySelector('.quantity-input').value, 10);
+            if (quantity > 0) {
+                orderItems.push({
+                    medicineId: item.dataset.id,
+                    name: item.dataset.name,
+                    quantity: quantity,
+                    price: item.dataset.price
+                });
+            }
+        });
+
+        if (orderItems.length === 0) {
+            alert("Please select a quantity for at least one medicine.");
+            return;
+        }
+
+        // Collect address details
+        const address = {
+            fullName: document.getElementById('fullName').value,
+            address: document.getElementById('address').value,
+            pincode: document.getElementById('pincode').value,
+        };
+        if (!address.fullName || !address.address || !address.pincode) {
+            alert("Please fill out all address details.");
+            return;
+        }
+        
+        const totalAmount = document.getElementById('totalAmount').textContent;
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/order`, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    userId: user.id,
+                    items: orderItems,
+                    deliveryAddress: address,
+                    total: totalAmount
+                })
+            });
+
+            if (!response.ok) throw new Error("Order placement failed");
+            
+            const result = await response.json();
+            alert(result.message);
+            window.location.href = "userdashboard.html";
+
+        } catch (error) {
+            console.error(error);
+            alert("There was an error placing your order. Please try again.");
+        }
     }
 
-    // Event listener for the back button.
-    document.getElementById("backButton").addEventListener("click", function(e){
-        e.preventDefault();
-        window.location.href = "userdashboard.html"; // Make sure this page exists in your project.
-    });
-
-    // Event listener for the payment form submission.
-    document.getElementById("paymentForm").addEventListener("submit", function(e) {
-        e.preventDefault();
-        alert('Payment processing...');
-        // In a real application, you would handle payment processing here.
-    });
-    
-    // Call updateTotal once on page load to initialize the total.
-    updateTotal();
-});
+    // Assign updateTotal to window so inline onchange can access it
+    window.updateTotal = updateTotal;
 </script>
 
 </body>

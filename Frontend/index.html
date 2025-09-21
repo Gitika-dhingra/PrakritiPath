@@ -120,6 +120,7 @@
             font-weight: 600;
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            cursor: pointer;
         }
         .btn:hover {
             transform: translateY(-2px) scale(1.03);
@@ -225,154 +226,12 @@
             border-radius: var(--radius-md);
         }
 
-        /* --- Specific Sections --- */
-        .testimonials {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-        .testimonial .stars {
-            color: var(--golden-primary);
-            margin-bottom: 8px;
-            text-align: center;
-        }
-        .testimonial-img {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 50%;
-            display: block;
-            margin: 0 auto 16px;
-            border: 4px solid #FFF7ED;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            margin-top: 24px;
-        }
-
-        .doctors {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 24px;
-        }
-        .doc-card {
-            background: var(--card-default-bg);
-            padding: 16px;
-            border-radius: var(--radius-md);
-            text-align: center;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            width: 260px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-        }
-        .doc-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-        }
-        .doc-img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-            border-radius: var(--radius-sm);
-            margin-bottom: 12px;
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .faq-container details {
-            background: var(--card-default-bg);
-            border: 1px solid rgba(0,0,0,0.08);
-            border-radius: var(--radius-sm);
-            padding: 14px 18px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        .faq-container summary {
-            font-weight: 600;
-            font-size: 1.1em;
-            list-style: none;
-        }
-        .faq-container summary::-webkit-details-marker { display: none; }
-        .faq-container details[open] {
-            background: #fff;
-            border-color: var(--rose-gold-mid);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-        }
+        /* --- Other sections remain the same --- */
+        /* ... (styles for testimonials, doctors, faq, footer, etc.) ... */
+        .testimonials{display:grid;grid-template-columns:1fr 1fr;gap:24px}.testimonial .stars{color:var(--golden-primary);margin-bottom:8px;text-align:center}.testimonial-img{width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 16px;border:4px solid #FFF7ED;box-shadow:0 4px 12px rgba(0,0,0,.1)}.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:24px}.doctors{display:flex;gap:30px;flex-wrap:wrap;justify-content:center;margin-top:24px}.doc-card{background:var(--card-default-bg);padding:16px;border-radius:var(--radius-md);text-align:center;transition:transform .2s ease,box-shadow .2s ease;width:260px;box-shadow:0 8px 24px rgba(0,0,0,.08)}.doc-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.12)}.doc-img{width:100%;height:280px;object-fit:cover;border-radius:var(--radius-sm);margin-bottom:12px}.faq-container{max-width:800px;margin:0 auto}.faq-container details{background:var(--card-default-bg);border:1px solid rgba(0,0,0,.08);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:12px;cursor:pointer;transition:all .3s ease;box-shadow:0 4px 12px rgba(0,0,0,.05)}.faq-container summary{font-weight:600;font-size:1.1em;list-style:none}.faq-container summary::-webkit-details-marker{display:none}.faq-container details[open]{background:#fff;border-color:var(--rose-gold-mid);box-shadow:0 6px 16px rgba(0,0,0,.08)}.restore-life-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;background:var(--card-default-bg);padding:40px;border-radius:var(--radius-md);box-shadow:0 8px 24px rgba(0,0,0,.08)}.restore-life-grid ul{list-style:none;padding:0;margin-top:20px}.restore-life-grid li{margin-bottom:10px;padding-left:28px;position:relative}.restore-life-grid li::before{content:"✔";color:var(--golden-primary);position:absolute;left:0;font-weight:bold}footer{margin-top:48px;padding:32px;background:var(--dark-bg);color:var(--light-text);border-top:4px solid var(--golden-primary);border-radius:var(--radius-md) var(--radius-md) 0 0}.footer-content{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}footer p{color:var(--light-text)}footer .btn.primary{background-color:var(--golden-primary);color:var(--primary-text-color)}
         
-        .restore-life-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            gap: 40px;
-            background: var(--card-default-bg);
-            padding: 40px;
-            border-radius: var(--radius-md);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-        }
-        .restore-life-grid ul {
-            list-style: none;
-            padding: 0;
-            margin-top: 20px;
-        }
-        .restore-life-grid li {
-            margin-bottom: 10px;
-            padding-left: 28px;
-            position: relative;
-        }
-        .restore-life-grid li::before {
-            content: "✔";
-            color: var(--golden-primary);
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-        
-        /* --- Footer --- */
-        footer {
-            margin-top: 48px;
-            padding: 32px;
-            background: var(--dark-bg);
-            color: var(--light-text);
-            border-top: 4px solid var(--golden-primary);
-            border-radius: var(--radius-md) var(--radius-md) 0 0;
-        }
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        footer p {
-            color: var(--light-text);
-        }
-        footer .btn.primary {
-            background-color: var(--golden-primary);
-            color: var(--primary-text-color);
-        }
-
         /* --- Responsive Design --- */
-        @media (max-width: 980px) {
-            .hero { grid-template-columns: 1fr; }
-            .testimonials { grid-template-columns: 1fr; }
-            .restore-life-grid { grid-template-columns: 1fr; }
-            .restore-life-grid { padding: 30px; }
-        }
-        @media (max-width: 620px) {
-            .cards-grid { grid-template-columns: 1fr; }
-            .brand h1 { font-size: 20px; }
-            .hero h2 { font-size: 28px; }
-            .restore-life-grid { padding: 20px; }
-        }
+        @media (max-width: 980px){.hero{grid-template-columns:1fr}.testimonials{grid-template-columns:1fr}.restore-life-grid{grid-template-columns:1fr;padding:30px}}@media (max-width: 620px){.cards-grid{grid-template-columns:1fr}.brand h1{font-size:20px}.hero h2{font-size:28px}.restore-life-grid{padding:20px}}
     </style>
 </head>
 <body>
@@ -381,129 +240,14 @@
         <div class="brand">
             <h1>PrakritiPath</h1>
         </div>
-        <div class="top-actions">
+        <div class="top-actions" id="auth-buttons">
             <a class="btn secondary" href="registration/userlogin.html">Login</a>
             <a class="btn primary" href="registration/signup.html">Signup</a>
         </div>
     </header>
 
     <main class="container">
-        <section class="hero">
-            <div class="hero-card">
-                <div class="eyebrow">Authentic Panchakarma Therapy</div>
-                <h2>Restore Balance. Rejuvenate Naturally.</h2>
-                <p>Experience an ancient, science-backed Ayurvedic detox to remove toxins, rebuild immunity, and restore vitality in a tranquil village setting.</p>
-                <div style="margin-top:24px; display:flex; gap:12px;">
-                    <a class="btn primary" href="registration/userlogin.html">View Packages</a>
-                    <a class="btn secondary" href="registration/userlogin.html">Learn More</a>
-                </div>
-            </div>
-            <img src="https://ayurvedichealingvillage.com/wp-content/uploads/2024/11/CLASSIC-VILLA-min-1.jpg" alt="Villa">
-        </section>
-        
-        <section class="section">
-             <div class="section-header">
-                <h2>Panchakarma Therapy — What You Get</h2>
-            </div>
-            <div class="cards-grid">
-                <div class="themed-card">
-                    <div class="card-content">
-                        <h3>Vamanam & Virechan</h3>
-                        <p>Cleansing procedures to re-balance Kapha & Pitta doshas. Professionally supervised purging and detox.</p>
-                    </div>
-                </div>
-                <div class="themed-card">
-                    <div class="card-content">
-                        <h3>Vasti & Nasyam</h3>
-                        <p>Gut therapies and nasal treatments to rejuvenate nervous and respiratory systems.</p>
-                    </div>
-                </div>
-                <div class="themed-card">
-                    <div class="card-content">
-                        <h3>Raktamokshana</h3>
-                        <p>Blood purification techniques where indicated, always under strict clinician guidance.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="restore-life-grid">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRedYA6yJ1lu2V1AqTbrfXGa87NnB47DnxWyT2-rhwDdNocAvPtlBGFHH1qkzKcby8Ehew&usqp=CAU" alt="Panchakarma Therapy" style="width:100%; border-radius:var(--radius-sm);">
-                <div>
-                    <h2>Natural Way To Restore Your Life</h2>
-                    <h3 style="color:var(--rose-gold-dark); margin:8px 0 16px;">Panchakarma: A Gift for a Healthy Life</h3>
-                    <p>Panchakarma therapy, through a 5-phase treatment plan, removes toxins from your body and rejuvenates your mind, body, and soul.</p>
-                    <ul>
-                        <li>Perform better & think clearly in your work</li>
-                        <li>Improve diet and gut health</li>
-                        <li>Achieve more beautiful & youthful skin</li>
-                        <li>Enjoy life by flushing toxins from your body</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="section-header">
-                <h2>Our Ayurvedic Doctors</h2>
-            </div>
-            <div class="doctors">
-                <div class="doc-card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2t4L8XArxS5g9nrPza9w_q8sCROqdzxUbJw&s" alt="Dr Deepu" class="doc-img">
-                    <strong>Dr. Deepu John</strong>
-                    <div class="small" style="color:var(--muted-text-color)">Chief Physician · 12+ years</div>
-                </div>
-                <div class="doc-card">
-                    <img src="https://cdn-aa.apollohospitals.com/live/images/doctors/ayurvedic/dr-anju-balakrishnan-ayurvedic-in-bangalore..jpeg" alt="Dr. Ashikha" class="doc-img">
-                    <strong>Dr. Ashikha Raj</strong>
-                    <div class="small" style="color:var(--muted-text-color)">BAMS · Arthritis Specialist</div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="section-header">
-                <h2>What Our Guests Say</h2>
-            </div>
-            <div class="testimonials">
-                <div class="themed-card">
-                    <div class="card-content">
-                        <img src="https://t3.ftcdn.net/jpg/00/91/50/30/360_F_91503098_BZkrVBWZJDbNkvpdFDjLzvaCqtCW3HG4.jpg" class="testimonial-img">
-                        <div class="stars">★★★★★</div>
-                        <p style="text-align:center;">“I feel like a completely new person. The therapies, the food, and the care were excellent.” — Michaela</p>
-                    </div>
-                </div>
-                <div class="themed-card">
-                    <div class="card-content">
-                        <img src="https://www.gebauer.com/hubfs/patient-engagement.jpg" class="testimonial-img">
-                        <div class="stars">★★★★★</div>
-                        <p style="text-align:center;">“Professional therapists, authentic experience, and true healing.” — Shreya</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="faq" class="section">
-            <div class="section-header">
-                <h2>Frequently Asked Questions</h2>
-            </div>
-            <div class="faq-container">
-                <details>
-                    <summary>What can be treated with Panchakarma?</summary>
-                    <p>Panchakarma is beneficial for chronic conditions like arthritis, digestive disorders, stress, skin problems, and metabolic imbalances.</p>
-                </details>
-                <details>
-                    <summary>Who should seek Panchakarma?</summary>
-                    <p>Anyone with lifestyle-related health concerns, chronic illnesses, or simply seeking detoxification and rejuvenation can opt for Panchakarma.</p>
-                </details>
-                <details>
-                    <summary>Does it offer instant relief?</summary>
-                    <p>Panchakarma is for long-term healing, not quick fixes. Benefits develop gradually with proper treatment and lifestyle changes.</p>
-                </details>
-            </div>
-        </section>
-
+        <section class="hero"><div class="hero-card"><div class="eyebrow">Authentic Panchakarma Therapy</div><h2>Restore Balance. Rejuvenate Naturally.</h2><p>Experience an ancient, science-backed Ayurvedic detox to remove toxins, rebuild immunity, and restore vitality in a tranquil village setting.</p><div style="margin-top:24px; display:flex; gap:12px;"><a class="btn primary" href="registration/userlogin.html">View Packages</a><a class="btn secondary" href="registration/userlogin.html">Learn More</a></div></div><img src="https://ayurvedichealingvillage.com/wp-content/uploads/2024/11/CLASSIC-VILLA-min-1.jpg" alt="Villa"></section><section class="section"><div class="section-header"><h2>Panchakarma Therapy — What You Get</h2></div><div class="cards-grid"><div class="themed-card"><div class="card-content"><h3>Vamanam & Virechan</h3><p>Cleansing procedures to re-balance Kapha & Pitta doshas. Professionally supervised purging and detox.</p></div></div><div class="themed-card"><div class="card-content"><h3>Vasti & Nasyam</h3><p>Gut therapies and nasal treatments to rejuvenate nervous and respiratory systems.</p></div></div><div class="themed-card"><div class="card-content"><h3>Raktamokshana</h3><p>Blood purification techniques where indicated, always under strict clinician guidance.</p></div></div></div></section><section class="section"><div class="restore-life-grid"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRedYA6yJ1lu2V1AqTbrfXGa87NnB47DnxWyT2-rhwDdNocAvPtlBGFHH1qkzKcby8Ehew&usqp=CAU" alt="Panchakarma Therapy" style="width:100%; border-radius:var(--radius-sm);"><div><h2>Natural Way To Restore Your Life</h2><h3 style="color:var(--rose-gold-dark); margin:8px 0 16px;">Panchakarma: A Gift for a Healthy Life</h3><p>Panchakarma therapy, through a 5-phase treatment plan, removes toxins from your body and rejuvenates your mind, body, and soul.</p><ul><li>Perform better & think clearly in your work</li><li>Improve diet and gut health</li><li>Achieve more beautiful & youthful skin</li><li>Enjoy life by flushing toxins from your body</li></ul></div></div></section><section class="section"><div class="section-header"><h2>Our Ayurvedic Doctors</h2></div><div class="doctors"><div class="doc-card"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2t4L8XArxS5g9nrPza9w_q8sCROqdzxUbJw&s" alt="Dr Deepu" class="doc-img"><strong>Dr. Deepu John</strong><div class="small" style="color:var(--muted-text-color)">Chief Physician · 12+ years</div></div><div class="doc-card"><img src="https://cdn-aa.apollohospitals.com/live/images/doctors/ayurvedic/dr-anju-balakrishnan-ayurvedic-in-bangalore..jpeg" alt="Dr. Ashikha" class="doc-img"><strong>Dr. Ashikha Raj</strong><div class="small" style="color:var(--muted-text-color)">BAMS · Arthritis Specialist</div></div></div></section><section class="section"><div class="section-header"><h2>What Our Guests Say</h2></div><div class="testimonials"><div class="themed-card"><div class="card-content"><img src="https://t3.ftcdn.net/jpg/00/91/50/30/360_F_91503098_BZkrVBWZJDbNkvpdFDjLzvaCqtCW3HG4.jpg" class="testimonial-img"><div class="stars">★★★★★</div><p style="text-align:center;">“I feel like a completely new person. The therapies, the food, and the care were excellent.” — Michaela</p></div></div><div class="themed-card"><div class="card-content"><img src="https://www.gebauer.com/hubfs/patient-engagement.jpg" class="testimonial-img"><div class="stars">★★★★★</div><p style="text-align:center;">“Professional therapists, authentic experience, and true healing.” — Shreya</p></div></div></div></section><section id="faq" class="section"><div class="section-header"><h2>Frequently Asked Questions</h2></div><div class="faq-container"><details><summary>What can be treated with Panchakarma?</summary><p>Panchakarma is beneficial for chronic conditions like arthritis, digestive disorders, stress, skin problems, and metabolic imbalances.</p></details><details><summary>Who should seek Panchakarma?</summary><p>Anyone with lifestyle-related health concerns, chronic illnesses, or simply seeking detoxification and rejuvenation can opt for Panchakarma.</p></details><details><summary>Does it offer instant relief?</summary><p>Panchakarma is for long-term healing, not quick fixes. Benefits develop gradually with proper treatment and lifestyle changes.</p></details></div></section>
     </main>
 
     <footer>
@@ -517,15 +261,49 @@
     </footer>
 
     <script>
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+        const API_BASE_URL = "https://bac-1ntv.onrender.com";
+
+        // --- Handle Login State on Page Load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem("authToken");
+            const user = JSON.parse(localStorage.getItem("loggedInUser"));
+            const authButtonsContainer = document.getElementById("auth-buttons");
+
+            if (token && user) {
+                // User is logged in, show Dashboard and Logout buttons
+                const dashboardUrl = user.role === 'doctor' ? 'doctordashboard.html' : 'userdashboard.html';
+                authButtonsContainer.innerHTML = `
+                    <a class="btn secondary" href="${dashboardUrl}">Dashboard</a>
+                    <button class="btn primary" onclick="logout()">Logout</button>
+                `;
+            } else {
+                // User is not logged in, show default Login and Signup buttons
+                authButtonsContainer.innerHTML = `
+                    <a class="btn secondary" href="registration/userlogin.html">Login</a>
+                    <a class="btn primary" href="registration/signup.html">Signup</a>
+                `;
+            }
         });
+
+        // --- Secure Logout Function ---
+        async function logout() {
+            const token = localStorage.getItem("authToken");
+            if (!token) return; // No token to invalidate
+
+            try {
+                await fetch(`${API_BASE_URL}/admin/logout`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+            } catch (error) {
+                console.error("Logout API call failed, but logging out on client-side anyway.", error);
+            } finally {
+                localStorage.clear();
+                window.location.reload(); // Reload the page to show logged-out state
+            }
+        }
     </script>
 </body>
 </html>

@@ -178,6 +178,8 @@
     </div>
 
     <script>
+        const API_BASE_URL = "https://bac-1ntv.onrender.com"; // 🚀 Your live Render URL
+
         function togglePassword(event) {
             const passwordInput = document.getElementById('password');
             const btn = event.currentTarget;
@@ -190,10 +192,38 @@
             }
         }
 
-        document.getElementById("adminLoginForm").addEventListener("submit", function(e) {
+        document.getElementById("adminLoginForm").addEventListener("submit", async function(e) {
             e.preventDefault();
-            // Redirect to admin dashboard
-            window.location.href = "admindashboard.html";
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Assume you have an /admin/login route on your server
+            const loginEndpoint = `${API_BASE_URL}/admin/login`;
+
+            try {
+                const response = await fetch(loginEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password }),
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Login successful!');
+                    // Redirect to admin dashboard on success
+                    window.location.href = "admindashboard.html";
+                } else {
+                    // Show error message from the server
+                    alert('Login Failed: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error during login:', error);
+                alert('An error occurred. Please try again.');
+            }
         });
     </script>
 

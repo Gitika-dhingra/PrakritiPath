@@ -267,6 +267,8 @@
     </div>
 
     <script>
+        const API_BASE_URL = "https://bac-1ntv.onrender.com"; // Your live Render URL
+
         // Reusable function to toggle password visibility
         function togglePasswordVisibility(inputId, button) {
             const input = document.getElementById(inputId);
@@ -300,7 +302,8 @@
             }
 
             try {
-                const res = await fetch('http://localhost:3000/user/signup', {
+                // Point the fetch request to your live Render URL
+                const res = await fetch(`${API_BASE_URL}/user/signup`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, age, contact, gender, email, password })
@@ -309,7 +312,7 @@
                 const data = await res.json();
                 
                 if (res.ok && data.success) {
-                    alert('User registered successfully!');
+                    alert('User registered successfully! Please log in.');
                     window.location.href = 'userlogin.html';
                 } else {
                     errorMsg.textContent = data.message || 'Error signing up. Please try again.';

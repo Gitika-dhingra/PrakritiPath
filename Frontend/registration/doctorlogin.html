@@ -158,6 +158,8 @@
     </div>
 
     <script>
+        const API_BASE_URL = "https://bac-1ntv.onrender.com"; // Your live Render URL
+
         document.getElementById("doctorLoginForm").addEventListener("submit", async function(e) {
             e.preventDefault();
 
@@ -165,7 +167,8 @@
             const password = document.getElementById("password").value;
 
             try {
-                const res = await fetch("http://localhost:3000/doctor/login", {
+                // Use the live URL and the correct endpoint from your server.js
+                const response = await fetch(`${API_BASE_URL}/doctor/login`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ email, password })
@@ -175,6 +178,13 @@
 
                 if (data.success) {
                     alert(data.message);
+                    
+                    // 1. Save the logged-in doctor's info and token to local storage
+                    // This keeps the user logged in across browser sessions.
+                    localStorage.setItem('loggedInUser', JSON.stringify(data.doctor));
+                    localStorage.setItem('authToken', data.token); // Assuming your backend sends a token
+
+                    // 2. Redirect to the doctor's dashboard
                     window.location.href = "../doctordashboard.html";
                 } else {
                     alert(data.message);

@@ -192,21 +192,42 @@
     </div>
 
     <script>
+        const API_BASE_URL = 'https://bac-1ntv.onrender.com';
+
         const form = document.getElementById('rescheduleForm');
         const messageEl = document.getElementById('message');
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            // Retrieve the JWT token from local storage
+            const token = localStorage.getItem("authToken");
+            if (!token) {
+                messageEl.textContent = 'You are not logged in. Please log in again.';
+                messageEl.style.color = 'red';
+                window.location.href = '/registration/userlogin.html';
+                return;
+            }
+
             const consultation_id = document.getElementById('consultationId').value;
             const newDate = document.getElementById('newDate').value;
             const newTime = document.getElementById('newTime').value;
             const note = document.getElementById('note').value;
+            
+            // Check for empty fields
+            if (!consultation_id || !newDate || !newTime) {
+                messageEl.textContent = 'Please fill in all required fields.';
+                messageEl.style.color = 'red';
+                return;
+            }
 
             try {
-                const res = await fetch('http://localhost:3000/doctor/reschedule', {
+                const res = await fetch(`${API_BASE_URL}/doctor/reschedule`, {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` // ✅ Added the security token here
+                    },
                     body: JSON.stringify({ consultation_id, newDate, newTime, note })
                 });
 
@@ -218,8 +239,8 @@
                     form.reset();
                 }
             } catch (err) {
-                console.error(err);
-                messageEl.textContent = 'Error connecting to server.';
+                console.error("Fetch Error:", err);
+                messageEl.textContent = 'Error connecting to server. Please check your network.';
                 messageEl.style.color = 'red';
             }
         });

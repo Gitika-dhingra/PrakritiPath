@@ -11,9 +11,9 @@
             --dark-bg: #475569;      
             --light-text: #F3F4F6;    
             --rose-gold-dark: #B76E79;    
-            --rose-gold-mid: #D9A7C7;   
-            --rose-gold-light: #F3E5F5;   
-            --sunset-dark: #DD6B20;     
+            --rose-gold-mid: #D9A7C7;  
+            --rose-gold-light: #F3E5F5;  
+            --sunset-dark: #DD6B20;    
             --sunset-light: #FDBA74;    
             --golden-primary: #D4AF37; 
             --golden-hover: #E8C15E;   
@@ -211,17 +211,17 @@
             </div>
 
             <div class="lg:w-1/3 themed-border card-hover">
-                 <div class="card-content">
+                <div class="card-content">
                     <div class="card-header-bg">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                         <span>Next Appointment</span>
                     </div>
-                    <div class="p-4 space-y-2 text-sm">
+                    <div class="p-4 space-y-2 text-sm" id="nextAppointmentDetails">
                         <p><strong>Doctor:</strong> Dr. Deepu John</p>
                         <p><strong>Date & Time:</strong> 22 Sep 2025, 10:00 AM</p>
                         <p class="text-xs mt-2">Please arrive 15 minutes early and carry previous reports.</p>
                     </div>
-                 </div>
+                </div>
             </div>
         </section>
 
@@ -240,6 +240,8 @@
 
 
 <script>
+    const API_BASE_URL = "https://bac-1ntv.onrender.com";
+
     document.addEventListener('DOMContentLoaded', () => {
 
     const config = {
@@ -252,19 +254,14 @@
         },
         monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
         dayNames: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-        appointments: [
-            { date: new Date(2025, 8, 15), status: 'visited' }, 
-            { date: new Date(2025, 8, 20), status: 'missed' },
-            { date: new Date(2025, 8, 22), status: 'visited' },
-            { date: new Date(2025, 8, 23), status: 'upcoming' },
-        ],
+        // Mock data removed, now fetched from API
         dashboardItems: [
-            { title: 'Health Updates', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>', content: ['Blood Pressure: 120/80', 'Weight: 65 kg'] },
-            { title: 'Reminders', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>', content: ['Take morning medicine', 'Yoga session at 7 AM'] },
-            { title: 'Lab Reports', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4l2 2h4a2 2 0 012 2v12a4 4 0 01-4 4H7z" /></svg>', content: ['Recent blood tests, urine tests, etc.', '<a href="labreports.html" class="btn-primary text-xs mt-2 inline-block">View Reports</a>'] },
-            { title: 'Order Medicines', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>', content: ['Order prescribed medicines online.', '<a href="paymentgateway.html" class="btn-primary text-xs mt-2 inline-block">Proceed to Payment</a>'] },
-            { title: 'Nutrition Plan', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-12v4m-2-2h4m5 4v4m-2-2h4M17 3v4m-2-2h4M5 11h1.5a1.5 1.5 0 000-3H5v3zm0 3h1.5a1.5 1.5 0 000-3H5v3zm0 3h1.5a1.5 1.5 0 000-3H5v3zm5.5-3H12a1.5 1.5 0 000-3h-1.5v3zm0 3h1.5a1.5 1.5 0 000-3h-1.5v3zm0 3h1.5a1.5 1.5 0 000-3h-1.5v3zm5.5-3H19a1.5 1.5 0 000-3h-1.5v3zm0 3h1.5a1.5 1.5 0 000-3h-1.5v3zm0 3h1.5a1.5 1.5 0 000-3h-1.5v3z" /></svg>', content: ['Breakfast: Oats', 'Lunch: Salad', 'Dinner: Soup'] },
-            { title: 'Messages', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>', content: ['Message from Dr. Deepu', 'Message from receptionist'] }
+            { title: 'Health History', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>', content: ['View your past consultations and prescriptions.', '<a href="previousconsultation.html" class="btn-primary text-xs mt-2 inline-block">View History</a>'] },
+            { title: 'Reminders', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>', content: ['No new reminders.'] },
+            { title: 'Lab Reports', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4l2 2h4a2 2 0 012 2v12a4 4 0 01-4 4H7z" /></svg>', content: ['View your previous lab reports.', '<a href="labreports.html" class="btn-primary text-xs mt-2 inline-block">View Reports</a>'] },
+            { title: 'Order Medicines', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>', content: ['Order prescribed medicines online.', '<a href="previousorder.html" class="btn-primary text-xs mt-2 inline-block">Order Now</a>'] },
+            { title: 'Therapy Bookings', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>', content: ['Book Panchakarma or other therapies.', '<a href="therapies.html" class="btn-primary text-xs mt-2 inline-block">Book Therapy</a>'] },
+            { title: 'Chatbot', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>', content: ['Ask our AI Chatbot anything about Ayurveda.', '<a href="chatbot.html" class="btn-primary text-xs mt-2 inline-block">Chat Now</a>'] }
         ]
     };
 
@@ -306,7 +303,6 @@
             calendar.innerHTML = '';
             config.dayNames.forEach(day => {
                 const dayEl = document.createElement('div');
-                // <<< UPDATED: Made day names more visible
                 dayEl.className = 'font-bold text-sm text-center text-slate-700 py-2';
                 dayEl.textContent = day;
                 calendar.appendChild(dayEl);

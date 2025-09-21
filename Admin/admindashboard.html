@@ -355,8 +355,10 @@ table tr:hover {
 </div>
 
 <script>
-const apiUrl = "http://192.168.223.103:3000";
+// --- Configuration ---
+const apiUrl = "https://bac-1ntv.onrender.com"; // <-- 🚀 UPDATED TO YOUR LIVE RENDER URL
 
+// --- UI Logic ---
 function showSection(sectionId) {
     document.getElementById("welcome").style.display = "none";
     document.querySelectorAll(".table-container").forEach(el => el.style.display = "none");
@@ -371,7 +373,7 @@ function showSection(sectionId) {
  */
 async function populateTable(endpoint, tbodyId, rowTemplate) {
     try {
-        const res = await fetch(`${apiUrl}${endpoint}`); // Corrected syntax
+        const res = await fetch(`${apiUrl}${endpoint}`);
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         const data = await res.json();
         
@@ -386,7 +388,7 @@ async function populateTable(endpoint, tbodyId, rowTemplate) {
 
 async function loadStats() {
     try {
-        const res = await fetch(`${apiUrl}/admin/stats`); // Corrected syntax
+        const res = await fetch(`${apiUrl}/admin/stats`);
         const data = await res.json();
         document.getElementById("totalPatients").textContent = data.totalPatients || 0;
         document.getElementById("totalDoctors").textContent = data.totalDoctors || 0;
@@ -427,8 +429,7 @@ const userRow = u => `
         <td>${u.status}</td>
         <td class="actions">
             <button class="edit-btn">Edit</button>
-            <button class.="delete-btn">Delete</button>
-        </td>
+            <button class="delete-btn">Delete</button> </td>
     </tr>`;
 
 const reportRow = r => `
@@ -449,7 +450,7 @@ function initializeDashboard() {
     populateTable('/admin/reports', 'reportsTableBody', reportRow);
 }
 
-initializeDashboard();
+document.addEventListener('DOMContentLoaded', initializeDashboard);
 </script>
 
 </body>
