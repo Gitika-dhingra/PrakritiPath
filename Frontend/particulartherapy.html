@@ -149,7 +149,7 @@
 </head>
 <body>
     <header>
-        <a href="userdashboard.html" class="back-btn">← Back</a>
+        <a href="Userdashboard.html" class="back-btn">← Back</a>
         Select Therapy
     </header>
 
@@ -178,7 +178,7 @@
             const token = localStorage.getItem("authToken");
             if (!token) {
                 alert("You must be logged in to select a therapy.");
-                window.location.href = "userlogin.html";
+                window.location.href = "registration/userlogin.html";
             }
         });
 
@@ -213,7 +213,7 @@
 
                 const data = await response.json();
                 alert("You have successfully selected: " + therapy);
-                window.location.href = "userdashboard.html";
+                window.location.href = "Userdashboard.html";
 
             } catch (err) {
                 console.error('Fetch Error:', err);

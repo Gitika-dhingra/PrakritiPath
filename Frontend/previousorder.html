@@ -232,7 +232,7 @@
 
     <header>
         Previous Orders
-        <a href="/userdashboard.html" id="backButton" class="back-btn">← Back</a>
+        <a href="Userdashboard.html" id="backButton" class="back-btn">← Back</a>
     </header>
 
     <div class="container">
@@ -302,7 +302,7 @@
 
             if (!token || !user) {
                 alert("Session expired. Please log in again.");
-                window.location.href = '/login.html'; // Redirect to login page
+                window.location.href = 'registration/userlogin.html'; // Redirect to login page
                 return null;
             }
             return {
@@ -446,7 +446,7 @@
 
                 if (result.success) {
                     alert("Order placed successfully! Redirecting to confirmation page.");
-                    window.location.href = "/order-confirmation.html";
+                    window.location.href = "order-confirmation.html";
                 } else {
                     alert(`Failed to place order: ${result.message}`);
                 }

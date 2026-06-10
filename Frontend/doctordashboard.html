@@ -209,7 +209,7 @@
 
             if (!token || !doctor) {
                 alert("You must be logged in to view this page.");
-                window.location.href = "doctorlogin.html";
+                window.location.href = "registration/doctorlogin.html";
                 return;
             }
 
@@ -270,7 +270,7 @@
                         <p><strong>Date:</strong> ${appointmentDate}</p>
                         <p><strong>Time:</strong> ${appointmentTime}</p>
                         <p><strong>Reason:</strong> ${appt.reason}</p>
-                        <a href="rescheduling.html?id=${appt.id}" class="reschedule-btn">Reschedule</a>
+                        <a href="reschuling.html?id=${appt.id}" class="reschedule-btn">Reschedule</a>
                     </div>
 
                     <div class="box">
@@ -301,7 +301,7 @@
                 console.error("Logout failed:", error);
             } finally {
                 localStorage.clear();
-                window.location.href = "doctorlogin.html";
+                window.location.href = "registration/doctorlogin.html";
             }
         }
     </script>

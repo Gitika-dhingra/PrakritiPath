@@ -167,7 +167,7 @@
 <body>
 
     <header>
-        <a href="userdashboard.html" class="back-btn">← Back</a>
+        <a href="Userdashboard.html" class="back-btn">← Back</a>
         Medicine Payment
     </header>
 
@@ -217,7 +217,7 @@
         const token = localStorage.getItem("authToken");
         if (!token) {
             alert("You must be logged in to order medicine.");
-            window.location.href = "userlogin.html";
+            window.location.href = "registration/userlogin.html";
             return;
         }
 
@@ -326,7 +326,7 @@
             
             const result = await response.json();
             alert(result.message);
-            window.location.href = "userdashboard.html";
+            window.location.href = "Userdashboard.html";
 
         } catch (error) {
             console.error(error);

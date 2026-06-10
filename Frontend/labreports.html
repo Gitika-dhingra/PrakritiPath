@@ -139,7 +139,7 @@
 <body>
 
     <header>
-        <a href="userdashboard.html" class="back-btn">⬅ Back</a>
+        <a href="Userdashboard.html" class="back-btn">⬅ Back</a>
         <span>Patient Lab Reports</span>
         <button class="logout-btn" onclick="logout()">Logout</button>
     </header>
@@ -158,7 +158,7 @@
 
         if (!token || !user) {
             alert("You must be logged in to view reports.");
-            window.location.href = "userlogin.html";
+            window.location.href = "registration/userlogin.html";
             return;
         }
 
@@ -219,7 +219,7 @@
             console.error("Logout failed:", error);
         } finally {
             localStorage.clear();
-            window.location.href = "userlogin.html";
+            window.location.href = "registration/userlogin.html";
         }
     }
 </script>

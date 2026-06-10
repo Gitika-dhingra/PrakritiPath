@@ -185,7 +185,7 @@ form button:hover {
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("backButton").addEventListener("click", function(e) {
             e.preventDefault();
-            window.location.href = "userdashboard.html";
+            window.location.href = "Userdashboard.html";
         });
 
         document.getElementById("consultationForm").addEventListener("submit", async function(e) {
@@ -197,7 +197,7 @@ form button:hover {
 
             if (!token || !loggedInUser) {
                 alert("You must be logged in to book a consultation.");
-                window.location.href = "userlogin.html";
+                window.location.href = "registration/userlogin.html";
                 return;
             }
 

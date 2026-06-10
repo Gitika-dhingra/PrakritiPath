@@ -271,7 +271,7 @@
 
             if (token && user) {
                 // User is logged in, show Dashboard and Logout buttons
-                const dashboardUrl = user.role === 'doctor' ? 'doctordashboard.html' : 'userdashboard.html';
+                const dashboardUrl = user.role === 'doctor' ? 'doctordashboard.html' : 'Userdashboard.html';
                 authButtonsContainer.innerHTML = `
                     <a class="btn secondary" href="${dashboardUrl}">Dashboard</a>
                     <button class="btn primary" onclick="logout()">Logout</button>
